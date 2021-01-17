@@ -13,4 +13,6 @@ compinit
 # End of lines added by compinstall
 
 # Aliases
-alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+alias dotfile="/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+alias vim="nvim"
+alias vi="nvim"
