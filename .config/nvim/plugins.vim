@@ -3,6 +3,9 @@ function! PackagerInit() abort
   call packager#init()
   call packager#add('kristijanhusak/vim-packager', { 'type': 'opt' })
   call packager#add('christoomey/vim-tmux-navigator')
+  call packager#add('neovim/nvim-lspconfig')
+  call packager#add('nvim-lua/completion-nvim')
+
 endfunction
 
 
