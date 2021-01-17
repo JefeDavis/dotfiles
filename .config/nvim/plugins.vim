@@ -5,6 +5,7 @@ function! PackagerInit() abort
   call packager#add('christoomey/vim-tmux-navigator')
   call packager#add('neovim/nvim-lspconfig')
   call packager#add('nvim-lua/completion-nvim')
+  call packager#add('embark-theme/vim', { 'type': 'opt', 'name': 'embark'})
 
 endfunction
 

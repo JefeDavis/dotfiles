@@ -9,3 +9,6 @@ runtime! general.vim
 
 " Lsp Settings
 runtime! lsp.vim
+
+" Theme Settings
+runtime! theme.vim
