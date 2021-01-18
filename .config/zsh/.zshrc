@@ -8,6 +8,6 @@ if [ -f $ZDOTDIR/pathrc ]; then
     source $ZDOTDIR/pathrc
 fi
 
-source $ZSH/oh-my-zsh.sh
-
 source $ZDOTDIR/zsh_aliases
+
+source $ZSH/oh-my-zsh.sh

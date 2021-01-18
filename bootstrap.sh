@@ -56,8 +56,19 @@ install tmux
 install neovim
 install kitty
 install bspwm
+install rofi
+install ruby
+
+gem install tmuxinator
+
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+
+# install terminfos
+tic -x $HOME/.config/terminfo/xterm-256color-italic.terminfo
+tic -x $HOME/.config/terminfo/tmux-256color.terminfo
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# Install starship prompt
 curl -fsSL https://starship.rs/install.sh | bash
