@@ -54,7 +54,8 @@ install git
 install zsh
 install tmux
 install neovim
-install fonts-powerline
+install kitty
+install bspwm
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

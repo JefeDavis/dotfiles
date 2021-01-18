@@ -1,0 +1,6 @@
+isecondary_monitor=$(xrandr --query | grep 'DisplayPort-1')
+if [[ $secondary_monitor = *connected* ]]; then
+    exit 0
+else
+  exit 1
+fi

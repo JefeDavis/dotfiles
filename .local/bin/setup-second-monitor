@@ -1,0 +1,5 @@
+ # This is for setting up multi monitors in bspwm if they exist
+has-two-monitors && \
+xrandr --output DisplayPort-0 --primary --mode 5120x2160 --rotate normal \
+--output DisplayPort-1 --mode 1920x1080 --rotate normal --above DisplayPort-0
+
