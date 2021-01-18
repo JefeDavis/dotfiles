@@ -72,3 +72,12 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 # Install starship prompt
 curl -fsSL https://starship.rs/install.sh | bash
+
+
+if [[ $OS == 'ubuntu' ]]; then
+    #Install Zoom
+    wget https://zoom.us/client/latest/zoom_amd64.deb
+    apt install ./zoom_amd64.deb
+    rm ./zoom_amd64.deb -f
+fi
+
