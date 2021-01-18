@@ -27,26 +27,88 @@ format = """\
 """
 
 
-[git_branch]
-symbol = " "
-style = "bold red"
-
 [character]
-success_symbol = "[](bold green)"
-error_symbol = "[](bold yellow)"
+success_symbol = "[➜](bold green) "
+error_symbol = "[✗](bold red) "
 vicmd_symbol = " "
-
-[aws]
-disabled = true
-
-[nodejs]
-symbol = " "
-
-[package]
-disabled = true
 
 [kubernetes]
 format = "within "
 disabled = false
 symbol = " "
+
+[aws]
+symbol = " "
+disabled = true
+
+[conda]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[directory]
+read_only = " "
+
+[docker]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[git_branch]
+symbol = " "
+style = "bold red"
+
+[golang]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[memory_usage]
+symbol = " "
+
+[nim]
+symbol = " "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[package]
+symbol = " "
+disabled = true
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[python]
+symbol = " "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[swift]
+symbol = "ﯣ "
 
