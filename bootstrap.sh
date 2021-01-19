@@ -63,6 +63,9 @@ gem install tmuxinator
 
 git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
+# Install polybar
+snap install polybar-git --edge --devmode
+
 # install terminfos
 tic -x $HOME/.config/terminfo/xterm-256color-italic.terminfo
 tic -x $HOME/.config/terminfo/tmux-256color.terminfo
@@ -80,4 +83,5 @@ if [[ $OS == 'ubuntu' ]]; then
     apt install ./zoom_amd64.deb
     rm ./zoom_amd64.deb -f
 fi
+
 

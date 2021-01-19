@@ -1,1 +1,2 @@
 alias dotfile="/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+alias polybar=polybar-git
