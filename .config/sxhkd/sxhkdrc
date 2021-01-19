@@ -11,7 +11,7 @@ super + {_, shift +} Return
 	{kitty, kitty --config=~/.config/kitty/kitty-scratch.conf --listen-on=unix:/tmp/kitty-scratch --class kitty-scratch --hold --directory=$HOME}
 
 # program launcher
-super + @space
+super + d
 	rofi -show drun -show-icons -location 0 -yoffset -250
 
 # make sxhkd reload its configuration files:

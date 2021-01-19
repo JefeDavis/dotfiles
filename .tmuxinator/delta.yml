@@ -7,6 +7,5 @@ windows:
       layout: tiled
       panes:
         - while true; do task burndown.daily; sleep 60; done
-        - habitica
         - v +Calendar
         - task

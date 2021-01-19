@@ -58,6 +58,7 @@ install kitty
 install bspwm
 install rofi
 install ruby
+install fzf
 
 gem install tmuxinator
 
