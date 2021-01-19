@@ -4,7 +4,7 @@ sxhkd &
 dunst -conf ~/.config/dunst/dunstrc &
 hsetroot -solid "#1e1c31" &
 setup-second-monitor &
-#~/.config/polybar/launch.sh &
+~/.config/polybar/launch.sh &
 
 if has-two-monitors ; then
     bspc monitor 'DisplayPort-0' -d 1 2 3 4
