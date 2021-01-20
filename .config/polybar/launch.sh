@@ -32,6 +32,10 @@ if [[ "$1" == "--titan" ]]; then
     style="titan"
     launch_bar
 
+elif [[ "$1" == "--blossom" ]]; then
+    style="blossom"
+    launch_bar
+
 elif [[ "$1" == "--material" ]]; then
 	style="material"
 	launch_bar
