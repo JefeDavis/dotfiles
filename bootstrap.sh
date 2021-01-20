@@ -59,6 +59,8 @@ install bspwm
 install rofi
 install ruby
 install fzf
+install playerctl
+install ranger
 
 gem install tmuxinator
 

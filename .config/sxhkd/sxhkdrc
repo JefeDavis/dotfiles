@@ -3,8 +3,8 @@
 #
 
 # Notepad
-super + slash
-	toggle-program kitty-scratch
+super + s
+	.local/bin/toggle-program kitty-scratch
 
 # terminal emulator
 super + {_, shift +} Return

@@ -1,6 +1,7 @@
 #! /bin/sh
 
 sxhkd &
+picom &
 dunst -conf ~/.config/dunst/dunstrc &
 hsetroot -solid "#1e1c31" &
 setup-second-monitor &
@@ -8,8 +9,8 @@ setup-second-monitor &
 xsetroot -cursor_name left_ptr &
 
 if has-two-monitors ; then
-    bspc monitor 'DisplayPort-0' -d 1 2 3 4
-    bspc monitor 'DisplayPort-1' -d 5 6
+    bspc monitor 'DP-0' -d 1 2 3 4
+    bspc monitor 'DP-1' -d 5 6
 else
     bspc monitor -d 1 2 3 4 5 6 7 8 9
 fi
@@ -27,19 +28,19 @@ bspc config gapless_monocle      true
 bspc config focus_follows_pointer      true
 
 bspc rule -a kitty desktop='1'
-bspc rule -a firefox desktop='2'
-bspc rile -a zoom desktop='2' follow=on
+bspc rule -a Firefox desktop='2'
+bspc rile -a Zoom desktop='2' follow=on
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
-bspc rule -a kitty-scratch sticky=true hidden=true
+bspc rule -a kitty-scratch sticky=on state=floating hidden=on
+bspc rule -a Spotify desktop='3'
+bspc rule -a "YouTube Music" desktop='3'
 
 firefox &
 kitty &
 THEME=gruvbox-light kitty --listen-on=unix:/tmp/kitty-scratch --class kitty-scratch --config ~/.config/kitty/kitty-scratch.conf --hold --directory=$HOME &
-
-bspc desktop '3' -f
-spotify &
-sleep 2
+youtube-music &
 
 kitty @ --to=unix:/tmp/kitty-scratch set-colors --all $HOME/.config/kitty/gruvbox-light.conf
+kitty @ --to=unix:/tmp/kitty-scratch send_text "vi ~/Documents/sync/Knowledge/Coding/index.md\r"
