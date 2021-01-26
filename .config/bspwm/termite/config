@@ -1,0 +1,67 @@
+[options]
+allow_bold = true
+#audible_bell = false
+#bold_is_bright = true
+#cell_height_scale = 1.0
+#cell_width_scale = 1.0
+clickable_url = true
+dynamic_title = true
+font = Iosevka Custom 9
+#fullscreen = true
+#icon_name = terminal
+#mouse_autohide = false
+#scroll_on_output = false
+#scroll_on_keystroke = true
+# Length of the scrollback buffer, 0 disabled the scrollback buffer
+# and setting it to a negative value means "infinite scrollback"
+scrollback_lines = 10000
+#search_wrap = true
+#urgent_on_bell = true
+#hyperlinks = false
+
+# $BROWSER is used by default if set, with xdg-open as a fallback
+browser = xdg-open
+
+# "system", "on" or "off"
+cursor_blink = system
+
+# "block", "underline" or "ibeam"
+cursor_shape = block
+
+# Hide links that are no longer valid in url select overlay mode
+#filter_unmatched_urls = true
+
+# Emit escape sequences for extra modified keys
+#modify_other_keys = false
+
+# set size hints for the window
+#size_hints = false
+
+# "off", "left" or "right"
+#scrollbar = off
+
+#===============================================================
+
+[colors]
+
+foreground=#cbe3e7
+background=#1e1c31
+cursor=
+
+color0=#565575
+color1=#ff8080
+color2=#95ffa4
+color3=#ffe9aa
+color4=#91ddff
+color5=#c991e1
+color6=#aaffe4
+color7=#cbe3e7
+
+color8=#100e23
+color9=#ff5458
+color10=#62d196
+color11=#ffb378
+color12=#65b2ff
+color13=#906cff
+color14=#63f2f1
+color15=#a6b3cc

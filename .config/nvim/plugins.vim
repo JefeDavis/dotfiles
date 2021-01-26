@@ -6,6 +6,12 @@ function! PackagerInit() abort
   call packager#add('neovim/nvim-lspconfig')
   call packager#add('nvim-lua/completion-nvim')
   call packager#add('embark-theme/vim', { 'type': 'opt', 'name': 'embark'})
+  call packager#add('challenger-deep-theme/vim', { 'type': 'opt', 'name': 'challenger-deep'})
+  call packager#add('aloussase/cyberpunk', { 'type': 'opt' })
+  call packager#add('arcticicestudio/nord-vim', { 'type': 'opt', 'name': 'nord' })
+  call packager#add('morhetz/gruvbox', { 'type': 'opt', 'name': 'gruvbox' })
+  call packager#add('dylanaraps/wal.vim', { 'type': 'opt', 'name': 'wal' })
+  call packager#add('mattn/vim-filewatcher', { 'do': 'pushd filewatcher && go get -d && go build && popd'})
 
 endfunction
 

@@ -12,3 +12,4 @@ runtime! lsp.vim
 
 " Theme Settings
 runtime! theme.vim
+runtime! theme-watch.vim

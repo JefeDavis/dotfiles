@@ -1,0 +1,21 @@
+#heat sheet!/bin/bash
+
+DIR="$HOME/.config/bspwm"
+XDIR="$HOME/.Xresources.d"
+
+rofi_command="rofi -theme $DIR/rofi/themes/themes.rasi"
+
+style (){
+	cat "$DIR"/themes/$1 > "$XDIR"/colors
+    echo $1 > "$HOME/.config/theme/current-theme"
+	feh --bg-scale "$DIR"/wallpapers/$1.jpg
+	bspc wm -r
+}
+
+# Variable passed to rofi
+options=$(ls $DIR/themes/ | awk '{print " " $1}' | sed 's/-/ /g' | sed 's/[^ ]\+/\L\u&/g')
+chosen="$(echo -e "$options" | $rofi_command -p "Available themes" -dmenu -selected-row 0)"
+theme=$(echo "${chosen:2}" | sed -E "s/[^a-zA-Z0-9]+/-/g" | tr A-Z a-z)
+
+style $theme
+

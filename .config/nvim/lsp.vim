@@ -17,10 +17,6 @@ lua << EOF
   end
 EOF
 
-"lua << EOF
-"  require'lspconfig'.gopls.setup{}
-"EOF
-
 " Completion
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 set completeopt=menuone,noinsert,noselect

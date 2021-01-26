@@ -1,0 +1,39 @@
+! -----------------------------------------------------------------------------
+! Embark color scheme
+! -----------------------------------------------------------------------------
+
+*foreground:  #cbe3e7
+*background:  #1e1c31
+*cursor:  #a1efd3
+
+!black
+*color0:  #1e1c31
+*color8:  #585273
+
+!red
+*color1:  #f48fb1
+*color9:  #f02e6e
+
+!green
+*color2:  #a1efd3
+*color10:  #62d196
+
+!yellow
+*color3:  #ffe6b3
+*color11:  #f2b482
+
+!blue
+*color4:  #91ddff
+*color12:  #65b2ff
+
+!magenta
+*color5:  #d4bfff
+*color13:  #a37acc
+
+!cyan
+*color6:  #87dfeb
+*color14:  #63f2f1
+
+!white
+*color7:  #8a889d
+*color15:  #cbe3e7
