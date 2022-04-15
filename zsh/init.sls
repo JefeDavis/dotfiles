@@ -1,6 +1,7 @@
 include:
   - cli-utils
   - starship
+  - direnv
 
 {% set zsh_dir = pillar['xdg_config_home'] + "/zsh" %}
 
@@ -17,7 +18,7 @@ purge-oh-my-zsh:
 zsh-env:
   file.managed:
     - name: {{ grains['homedir'] }}/.zshenv
-    - source salt://zsh/.zshenv
+    - source: salt://zsh/.zshenv
     - user: {{ grains['user'] }}
 
 zsh-config:
@@ -26,6 +27,11 @@ zsh-config:
     - source: salt://zsh/zsh
     - user: {{ grains['user'] }}
     - force: True
+    - requres:
+        - pkgs:
+            - starship
+            - direnv
+
 
 histfile:
   file.directory:

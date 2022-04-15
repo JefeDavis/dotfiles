@@ -11,3 +11,5 @@ alias muxa="tmux a"
 #Kubernetes
 alias k="kubectl"
 
+#pass
+alias pass=gopass

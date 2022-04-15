@@ -13,7 +13,7 @@ export HISTSIZE=1000000000
 export HISTFILESIZE=1000000000
 export SAVEHIST=1000000000
 
-export CDPATH=( . /srv/ $HOME $HOME/Projects $HOME/Documents)
+export CDPATH=.:/etc/srv/:$HOME:$HOME/Projects:$HOME/Documents
 
 export EDITOR="nvim"
 export BROWSER="firefox"
@@ -22,7 +22,7 @@ export LESSHISTFILE="$XDG_DATA_HOME/lesshst"
 
 # GPG shenanigans
 export GNUPGHOME="$XDG_CONFIG_HOME/gpg"
-export GPG_TTY="$(tty)"
+export GPG_TTY="${TTY}"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 
@@ -57,4 +57,4 @@ export NNN_FIFO=/tmp/nnn.fifo
 # Fallback value when review base is not set
 # This environment sets up what the "master" branch is for a repo
 # in case a repo uses a non standard version
-export REVIEW_BASE=master
+export REVIEW_BASE=main

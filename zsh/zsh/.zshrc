@@ -5,6 +5,9 @@
 # Make sure plugins are along the fpath
 fpath=($ZDOTDIR/plugins $fpath)
 
+# This setting doesn't work in .zshenv for some reason. oh well
+export GPG_TTY=$TTY
+
 #######################################################################
 # Navigation
 #######################################################################
@@ -149,11 +152,11 @@ source $ZDOTDIR/plugins/zsh-vim-mode
 # FZF
 #######################################################################
 if [ $(command -v "fzf") ]; then
-  source /usr/share/fzf/completion.zsh
-  source /usr/share/fzf/key-bindings.zsh
+  source /usr/local/opt/fzf/shell/completion.zsh
+  source /usr/local/opt/fzf/shell/key-bindings.zsh
 fi
 
-autoload -Uz titan-call
+autoload -Uz dotfile-call
 
 #######################################################################
 # FUNCTIONS
