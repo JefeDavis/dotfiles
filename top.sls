@@ -1,6 +1,7 @@
 base:
   '*':
     - nvim
+    - gpg
   # 'os:MacOS':
   #   - match: grain
   #   - yabai

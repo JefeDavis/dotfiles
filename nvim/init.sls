@@ -1,3 +1,6 @@
+include:
+  - lang.lua
+
 nvim:
   pkg.installed:
     - name: nvim
