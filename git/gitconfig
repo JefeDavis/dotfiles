@@ -1,0 +1,55 @@
+[user]
+	name = Jeff Davis
+	email = jeffda@vmware.com
+	signingkey = jeffda@vmware.com
+
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = true
+
+[fetch]
+  prune = true
+
+[core]
+  editor = nvim
+  commentChar = ";"
+  excluedsFile = ~/.config/git/gitignore
+
+[blame]
+  date = relative
+
+[diff]
+  algorithm = histogram
+
+[merge]
+  conflictstyle = diff3
+
+[commit]
+  gpgsign = true
+
+[alias]
+  l = log --date=short --decorate --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]"
+  dog = log --all --decorate --oneline --graph
+  to = "!git checkout $(git branches --no-multi)"
+  drop = "!git branch -d $(git branches --multi)"
+  st = status
+  p = pull
+  pp = push
+  c = commit
+  cm = commit -m
+  can = commit --amend --no-edit
+  co = checkout
+  default = !git remote show origin | rg 'HEAD branch' | cut -d " " -f5
+  back = reset HEAD~1
+  backk = reset HEAD~1 --hard
+  files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")
+  stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+  review = !nvim -p $(git files) +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+  feature = !sh -c 'git switch --no-track -c $1 origin/${BASE_GIT_BRANCH-main}' -
+  catchup = !sh -c 'git rebase origin/${BASE_GIT_BRANCH-main}' -
+  what = "!git config --get-regexp alias"
+	sweep = !git branch --merged $([[ $1 != \"-f\" ]] \\\n&& git rev-parse main) | egrep -v \"(^\\*|^\\s*(master|main)$)\" \\\n| xargs git branch -d
+  tidy = "!git fetch origin -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
+
