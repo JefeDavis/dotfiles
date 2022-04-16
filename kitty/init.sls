@@ -1,3 +1,6 @@
+include:
+  - fonts
+
 kitty: 
   {% if grains['os'] == 'MacOS' %}
   cmd.run:
