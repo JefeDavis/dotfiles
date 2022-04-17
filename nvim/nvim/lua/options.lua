@@ -67,3 +67,8 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 --MOUSE
 --====================================================================
 opt.mouse = 'a'
+
+
+vim.api.nvim_command([[
+au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
+]])
