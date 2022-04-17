@@ -1,6 +1,7 @@
 -- define the leaders
 vim.g.mapleader = " "
 vim.g.maplocalleader = "-"
+vim.g.camelcasemotion_key = '<leader>'
 
 -- quickfix list
 vim.keymap.set('n', '<UP>', '<CMD>cope<CR>')

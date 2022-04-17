@@ -31,6 +31,8 @@ packer.startup(function()
     'vim-test/vim-test',
     requires = { 'tpope/vim-dispatch', 'neomake/neomake', 'preservim/vimux' }
   }
+  use 'jefedavis/vim-system-copy'
+
   -- ============================================
 
   -- Navigation
