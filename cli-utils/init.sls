@@ -10,8 +10,5 @@ jq:
 exa:
   pkg.installed
 
-bpytop:
-  pkg.installed
-
 remind:
   pkg.installed
