@@ -27,9 +27,8 @@ vim.keymap.set('t', '<Esc>', '<c-\\><c-n>', { silent = false })
 -- More quickly call external programs
 vim.keymap.set('n', '<leader>>', ':!<SPACE>', { silent = false })
 
--- copy and paste
-vim.keymap.set('v', '<leader>cc', '"+y')
-vim.keymap.set('', '<leader>vv', '"+p')
-
 vim.keymap.set('', '<ScrollWheelDown>', ':call comfortable_motion#flick(40)<CR>')
 vim.keymap.set('', '<ScrollWheelUp>', ':call comfortable_motion#flick(-40)<CR>')
+
+vim.keymap.set('n', '[x', '<CMD>set cursorcolumn<CR>')
+vim.keymap.set('n', ']x', '<CMD>set nocursorcolumn<CR>')
