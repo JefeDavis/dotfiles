@@ -29,6 +29,9 @@
 [commit]
   gpgsign = true
 
+[format]
+  signoff = true
+
 [alias]
   l = log --date=short --decorate --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]"
   dog = log --all --decorate --oneline --graph
