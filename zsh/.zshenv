@@ -53,6 +53,8 @@ export NNN_COLORS="#56565656"
 export NNN_PLUG="p:preview-tui"
 export NNN_FIFO=/tmp/nnn.fifo
 
+export PATH="$GOPATH/bin:"$HOME"/.local/bin:$PATH"
+
 # Git helpers
 # Fallback value when review base is not set
 # This environment sets up what the "master" branch is for a repo
