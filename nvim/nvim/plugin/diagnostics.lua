@@ -1,7 +1,7 @@
 vim.diagnostic.config {
   underline = false,
   virtual_text = {
-    prefix = ""
+    prefix = " "
   },
   signs = true,
 }
