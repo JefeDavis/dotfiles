@@ -9,7 +9,7 @@ gopass-jsonapi:
   cmd.run:
     - name: echo "Y" | gopass-jsonapi configure --browser firefox --global=false --path {{ pillar['xdg_config_home'] }}/gopass --print=false
     - runas: {{ grains['user'] }}
-    - creates: {{ pillar['xdg_config_home']/gopass/gopass_wrapper.sh
+    - creates: {{ pillar['xdg_config_home'] }}/gopass/gopass_wrapper.sh
 
 passstore:
   git.cloned:
@@ -18,6 +18,10 @@ passstore:
     - user: {{ grains['user'] }}
     - require:
       - pkg: gopass
+
+summon:
+  pkg.installed:
+    - name: cyberark/tools/summon
 
 # pass-otp: pkg.installed
 
