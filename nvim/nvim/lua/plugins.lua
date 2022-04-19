@@ -1,3 +1,9 @@
+--[[
+░█▀█░█░░░█░█░█▀▀░▀█▀░█▀█░█▀▀░░
+░█▀▀░█░░░█░█░█░█░░█░░█░█░▀▀█░░
+░▀░░░▀▀▀░▀▀▀░▀▀▀░▀▀▀░▀░▀░▀▀▀░░
+--]]
+
 vim.cmd [[packadd packer.nvim]]
 
 local packer = require('packer')
@@ -6,12 +12,20 @@ packer.startup(function()
   -- ==========================================
 
   -- FileType Plugins
-  -- use { 'fatih/vim-go', ft = {'go', 'go.mod', 'go.sum' }}
   use {
     'crispgm/nvim-go',
     requires = { 'nvim-lua/plenary.nvim', 'nvim-lua/popup.nvim' },
     ft = { 'go', 'go.mod', 'go.sum'}
   }
+  use {
+    'vimwiki/vimwiki',
+    branch = 'dev',
+    config = function()
+      require('wiki')
+    end
+  }
+  use 'tools-life/taskwiki'
+
   use 'saltstack/salt-vim'
   use 'plasticboy/vim-markdown'
   use 'stephpy/vim-yaml'
@@ -96,7 +110,7 @@ packer.startup(function()
   use {
     'glepnir/galaxyline.nvim',
     branch = 'main',
-    config = function() require('status-line') end,
+    config = function() require('neoline') end,
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
   use {
