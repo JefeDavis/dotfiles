@@ -20,6 +20,7 @@ zsh-env:
     - name: {{ grains['homedir'] }}/.zshenv
     - source: salt://zsh/.zshenv
     - user: {{ grains['user'] }}
+    - template: jinja
 
 zsh-config:
   file.recurse:
