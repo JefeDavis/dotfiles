@@ -6,6 +6,7 @@ base:
     - starship
     - tmux
     - git
+    - pam
     - gpg
     - passwords
     - nvim
@@ -13,6 +14,7 @@ base:
     - nnn
     - direnv
     - bpytop
+    - mail
   'os:MacOS':
     - match: grain
     - skhd
