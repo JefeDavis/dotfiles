@@ -3,17 +3,11 @@ include:
 
 git: pkg.installed
 
-gitconfig:
-  file.managed:
-    - name: {{ pillar['xdg_config_home'] }}/git/config
-    - source: salt://git/gitconfig
-    - makedirs: true
-    - user: {{ grains['user'] }}
-
-gitignore:
-  file.managed:
-    - name: {{ pillar['xdg_config_home'] }}/git/gitignore
-    - source: salt://git/gitignore
+git-configs:
+  file.recurse:
+    - name: {{ pillar['xdg_config_home'] }}/git/
+    - source: salt://git/git
+    - clean: true
     - makedirs: true
     - user: {{ grains['user'] }}
 
@@ -40,8 +34,11 @@ github-cli-dash:
     - unless: gh dash --help
     - require:
       - pkg: gh
-  file.managed:
-    - name: {{ pillar['xdg_config_home'] }}/gh-dash/config.yml
-    - source: salt://git/gh-dash.config.yml
+
+gh-dash-configs:
+  file.recurse:
+    - name: {{ pillar['xdg_config_home'] }}/gh-dash
+    - source: salt://git/gh-dash
+    - clean: true
     - makedirs: true
     - user: {{ grains['user'] }}

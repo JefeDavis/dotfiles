@@ -3,10 +3,11 @@ skhd:
     - name: skhd
 
 skhd-config:
-  file.managed:
-    - name: {{ pillar['xdg_config_home'] }}/skhd/skhdrc
-    - source: salt:///skhd/skhdrc
+  file.recurse:
+    - name: {{ pillar['xdg_config_home'] }}/skhd
+    - source: salt://skhd/skhd
     - makedirs: true
+    - clean: true
     - user: {{ grains['user'] }}
     - force: true
 
@@ -15,5 +16,5 @@ skhd-service:
     - name: brew services restart skhd
     - use_vt: true
     - onchanges:
-        - file: {{ pillar['xdg_config_home'] }}/skhd/skhdrc
+        - file: {{ pillar['xdg_config_home'] }}/skhd
 

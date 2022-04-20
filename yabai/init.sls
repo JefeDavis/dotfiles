@@ -2,9 +2,10 @@ yabai:
   pkg.installed
 
 yabai-configs:
-  file.managed:
-    - name: {{ pillar['xdg_config_home'] }}/yabai/yabairc
-    - source: salt:///yabai/yabairc
+  file.recurse:
+    - name: {{ pillar['xdg_config_home'] }}/yabai
+    - source: salt://yabai/yabai
+    - clean: true
     - makedirs: true
     - user: {{ grains['user'] }}
     - force: true
@@ -22,4 +23,4 @@ yabai-service:
     - name: brew services restart yabai
     - runas: {{ grains['user'] }}
     - onchanges:
-        - file: {{ pillar['xdg_config_home'] }}/yabai/yabairc
+        - file: {{ pillar['xdg_config_home'] }}/yabai

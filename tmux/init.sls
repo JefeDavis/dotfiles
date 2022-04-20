@@ -6,31 +6,10 @@ include:
 tmux: pkg.installed
 
 tmux-config:
-  file.managed:
-    - name: {{ tmux_dir }}/tmux.conf
-    - source: salt://tmux/tmux.conf
+  file.recurse:
+    - name: {{ tmux_dir }}
+    - source: salt://tmux/tmux
     - makedirs: true
-    - user: {{ grains['user'] }}
-
-embark-tmux:
-  file.managed:
-    - name: {{tmux_dir }}/embark.tmux
-    - source: salt://tmux/embark.tmux
-    - makerdirs: true
-    - user: {{ grains['user'] }}
-
-gruvbox-light-tmux:
-  file.managed:
-    - name: {{tmux_dir }}/gruvbox-light.tmux
-    - source: salt://tmux/gruvbox-light.tmux
-    - makerdirs: true
-    - user: {{ grains['user'] }}
-
-neoline:
-  file.managed:
-    - name: {{tmux_dir }}/neoline.tmux
-    - source: salt://tmux/neoline.tmux
-    - makerdirs: true
     - user: {{ grains['user'] }}
 
 tmux-plugin-manager:
