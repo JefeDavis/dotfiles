@@ -27,5 +27,11 @@ kitty-icon:
 configs:
   file.recurse:
     - name: {{ pillar['xdg_config_home'] }}/kitty
+    - clean: true
     - source: salt://kitty/kitty
+    - user: {{ grains['user'] }}
+
+remote-control:
+  file.directory:
+    - name: {{ pillar['xdg_cache_home'] }}/kitty
     - user: {{ grains['user'] }}
