@@ -21,10 +21,15 @@ export MANPAGER="nvim +Man!"
 export LESSHISTFILE="$XDG_DATA_HOME/lesshst"
 
 # GPG shenanigans
-export GNUPGHOME="$XDG_CONFIG_HOME/gpg"
-export GPG_TTY="${TTY}"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+if [[ $UID != 0 ]]; then
+  export GPG_TTY=$(tty);
+  if which gpgconf > /dev/null 2>&1; then
+    export GNUPGHOME="$XDG_CONFIG_HOME/gpg"
+    export GPG_TTY="${TTY}"
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+    gpgconf --launch gpg-agent
+  fi
+fi
 
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 # export PASSWORD_STORE_GPG_OPTS="--no-throw-keyids"
@@ -35,9 +40,12 @@ export SKIM_DEFAULT_OPTIONS="--reverse --ansi --color=fg:15,hl:03,hl+:03,matched
 export FZF_DEFAULT_OPTS="--reverse --ansi --color=fg:15,hl:3,hl+:3,bg+:-1,fg+:-1,pointer:06,spinner:05,info:7,prompt:6"
 
 # Go
-export GOPATH=$XDG_DATA_HOME/go
+export GOPATH={{ pillar['go_path'] }}
 export GO111MODULE=on
 export WAKATIME_HOME="$XDG_CONFIG_HOME/wakatime"
+
+# Rust
+export CARGO_HOME={{ pillar['cargo_path'] }}
 
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker" 
 # ZOOM - What the hell is SSB?
@@ -53,7 +61,7 @@ export NNN_COLORS="#56565656"
 export NNN_PLUG="p:preview-tui"
 export NNN_FIFO=/tmp/nnn.fifo
 
-export PATH="$GOPATH/bin:"$HOME"/.local/bin:$PATH"
+export PATH="$GOPATH/bin:$CARGO_HOME/bin:"$HOME"/.local/bin:$PATH"
 
 # Git helpers
 # Fallback value when review base is not set
