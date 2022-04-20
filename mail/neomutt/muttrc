@@ -1,0 +1,6 @@
+source ~/.config/neomutt/settings
+source ~/.config/neomutt/colors
+source ~/.config/neomutt/mappings
+
+# Accounts
+source ~/.config/neomutt/accounts/work
