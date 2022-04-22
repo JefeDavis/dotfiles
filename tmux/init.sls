@@ -8,7 +8,7 @@ tmux: pkg.installed
 tmux-config:
   file.recurse:
     - name: {{ tmux_dir }}
-    - source: salt://tmux/tmux
+    - source: salt://tmux/config
     - makedirs: true
     - user: {{ grains['user'] }}
 
@@ -28,10 +28,11 @@ tmuxinator:
     - user: {{ grains['user'] }}
     - force: true
 
-tmux-launcher:
-  file.managed:
-    - name: {{ grains['homedir'] }}/.local/bin/embark.sh
-    - source: salt://tmux/embark.sh
+tmux-scripts:
+  file.recurse:
+    - name: {{ pillar['xdg_bin_home'] }}
+    - source: salt://tmux/bin
+    - makedirs: true
+    - file_mode: '0755'
     - user: {{ grains['user'] }}
-    - mode: '0755'
     - force: true

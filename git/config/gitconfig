@@ -15,7 +15,7 @@
 [core]
   editor = nvim
   commentChar = ";"
-  excluedsFile = ~/.config/git/gitignore
+  excludesFile = ~/.config/git/gitignore
 
 [blame]
   date = relative
@@ -40,8 +40,8 @@
   st = status
   p = pull
   pp = push
-  c = commit
-  cm = commit -m
+  c = commit -s
+  cm = commit -m -s
   can = commit --amend --no-edit
   co = checkout
   default = !git remote show origin | rg 'HEAD branch' | cut -d " " -f5

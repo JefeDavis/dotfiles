@@ -15,8 +15,9 @@ vim-packer:
 nvim-config:
   file.recurse:
     - name: {{ pillar['xdg_config_home'] }}/nvim
-    - source: salt://nvim/nvim
+    - source: salt://nvim/config
     - clean: true
+    - makedir: true
     - user: {{ grains['user'] }}
     - force: true
   cmd.run:

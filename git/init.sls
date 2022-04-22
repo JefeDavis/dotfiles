@@ -5,24 +5,18 @@ git: pkg.installed
 
 git-configs:
   file.recurse:
-    - name: {{ pillar['xdg_config_home'] }}/git/
-    - source: salt://git/git
+    - name: {{ pillar['xdg_config_home'] }}/git
+    - source: salt://git/config
     - clean: true
     - makedirs: true
     - user: {{ grains['user'] }}
 
-git-branches:
-  file.managed:
-    - name: {{ grains['homedir'] }}/.local/bin/git-branches
-    - source: salt://git/git-branches
-    - mode: keep
-    - user: {{ grains['user'] }}
-
-git-default-branch:
-  file.managed:
-    - name: {{ grains['homedir'] }}/.local/bin/git-default-branch
-    - source: salt://git/git-default-branch
-    - mode: keep
+git-scripts:
+  file.recurse:
+    - name: {{ pillar['xdg_bin_home'] }}
+    - source: salt://git/bin
+    - makedirs: true
+    - file_mode: 0755
     - user: {{ grains['user'] }}
 
 gh: pkg.installed

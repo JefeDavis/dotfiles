@@ -1,4 +1,6 @@
 xdg_config_home: {{ grains['homedir'] }}/.config
+xdg_bin_home: {{ grains['homedir'] }}/.local/bin
+xdg_lib_home: {{ grains['homedir'] }}/.local/lib
 xdg_data_home: {{ grains['homedir'] }}/.local/share
 xdg_cache_home: {{ grains['homedir'] }}/.cache
 xdg_desktop_dir: {{ grains['homedir'] }}/Desktop

@@ -25,7 +25,7 @@ zsh-env:
 zsh-config:
   file.recurse:
     - name: {{ zsh_dir }}
-    - source: salt://zsh/zsh
+    - source: salt://zsh/config
     - user: {{ grains['user'] }}
     - force: True
     - requres:

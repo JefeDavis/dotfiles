@@ -1,6 +1,6 @@
 # Mode declaration
-# 1) default: all keybindings are available
-# 2) passthrough: all keybindings are unavailable. (If some keybindings conflict with some application, we can turn off skhd)
+# 1) default: all keylib/yabaidings are available
+# 2) passthrough: all keylib/yabaidings are unavailable. (If some keylib/yabaidings conflict with some application, we can turn off skhd)
 :: default : yabai -m config active_window_border_color 0xffffbb7d;\
              osascript -e "display notification \"skhd enabled!\" with title \"skhd\""
 
@@ -49,20 +49,20 @@ cmd + shift - m : [[ $(yabai -m query --windows --window | jq '."zoom-fullscreen
 #   - [, ]: cycle through the workspaces (support moving the focus across the display)
 #     e.g., 4 | 1 2 | 3 (three displays and currently at 2, using [ to move the focus 2 -> 1 -> 4 -> 3 -> 2, ..., ] is the same but on the opposite direction
 #   - \:    focus the recently-focused workspace
-cmd - 0x12 : ~/.config/yabai/scripts/focus-space-sip.sh 1
-cmd - 0x13 : ~/.config/yabai/scripts/focus-space-sip.sh 2
-cmd - 0x14 : ~/.config/yabai/scripts/focus-space-sip.sh 3
-cmd - 0x15 : ~/.config/yabai/scripts/focus-space-sip.sh 4
-cmd - 0x17 : ~/.config/yabai/scripts/focus-space-sip.sh 5
-cmd - 0x16 : ~/.config/yabai/scripts/focus-space-sip.sh 6
-cmd - 0x1A : ~/.config/yabai/scripts/focus-space-sip.sh 7
-cmd - 0x1C : ~/.config/yabai/scripts/focus-space-sip.sh 8
-cmd - 0x19 : ~/.config/yabai/scripts/focus-space-sip.sh 9
-cmd - 0x1D : ~/.config/yabai/scripts/focus-space-sip.sh 10
+cmd - 0x12 : ~/.local/lib/yabai/focus-space-sip.sh 1
+cmd - 0x13 : ~/.local/lib/yabai/focus-space-sip.sh 2
+cmd - 0x14 : ~/.local/lib/yabai/focus-space-sip.sh 3
+cmd - 0x15 : ~/.local/lib/yabai/focus-space-sip.sh 4
+cmd - 0x17 : ~/.local/lib/yabai/focus-space-sip.sh 5
+cmd - 0x16 : ~/.local/lib/yabai/focus-space-sip.sh 6
+cmd - 0x1A : ~/.local/lib/yabai/focus-space-sip.sh 7
+cmd - 0x1C : ~/.local/lib/yabai/focus-space-sip.sh 8
+cmd - 0x19 : ~/.local/lib/yabai/focus-space-sip.sh 9
+cmd - 0x1D : ~/.local/lib/yabai/focus-space-sip.sh 10
 
-cmd - 0x21 : ~/.config/yabai/scripts/focus-space-sip.sh $(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
+cmd - 0x21 : ~/.local/lib/yabai/focus-space-sip.sh $(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
                                       yabai -m query --displays | jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then last else .[index($cur_space) - 1] end")
-cmd - 0x1E : ~/.config/yabai/scripts/focus-space-sip.sh $(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
+cmd - 0x1E : ~/.local/lib/yabai/focus-space-sip.sh $(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
                                       yabai -m query --displays | jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) + 1 == length then first else .[index($cur_space) + 1] end")
 cmd - 0x2A : yabai -m space --focus recent
 
@@ -80,60 +80,60 @@ cmd + alt - l : yabai -m window --swap east
 #   - \:    send the current window to the recently-focused workspace, and focus that window
 cmd + alt - 1 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 1 && \
-                ~/.config/yabai/scripts/focus-space-sip.sh 1 && \
+                ~/.local/lib/yabai/focus-space-sip.sh 1 && \
                 yabai -m window --focus ${cur_window}
 cmd + alt - 2 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 2 && \
-                ~/.config/yabai/scripts/focus-space-sip.sh 2 && \
+                ~/.local/lib/yabai/focus-space-sip.sh 2 && \
                 yabai -m window --focus ${cur_window}
 cmd + alt - 3 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 3 && \
-                ~/.config/yabai/scripts/focus-space-sip.sh 3 && \
+                ~/.local/lib/yabai/focus-space-sip.sh 3 && \
                 yabai -m window --focus ${cur_window}
 cmd + alt - 4 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 4 && \
-                ~/.config/yabai/scripts/focus-space-sip.sh 4 && \
+                ~/.local/lib/yabai/focus-space-sip.sh 4 && \
                 yabai -m window --focus ${cur_window}
 cmd + alt - 5 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 5 && \
-                ~/.config/yabai/scripts/focus-space-sip.sh 5 && \
+                ~/.local/lib/yabai/focus-space-sip.sh 5 && \
                 yabai -m window --focus ${cur_window}
 cmd + alt - 6 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 6 && \
-                ~/.config/yabai/scripts/focus-space-sip.sh 6 && \
+                ~/.local/lib/yabai/focus-space-sip.sh 6 && \
                 yabai -m window --focus ${cur_window}
 cmd + alt - 7 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 7 && \
-                ~/.config/yabai/scripts/focus-space-sip.sh 7 && \
+                ~/.local/lib/yabai/focus-space-sip.sh 7 && \
                 yabai -m window --focus ${cur_window}
 cmd + alt - 8 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 8 && \
-                ~/.config/yabai/scripts/focus-space-sip.sh 8 && \
+                ~/.local/lib/yabai/focus-space-sip.sh 8 && \
                 yabai -m window --focus ${cur_window}
 cmd + alt - 9 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 9 && \
-                ~/.config/yabai/scripts/focus-space-sip.sh 9 && \
+                ~/.local/lib/yabai/focus-space-sip.sh 9 && \
                 yabai -m window --focus ${cur_window}
 cmd + alt - 0 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 10 && \
-                ~/.config/yabai/scripts/focus-space-sip.sh 10 && \
+                ~/.local/lib/yabai/focus-space-sip.sh 10 && \
                 yabai -m window --focus ${cur_window}
 cmd + alt - 0x21 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                    workspace_left=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
                    yabai -m query --displays | jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then .[length - 1] else .[index($cur_space) - 1] end") && \
                    yabai -m window --space ${workspace_left} && \
-                   ~/.config/yabai/scripts/focus-space-sip.sh ${workspace_left} && \
+                   ~/.local/lib/yabai/focus-space-sip.sh ${workspace_left} && \
                    yabai -m window --focus ${cur_window}
 cmd + alt - 0x1E : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                    workspace_right=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
                    yabai -m query --displays | jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) + 1 == length then .[0] else .[index($cur_space) + 1] end") && \
                    yabai -m window --space ${workspace_right} && \
-                   ~/.config/yabai/scripts/focus-space-sip.sh ${workspace_right} && \
+                   ~/.local/lib/yabai/focus-space-sip.sh ${workspace_right} && \
                    yabai -m window --focus ${cur_window}
 cmd + alt - 0x2A : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                    recent_space=$(yabai -m query --spaces --space recent | jq '.id') && \
                    yabai -m window --space ${recent_space} && \
-                   ~/.config/yabai/scripts/focus-space-sip.sh ${recent_space} && \
+                   ~/.local/lib/yabai/focus-space-sip.sh ${recent_space} && \
                    yabai -m window --focus ${cur_window}
 
 
@@ -168,12 +168,12 @@ cmd + ctrl - k : yabai -m window --resize top:0:-20 || yabai -m window --resize 
 cmd + ctrl - l : yabai -m window --resize left:20:0 || yabai -m window --resize right:20:0
 
 # Toggle window between tiling and floating, and restore its previous position when become floating
-cmd - f : ~/.config/yabai/scripts/toggle-window-floating.sh
+cmd - f : ~/.local/lib/yabai/toggle-window-floating.sh
 
 # apps
 cmd - w : open -na firefox
-cmd - 0x27 : ~/.config/yabai/scripts/toggle-visibility.sh Slack || open -na slack
-cmd - 0x29 : ~/.config/yabai/scripts/toggle-visibility.sh zoom.us || open -na zoom.us
+cmd - 0x27 : ~/.local/lib/yabai/toggle-visibility.sh Slack || open -na slack
+cmd - 0x29 : ~/.local/lib/yabai/toggle-visibility.sh zoom.us || open -na zoom.us
 
 # close window
 cmd - q : yabai -m window --close || cur_window=$(yabai -m query --windows --window | jq '.pid') && kill -9 ${cur_window}

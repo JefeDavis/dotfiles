@@ -5,7 +5,7 @@ skhd:
 skhd-config:
   file.recurse:
     - name: {{ pillar['xdg_config_home'] }}/skhd
-    - source: salt://skhd/skhd
+    - source: salt://skhd/config
     - makedirs: true
     - clean: true
     - user: {{ grains['user'] }}
