@@ -31,6 +31,14 @@ configs:
     - clean: true
     - user: {{ grains['user'] }}
 
+kitty-scripts:
+  file.recurse:
+    - name: {{ pillar['xdg_bin_home'] }}
+    - source: salt://kitty/bin
+    - makedir: true
+    - file_mode: '0755'
+    - user: {{ grains['user'] }}
+
 remote-control:
   file.directory:
     - name: {{ pillar['xdg_cache_home'] }}/kitty

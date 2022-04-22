@@ -47,7 +47,7 @@ function! ColorScheme()
     hi PMenu guibg=#FAF2CF
     hi ClapFile guifg=#654735
     hi Visual guibg=#d9e1cc
-    execute "silent ! kitty @ --to=unix:@mykitty set-colors --all ~/.config/kitty/gruvbox-light.conf"
+    execute "silent ! kitty-remote set-colors --all ~/.config/kitty/gruvbox-light.conf"
     execute "silent ! tmux source-file ~/titan/tmux/gruvbox-light.tmux"
   endif
 
@@ -56,7 +56,7 @@ function! ColorScheme()
     let g:embark_terminal_italics = 1
     colorscheme embark
 
-    execute "silent ! kitty @ --to=unix:@mykitty set-colors --all ~/.config/kitty/embark.conf"
+    execute "silent ! kitty-remote set-colors --all ~/.config/kitty/embark.conf"
     execute "silent ! tmux source-file ~/titan/tmux/embark.tmux"
   endif
 endfunction

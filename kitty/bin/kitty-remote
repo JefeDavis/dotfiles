@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+for i in $(ls -d $HOME/.cache/kitty/*)
+do
+  kitty @ --to=unix:$i $@ 2> /dev/null
+done
+
