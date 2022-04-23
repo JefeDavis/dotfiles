@@ -17,6 +17,7 @@ base:
     - bpytop
     - mail
     - kubernetes
+    - neofetch
   'os:MacOS':
     - match: grain
     - skhd
