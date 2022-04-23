@@ -28,6 +28,7 @@ zsh-config:
     - source: salt://zsh/config
     - user: {{ grains['user'] }}
     - force: True
+    - file_mode: keep
     - requres:
         - pkgs:
             - starship

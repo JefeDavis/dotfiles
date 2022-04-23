@@ -1,0 +1,16 @@
+#!/bin/sh
+
+painter() {
+  if [ -z "$1" ]; then
+    theme=$(ls ~/.config/theme | fzf)
+    export THEME="$theme"
+    echo "$THEME" > ~/.config/current-theme
+    kitty @ set-colors --all ~/.config/kitty/${THEME}.conf
+    tmux source ~/.config/tmux/${THEME}.tmux
+  else
+    export THEME="$1"
+    echo "$THEME" > ~/.config/current-theme
+    kitty @ set-colors --all ~/.config/kitty/${THEME}.conf
+    tmux source ~/.config/tmux/${THEME}.tmux
+  fi
+}

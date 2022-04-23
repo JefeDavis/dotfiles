@@ -68,3 +68,5 @@ export PATH="$GOPATH/bin:$CARGO_HOME/bin:"$HOME"/.local/bin:$PATH"
 # This environment sets up what the "master" branch is for a repo
 # in case a repo uses a non standard version
 export REVIEW_BASE=main
+
+export THEME=$(cat $HOME/.config/current-theme)

@@ -1,6 +1,7 @@
 base:
   '*':
     - fonts
+    - theme
     - kitty
     - zsh
     - starship

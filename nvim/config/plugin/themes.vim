@@ -6,33 +6,6 @@ function SwitchColorScheme(name)
 endfunction
 
 function! ColorScheme()
-  if g:VIM_COLOR_SCHEME ==# 'embark-solarized'
-    colorscheme embark_solarized
-    let g:lightline.colorscheme = 'embark_solarized'
-    hi link Sneak Search
-  endif
-
-    if g:VIM_COLOR_SCHEME ==# 'tomorrow-night-blue'
-    packadd colorsbox
-    " let g:colorsbox_contrast_dark = 'hard'
-    let g:colorsbox_italic = 1
-    let g:colorsbox_bold = 0
-    let g:colorsbox_inverse = 0
-    colorscheme colorsbox-stblue
-    let g:lightline.colorscheme = 'blue'
-    hi link Sneak Search
-    hi VertSplit guibg=#002451 guifg=#a0c1eb
-    hi SignColumn guibg=#002451
-    hi GitGutterAdd guibg=#002451
-    hi GitGutterChange guibg=#002451
-    hi GitGutterDelete guibg=#002451
-    hi CursorLineNr guifg=#d1f1a9
-    hi DiffAdd guibg=#d1f1a9 guifg=#002451
-    hi DiffDelete guibg=#ff9da4 guifg=#002451
-    hi DiffChange guibg=#ffeead guifg=#002451
-    hi DiffText guibg=#ffeead guifg=#002451 gui=bold
-  endif
-
   if g:VIM_COLOR_SCHEME ==# 'gruvbox-light'
     packadd gruvbox-material
     set background=light
@@ -47,22 +20,31 @@ function! ColorScheme()
     hi PMenu guibg=#FAF2CF
     hi ClapFile guifg=#654735
     hi Visual guibg=#d9e1cc
-    execute "silent ! kitty-remote set-colors --all ~/.config/kitty/gruvbox-light.conf"
-    execute "silent ! tmux source-file ~/titan/tmux/gruvbox-light.tmux"
-  endif
+    execute "silent ! kitty @ set-colors --all ~/.config/kitty/gruvbox-light.conf"
+    execute "silent ! tmux source-file ~/.config/tmux/gruvbox-light.tmux"
 
-  if g:VIM_COLOR_SCHEME ==# 'embark'
-    packadd embark
+  elseif g:VIM_COLOR_SCHEME ==# 'cyberpunk'
+    execute "colorscheme ".  g:VIM_COLOR_SCHEME
+
+    execute "silent ! kitty @ set-colors --all ~/.config/kitty/". g:VIM_COLOR_SCHEME. ".conf"
+    execute "silent ! tmux source-file ~/.config/tmux/". g:VIM_COLOR_SCHEME. ".tmux"
+
+  else
     let g:embark_terminal_italics = 1
-    colorscheme embark
+    execute "packadd ".  g:VIM_COLOR_SCHEME
+    execute "colorscheme ".  g:VIM_COLOR_SCHEME
 
-    execute "silent ! kitty-remote set-colors --all ~/.config/kitty/embark.conf"
-    execute "silent ! tmux source-file ~/titan/tmux/embark.tmux"
+    execute "silent ! kitty @ set-colors --all ~/.config/kitty/". g:VIM_COLOR_SCHEME. ".conf"
+    execute "silent ! tmux source-file ~/.config/tmux/". g:VIM_COLOR_SCHEME. ".tmux"
   endif
 endfunction
 
 if empty($THEME)
-  let theme = 'embark'
+  if filereadable(expand("$HOME/.config/current-theme"))
+    let theme = readfile(expand("$HOME/.config/current-theme"))[0]
+  else
+    let theme = 'embark'
+  endif
 else
   let theme = $THEME
 endif

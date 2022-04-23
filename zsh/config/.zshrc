@@ -157,6 +157,7 @@ if [ $(command -v "fzf") ]; then
 fi
 
 autoload -Uz dotfile-call
+autoload -Uz painter
 
 #######################################################################
 # FUNCTIONS

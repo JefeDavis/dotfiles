@@ -1,0 +1,39 @@
+! -----------------------------------------------------------------------------
+! Cyberpunk color scheme
+! -----------------------------------------------------------------------------
+
+*foreground:        #f1c4c0
+*background:        #0c1018
+
+! black
+*color0:  #0c1018
+*color8:  #a88986
+
+! red
+*color1:  #F8506D
+*color9:  #F8506D
+
+! green
+*color2:  #F06576
+*color10:  #F06576
+
+! yellow
+*color3:  #CF916E
+*color11:  #CF916E
+
+! blue
+*color4:  #FA3C82
+*color12:  #FA3C82
+
+! magenta
+*color5:  #E9698E
+*color13:  #E9698E
+
+! cyan
+*color6:  #EA7288
+*color14:  #EA7288
+
+! white
+*color7:  #f1c4c0
+*color15:  #f1c4c0
+

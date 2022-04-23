@@ -158,6 +158,8 @@ packer.startup(function()
 
   -- Themes
   use {'gruvbox-material/vim', opt = true, as = 'gruvbox-material'}
+  use {'arcticicestudio/nord-vim', opt = true, as = 'nord'}
+  use {'catppuccin/nvim', opt = true, as = 'catppuccin'}
   use {'mkarmona/colorsbox', opt = true}
   use {'embark-theme/vim', opt = true, as = 'embark'}
 end)

@@ -7,10 +7,11 @@ local gls = gl.section
 gl.short_line_list = {'NvimTree','vista_kind','dbui'}
 
 local colors = {
-  bg = "#1e1c31",
-  bg_dark = "#100E23",
+  bg = "#2d2b40",
+  bg_dark = "#1e1c31",
+  bg_alt = "#3e3859",
   fg = "#cbe3e7",
-  fg_dark = "#8A889D"
+  fg_dark = "#8A889D",
 
 }
 
@@ -48,9 +49,9 @@ gls.left[1] = {
         return 'SCRATCH '
       end
     end,
-    highlight = { colors.fg_dark, "#19172C" },
-    separator = '',
-    separator_highlight = {"#19172C", "#2D2B40"}
+    highlight = { colors.fg_dark, colors.bg_dark },
+    separator = '',
+    separator_highlight = {colors.bg, colors.bg_dark}
   }
 }
 
@@ -64,9 +65,9 @@ gls.left[2] = {
       end
     end,
     icon = '  ',
-    highlight = { colors.fg_dark, "#2D2B40" },
+    highlight = { colors.fg_dark, colors.bg },
     separator = '',
-    separator_highlight = {"#2D2B40", "#37354A" }
+    separator_highlight = {colors.bg, colors.bg_alt }
   }
 }
 
@@ -80,7 +81,7 @@ gls.left[3] = {
         return '· '
       end
     end,
-    highlight = { colors.fg_dark, "#37354A" }
+    highlight = { colors.fg_dark, colors.bg_alt }
   }
 }
 
@@ -94,7 +95,8 @@ gls.left[4] = {
         return '· '
       end
     end,
-    highlight = { colors.fg_dark, "#37354A" }
+    highlight = { colors.fg_dark, colors.bg_alt }
+ 
   }
 }
 
@@ -108,9 +110,9 @@ gls.left[5] = {
         return '· '
       end
     end,
-    highlight = { colors.fg_dark, "#37354A" },
+    highlight = { colors.fg_dark, colors.bg_alt },
     separator = '',
-    separator_highlight = { "#37354A", colors.bg_dark }
+    separator_highlight = { colors.bg_alt , colors.bg_dark }
   }
 }
 
@@ -127,18 +129,18 @@ gls.right[1] = {
         return '  '
       end
     end,
-    highlight = { colors.fg_dark, "#37354A" },
+    highlight = { colors.fg_dark, colors.bg_alt },
     separator = '',
-    separator_highlight = { "#37354A", colors.bg_dark }
+    separator_highlight = { colors.bg_alt , colors.bg_dark }
   }
 }
 
 gls.right[2] = {
   TestResults = {
     provider = testing_results,
-    highlight = { colors.fg_dark, "#2D2B40" },
+    highlight = { colors.fg_dark, colors.bg },
     separator = '',
-    separator_highlight = {  "#2D2B40", "#37354A" }
+    separator_highlight = {  colors.bg , colors.bg_alt }
   }
 }
 
@@ -149,9 +151,9 @@ gls.right[3] = {
       local col = vim.fn.col('.')
       return ' ' .. line .. ':' .. col .. ' '
     end,
-    highlight = { colors.fg_dark, "#19172C" },
-    separator = '',
-    separator_highlight = {"#19172C", "#2D2B40"}
+    highlight = { colors.fg_dark, colors.bg_dark },
+    separator = '',
+    separator_highlight = { colors.bg, colors.bg_dark }
   }
 }
 
