@@ -16,6 +16,7 @@ base:
     - direnv
     - bpytop
     - mail
+    - kubernetes
   'os:MacOS':
     - match: grain
     - skhd
