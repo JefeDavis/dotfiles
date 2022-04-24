@@ -1,6 +1,4 @@
 local telescope = require('telescope')
-local builtin = require('telescope.builtin')
-local actions = require('telescope.actions')
 --configure telescope
 telescope.setup{
   defaults = {
@@ -22,7 +20,7 @@ telescope.setup{
     },
     live_grep = {
       previewer = false,
-      theme = "dropdown" 
+      theme = "dropdown"
     },
     git_status = {
       git_icons = {

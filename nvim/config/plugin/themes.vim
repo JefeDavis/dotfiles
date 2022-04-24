@@ -29,8 +29,16 @@ function! ColorScheme()
     execute "silent ! kitty @ set-colors --all ~/.config/kitty/". g:VIM_COLOR_SCHEME. ".conf"
     execute "silent ! tmux source-file ~/.config/tmux/". g:VIM_COLOR_SCHEME. ".tmux"
 
-  else
+  elseif g:VIM_COLOR_SCHEME ==# 'embark'
+    execute "packadd ".  g:VIM_COLOR_SCHEME
     let g:embark_terminal_italics = 1
+    execute "colorscheme ".  g:VIM_COLOR_SCHEME
+    hi PMenu guibg=##1e1c31
+
+    execute "silent ! kitty @ set-colors --all ~/.config/kitty/". g:VIM_COLOR_SCHEME. ".conf"
+    execute "silent ! tmux source-file ~/.config/tmux/". g:VIM_COLOR_SCHEME. ".tmux"
+
+  else
     execute "packadd ".  g:VIM_COLOR_SCHEME
     execute "colorscheme ".  g:VIM_COLOR_SCHEME
 

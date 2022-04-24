@@ -7,7 +7,7 @@
 vim.cmd [[packadd packer.nvim]]
 
 local packer = require('packer')
-packer.startup(function()
+packer.startup(function(use)
   use {'wbthomason/packer.nvim', opt = true}
   -- ==========================================
 
@@ -64,6 +64,7 @@ packer.startup(function()
   use {
     'neovim/nvim-lspconfig',
     config = function() require('lsp') end,
+    requires = { 'williamboman/nvim-lsp-installer' }
   }
   use {
     'hrsh7th/nvim-cmp',

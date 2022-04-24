@@ -1,14 +1,9 @@
 local cmp = require('cmp')
-local lspkind = require('lspkind')
 local luasnip = require('luasnip')
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
-local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
 
 local kind_icons = {
@@ -67,10 +62,14 @@ cmp.setup {
   },
   mapping = {
     -- confirm snippets
-    ["<c-y>"] = cmp.mapping.confirm {
+    ["<C-Space"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true
     },
+    ["<C-c>"] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
     -- tab to move down list
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -85,7 +84,7 @@ cmp.setup {
     end, { "i", "s" }),
 
     -- shift tab to move backwards
-    ["<S-Tab>"] = cmp.mapping(function()
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
