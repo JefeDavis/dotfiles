@@ -114,9 +114,13 @@ packer.startup(function(use)
     end
   }
   use {
-    'glepnir/galaxyline.nvim',
-    branch = 'main',
-    config = function() require('neoline') end,
+    'feline-nvim/feline.nvim',
+    -- branch = 'main',
+    config = function()
+      require('feline').setup {
+        components = require('catppuccin.core.integrations.feline')
+      }
+    end,
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
   use {
@@ -164,9 +168,22 @@ packer.startup(function(use)
   -- Themes
   use {'gruvbox-material/vim', opt = true, as = 'gruvbox-material'}
   use {'arcticicestudio/nord-vim', opt = true, as = 'nord'}
-  use {'catppuccin/nvim', opt = true, as = 'catppuccin'}
+  use {
+    'catppuccin/nvim',
+    opt = true,
+    as = 'catppuccin',
+    config = function ()
+      require("catppuccin").setup {
+        transparent_background = true,
+        integrations = {
+          lightspeed = true,
+        },
+      }
+    end
+  }
   use {'mkarmona/colorsbox', opt = true}
   use {'embark-theme/vim', opt = true, as = 'embark'}
+    -- config = function() require('theme.embark') end }
 end)
 
 vim.cmd("autocmd BufWritePost plugins.lua PackerCompile")
