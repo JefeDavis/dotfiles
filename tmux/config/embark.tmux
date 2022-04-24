@@ -1,3 +1,5 @@
+# vim:syntax=tmux
+
 set -g status-interval 3
 set-option -g status-position bottom
 set-option -g pane-active-border-style "fg=green"
@@ -15,10 +17,10 @@ set -g status-bg "black"
 #Bars ---------------------------------
 set -g status-left "#[bg=black,fg=brightwhite italics] #(tmux run-shell 'tmux display-message -p \"#S\" | tr \"[:lower:]\" \"[:upper:]\"') #[fg=black] "
 
-set -g status-right "#[fg=red]#[bg=red,fg=black] %Y-%m-%d #[fg=red,bg=magenta] #[fg=black,bg=magenta]%I:%M #[fg=magenta,bg=default]#[bg=default,fg=white italics] @#H "
+set -g status-right "#[fg=magenta]#[bg=magenta,fg=black] %Y-%m-%d #[fg=magenta,bg=white] #[fg=black,bg=white]%I:%M #[fg=white,bg=black]#[bg=black,fg=white italics] @#H "
 
 # Windows ------------------------------
 set -g status-justify left
 
-set -g window-status-format "#[fg=brightwhite]#[fg=white,bg=brightwhite] #{?window_zoomed_flag,  ,}#W #[bg=black,fg=brightwhite]"
-set -g window-status-current-format "#[fg=brightcyan]#[bg=brightcyan,fg=black] #W #{?window_zoomed_flag,  ,}#[fg=brightcyan,bg=black]"
+set -g window-status-format "#[fg=brightwhite, bg=black]#[fg=white,bg=brightwhite] #{?window_zoomed_flag,  ,}#W #[bg=black,fg=brightwhite]"
+set -g window-status-current-format "#[fg=brightcyan, bg=black]#[bg=brightcyan,fg=black] #W #{?window_zoomed_flag,  ,}#[fg=brightcyan,bg=black]"

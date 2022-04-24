@@ -18,6 +18,10 @@ packer.startup(function(use)
     ft = { 'go', 'go.mod', 'go.sum'}
   }
   use {
+    'tmux-plugins/vim-tmux',
+    ft = { 'tmux' }
+  }
+  use {
     'vimwiki/vimwiki',
     branch = 'dev',
     config = function()
