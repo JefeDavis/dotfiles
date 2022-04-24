@@ -1,6 +1,7 @@
 base:
   '*':
     - fonts
+    - terminfo
     - theme
     - kitty
     - zsh
