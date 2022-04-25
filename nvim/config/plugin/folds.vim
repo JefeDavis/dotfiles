@@ -5,3 +5,4 @@ endfunction
 
 set foldtext=MyFoldText()
 set fillchars=fold:\ 
+set foldexpr=nvim_treesitter#foldexpr()
