@@ -174,18 +174,9 @@ packer.startup(function(use)
   use {'arcticicestudio/nord-vim', opt = true, as = 'nord'}
   use {
     'catppuccin/nvim',
-    opt = true,
+    opt = false,
     as = 'catppuccin',
-    config = function ()
-      local catppuccin = require("catppuccin")
-      catppuccin.setup {
-        transparent_background = true,
-        integrations = {
-          treesitter = true,
-          lightspeed = true,
-        },
-      }
-    end
+    config = function() require('theme.catppuccin') end
   }
   use {'mkarmona/colorsbox', opt = true}
   use {'jefedavis/embark-nvim', opt = true, as = 'embark'}

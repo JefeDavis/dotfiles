@@ -63,5 +63,5 @@ function! SynGroup()
   endfun
 
 " The Defaults
-:call SwitchColorScheme(theme)
+" :call SwitchColorScheme(theme)
 
