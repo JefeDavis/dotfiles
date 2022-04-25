@@ -19,6 +19,7 @@ base:
     - mail
     - kubernetes
     - neofetch
+    - k9s
   'os:MacOS':
     - match: grain
     - skhd

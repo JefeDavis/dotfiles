@@ -1,0 +1,110 @@
+k9s:
+  refreshRate: 2
+  maxConnRetry: 5
+  enableMouse: false
+  headless: false
+  logoless: false
+  crumbsless: false
+  readOnly: false
+  noIcons: true
+  logger:
+    tail: 100
+    buffer: 5000
+    sinceSeconds: 60
+    fullScreenLogs: false
+    textWrap: false
+    showTime: false
+  currentContext: digital-ocean
+  currentCluster: do-nyc3-k8s-1-22-7-do-0-nyc3-1647820738947
+  clusters:
+    10.213.205.6:
+      namespace:
+        active: all
+        favorites:
+        - all
+        - default
+      view:
+        active: pod
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    decc-scdc1-prod2:
+      namespace:
+        active: scdc1-prod2-mapbu-cnfe
+        favorites:
+        - scdc1-prod2-mapbu-cnfe
+        - default
+      view:
+        active: pod
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    do-nyc3-k8s-1-22-7-do-0-nyc3-1647820738947:
+      namespace:
+        active: all
+        favorites:
+        - cert-manager
+        - ingress-nginx
+        - resume
+        - all
+        - default
+      view:
+        active: dp
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+    tkg-workload-001a:
+      namespace:
+        active: res
+        favorites:
+        - res
+        - tenancy-system
+        - ingress-system
+        - all
+        - test
+        - default
+      view:
+        active: cm test
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.31
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+      portForwardAddress: localhost
+  thresholds:
+    cpu:
+      critical: 90
+      warn: 70
+    memory:
+      critical: 95
+      warn: 85
+  screenDumpDir: /var/folders/f4/8jbmtb6n0rx4bg32mtdt8tph0000gq/T/k9s-screens-jeffda
