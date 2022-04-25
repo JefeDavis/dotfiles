@@ -45,6 +45,7 @@ packer.startup(function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-repeat'
   use 'tpope/vim-commentary'
+  use 'tpope/vim-projectionist'
   use {
     'vim-test/vim-test',
     requires = { 'tpope/vim-dispatch', 'neomake/neomake', 'preservim/vimux' }
@@ -114,11 +115,14 @@ packer.startup(function(use)
     end
   }
   use {
+    -- 'glepnir/galaxyline.nvim',
+    -- branch = 'main',
+    -- config = function() require('neoline') end,
     'feline-nvim/feline.nvim',
     -- branch = 'main',
     config = function()
       require('feline').setup {
-        components = require('catppuccin.core.integrations.feline')
+        components = require('catppuccin-line')
       }
     end,
     requires = { 'kyazdani42/nvim-web-devicons', opt = true }
@@ -173,16 +177,18 @@ packer.startup(function(use)
     opt = true,
     as = 'catppuccin',
     config = function ()
-      require("catppuccin").setup {
+      local catppuccin = require("catppuccin")
+      catppuccin.setup {
         transparent_background = true,
         integrations = {
+          treesitter = true,
           lightspeed = true,
         },
       }
     end
   }
   use {'mkarmona/colorsbox', opt = true}
-  use {'embark-theme/vim', opt = true, as = 'embark'}
+  use {'jefedavis/embark-nvim', opt = true, as = 'embark'}
     -- config = function() require('theme.embark') end }
 end)
 
