@@ -167,15 +167,6 @@ components.active[1][3] = {
 		bg = clrs.flamingo,
 	},
 	icon = "  ",
-	left_sep = {
-    str = assets.slant_right,
-    hl  = function()
-      return {
-        fg = mode_colors[vim.fn.mode()][2],
-        bg = clrs.flamingo
-      }
-    end
-  },
   right_sep = {
     str = assets.slant_right,
     hl  = function()
