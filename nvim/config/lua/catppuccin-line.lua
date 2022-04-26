@@ -141,7 +141,22 @@ components.active[1][2] = {
 		return " " .. mode_colors[vim.fn.mode()][1] .. " "
 	end,
 	hl = vi_mode_hl,
-	icon = "",
+	icon = "  ",
+	right_sep = {
+    str = assets.slant_right,
+    hl  = function()
+      if b.gitsigns_head then
+        return {
+          fg = mode_colors[vim.fn.mode()][2],
+          bg = clrs.flamingo,
+        }
+      end
+      return {
+        fg = mode_colors[vim.fn.mode()][2],
+        bg = sett.bkg
+      }
+    end
+  },
 }
 
 components.active[1][3] = {
