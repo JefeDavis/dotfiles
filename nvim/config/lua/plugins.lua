@@ -105,12 +105,17 @@ packer.startup(function(use)
     config = function()
       local nnn = require('nnn')
       require('nnn').setup {
+        picker = {
+          cmd = "tmux new-session nnn -DPp",
+          style = { border = "rounded" }
+        },
         replace_netrw = "picker",
         auto_close = true,
         mappings = {
           { "<C-t>", nnn.builtin.open_in_tab },
           { "<C-s>", nnn.builtin.open_in_split },
           { "<C-v>", nnn.builtin.open_in_vsplit },
+          { "<C-g>", nnn.builtin.cd_to_path },
         }
       }
     end

@@ -4,7 +4,8 @@ if not has_telescope then
   return
 end
 
-vim.keymap.set('n', '<leader>\\', '<CMD>NnnExplorer<CR>')
+vim.keymap.set('n', '\\', '<CMD>NnnExplorer<CR>')
+vim.keymap.set('t', '\\', '<CMD>NnnExplorer<CR>')
 vim.keymap.set('n', '<leader><BAR>', '<CMD>NnnPicker %:p<CR>')
 vim.keymap.set('n', '<leader>/', ':silent grep ', { silent = false })
 vim.keymap.set('n', '<leader>_', telescope.live_grep)
