@@ -12,17 +12,31 @@ nnn-config:
     - name: {{ pillar['xdg_config_home'] }}/nnn
     - makedirs: true
     - user: {{ grains['user'] }}
+nnn-bin:
+  file.directory:
+    - name: {{ pillar['xdg_bin_home'] }}/nnn.d
+    - makedirs: true
+    - user: {{ grains['user'] }}
 
 nnn-build:
   file.absent:
-    - name: {{ grains['homedir'] }}/.local/bin/nnn
+    - name: {{ pillar['xdg_bin_home'] }}/nnn.d/nnn
   cmd.run:
     - cwd: {{ pillar['xdg_data_home'] }}/nnn
     - names:
       - make O_NERD=1
-      - mv nnn {{ grains['homedir'] }}/.local/bin
+      - mv nnn {{ pillar['xdg_bin_home'] }}/nnn.d/nnn
       - cp -r plugins {{ pillar['xdg_config_home'] }}/nnn
+    - runas: {{ grains['user'] }}
     - user: {{ grains['user'] }}
+
+nnn-wrapper:
+  file.managed:
+    - name: {{ pillar['xdg_bin_home'] }}/nnn
+    - source: salt://nnn/bin/nnn
+    - mode: 0755
+    - user: {{ grains['user'] }}
+
 
 
 # nnn-desktop:

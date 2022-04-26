@@ -55,9 +55,9 @@ export SSB_HOME="$XDG_DATA_HOME/zoom"
 export NNN_OPTS="Hd"
 export NNN_TRASH=1
 export NNN_BMS="a:$HOME/Documents/Archive;D:$HOME/Documents;p:$HOME/Projects;c:$HOME/.config;o:$HOME/Downloads;w:$HOME/Pictures/Wallpapers"
-BLK="00" CHAR="00" DIR="69" EXE="DE" REG="00" HLI="00" SLI="00" MIS="00" ORP="00" FIF="00" SOC="00" UNK="00"
+BLK="DA" CHAR="E5" DIR="99" EXE="97" REG="E0" HLI="E5" SLI="74" MIS="BC" ORP="D9" FIF="" SOC="BC" UNK="D3"
 export NNN_FCOLORS="$BLK$CHAR$DIR$EXE$REG$HLI$SLI$MIS$ORP$FIF$SOC$UNK"
-export NNN_COLORS="#56565656"
+export NNN_COLORS="#99D9DFE1"
 export NNN_PLUG="p:preview-tui"
 export NNN_FIFO=/tmp/nnn.fifo
 
