@@ -9,12 +9,10 @@ trash-cli:
 
 nnn-config:
   file.directory:
-    - name: {{ pillar['xdg_config_home'] }}/nnn
-    - makedirs: true
-    - user: {{ grains['user'] }}
-nnn-bin:
-  file.directory:
-    - name: {{ pillar['xdg_bin_home'] }}/nnn.d
+    - names:
+        - {{ pillar['xdg_bin_home'] }}/nnn.d
+        - {{ pillar['xdg_config_home'] }}/nnn
+        - {{ pillar['xdg_cache_home'] }}/nnn/previews
     - makedirs: true
     - user: {{ grains['user'] }}
 

@@ -58,8 +58,9 @@ export NNN_BMS="a:$HOME/Documents/Archive;D:$HOME/Documents;p:$HOME/Projects;c:$
 BLK="DA" CHAR="E5" DIR="99" EXE="97" REG="E0" HLI="E5" SLI="74" MIS="BC" ORP="D9" FIF="" SOC="BC" UNK="D3"
 export NNN_FCOLORS="$BLK$CHAR$DIR$EXE$REG$HLI$SLI$MIS$ORP$FIF$SOC$UNK"
 export NNN_COLORS="#99D9DFE1"
-export NNN_PLUG="p:preview-tui"
+export NNN_PLUG="p:preview-tui;v:imgview"
 export NNN_FIFO=/tmp/nnn.fifo
+export NNN_PREVIEWDIR={{ pillar['xdg_cache_home'] }}/nnn/previews
 
 export PATH="$GOPATH/bin:$CARGO_HOME/bin:"$HOME"/.local/bin:$PATH"
 

@@ -12,3 +12,9 @@ exa:
 
 remind:
   pkg.installed
+
+pastel:
+  pkg.installed
+
+viu:
+  pkg.installed

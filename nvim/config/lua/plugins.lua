@@ -106,6 +106,7 @@ packer.startup(function(use)
       local nnn = require('nnn')
       require('nnn').setup {
         replace_netrw = "picker",
+        auto_close = true,
         mappings = {
           { "<C-t>", nnn.builtin.open_in_tab },
           { "<C-s>", nnn.builtin.open_in_split },

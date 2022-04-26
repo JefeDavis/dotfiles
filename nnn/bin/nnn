@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ -n "$TMUX" ]; then
-    TERM=xterm-kitty $HOME/.local/bin/nnn.d/nnn -aD $@
+    TERM=xterm-kitty $HOME/.local/bin/nnn.d/nnn -D $@
 else
-    $HOME/.local/bin/nnn.d/nnn -aD $@
+    $HOME/.local/bin/nnn.d/nnn -D $@
 fi
