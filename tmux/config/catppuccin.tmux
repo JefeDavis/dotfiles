@@ -43,14 +43,14 @@ set -g window-status-style fg="${thm_fg}",bg="${thm_bg}",none
 
 # --------=== Statusline
 
-set -g status-left "#[bg=$thm_gray,fg=$thm_fg italics] #(tmux run-shell 'tmux display-message -p \"#S\" | tr \"[:lower:]\" \"[:upper:]\"') #[fg=$thm_gray, bg=$thm_bg]"
+set -g status-left "#[bg=$thm_gray,fg=$thm_fg italics] #(tmux run-shell 'tmux display-message -p \"#S\" | tr \"[:lower:]\" \"[:upper:]\"') #[fg=$thm_gray, bg=$thm_bg]"
 
 
 set -g status-right "#[fg=$thm_pink,bg=$thm_bg]#[bg=$thm_pink,fg=$thm_bg] %Y-%m-%d #[fg=$thm_pink,bg=$thm_magenta] #[fg=$thm_bg,bg=$thm_magenta]%I:%M #[fg=$thm_magenta,bg=$thm_blue]#[bg=$thm_blue,fg=$thm_bg italics] @#H "
 
-set -g window-status-format "#[fg=$thm_black4]#[fg=brightwhite,bg=$thm_black4] #{?window_zoomed_flag,  ,}#W #[bg=$thm_bg,fg=$thm_black4]"
+set -g window-status-format "#[fg=$thm_black4]#[fg=brightwhite,bg=$thm_black4] #{?window_zoomed_flag,  ,}#W #[bg=$thm_bg,fg=$thm_black4]"
 
-set -g window-status-current-format "#[fg=$thm_green]#[bg=$thm_green,fg=$thm_bg] #W #{?window_zoomed_flag,  ,}#[fg=$thm_green,bg=$thm_bg]"
+set -g window-status-current-format "#[fg=$thm_green]#[bg=$thm_green,fg=$thm_bg] #W #{?window_zoomed_flag,  ,}#[fg=$thm_green,bg=$thm_bg]"
 
 # --------=== Modes
 setw -g clock-mode-colour "blue"
