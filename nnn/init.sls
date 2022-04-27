@@ -10,30 +10,32 @@ trash-cli:
 nnn-config:
   file.directory:
     - names:
-        - {{ pillar['xdg_bin_home'] }}/nnn.d
+        - {{ pillar['xdg_lib_home'] }}/nnn.d
         - {{ pillar['xdg_config_home'] }}/nnn
         - {{ pillar['xdg_cache_home'] }}/nnn/previews
     - makedirs: true
-    - user: {{ grains['user'] }}
-
-nnn-build:
-  file.absent:
-    - name: {{ pillar['xdg_bin_home'] }}/nnn.d/nnn
-  cmd.run:
-    - cwd: {{ pillar['xdg_data_home'] }}/nnn
-    - names:
-      - make O_NERD=1
-      - mv nnn {{ pillar['xdg_bin_home'] }}/nnn.d/nnn
-      - cp -r plugins {{ pillar['xdg_config_home'] }}/nnn
-    - runas: {{ grains['user'] }}
     - user: {{ grains['user'] }}
 
 nnn-wrapper:
   file.managed:
     - name: {{ pillar['xdg_bin_home'] }}/nnn
     - source: salt://nnn/bin/nnn
+    - makedirs: true
     - mode: 0755
     - user: {{ grains['user'] }}
+
+nnn-build:
+  file.absent:
+    - name: {{ pillar['xdg_lib_home'] }}/nnn.d/nnn
+  cmd.run:
+    - cwd: {{ pillar['xdg_data_home'] }}/nnn
+    - names:
+      - make O_NERD=1
+      - mv nnn {{ pillar['xdg_lib_home'] }}/nnn.d/nnn
+      - cp -r plugins {{ pillar['xdg_config_home'] }}/nnn
+    - runas: {{ grains['user'] }}
+    - user: {{ grains['user'] }}
+
 
 
 
