@@ -55,9 +55,11 @@ export SSB_HOME="$XDG_DATA_HOME/zoom"
 export NNN_OPTS="Hd"
 export NNN_TRASH=1
 export NNN_BMS="a:$HOME/Documents/Archive;D:$HOME/Documents;p:$HOME/Projects;c:$HOME/.config;o:$HOME/Downloads;w:$HOME/Pictures/Wallpapers"
-BLK="DA" CHAR="E5" DIR="99" EXE="97" REG="E0" HLI="E5" SLI="74" MIS="BC" ORP="D9" FIF="" SOC="BC" UNK="D3"
-export NNN_FCOLORS="$BLK$CHAR$DIR$EXE$REG$HLI$SLI$MIS$ORP$FIF$SOC$UNK"
-export NNN_COLORS="#99D9DFE1"
+BLK="E5" CHR="E5" DIR="99" EXE="97" REG="07" HARDLINK="E1" SYMLINK="E1" MISSING="08" ORPHAN="D3" FIFO="9F" SOCK="E5" UNKNOWN="D3"
+# BLK="03" CHR="03" DIR="04" EXE="02" REG="07" HARDLINK="05" SYMLINK="05" MISSING="08" ORPHAN="01" FIFO="06" SOCK="03" UNKNOWN="01"
+export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$UNKNOWN"
+# export NNN_COLORS="#99D9DFE1;4253"
+export NNN_COLORS="#04020301;4231"
 export NNN_PLUG="p:preview-tui;v:imgview"
 export NNN_FIFO=/tmp/nnn.fifo
 export NNN_PREVIEWDIR={{ pillar['xdg_cache_home'] }}/nnn/previews
