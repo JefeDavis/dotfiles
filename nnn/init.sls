@@ -16,6 +16,15 @@ nnn-config:
     - makedirs: true
     - user: {{ grains['user'] }}
 
+nnn-env:
+  file.recurse:
+    - name: {{ pillar['xdg_config_home'] }}/env/nnn
+    - source: salt://nnn/env
+    - clean: true
+    - makedirs: true
+    - template: jinja
+    - user: {{ grains['user'] }}
+
 nnn-wrapper:
   file.managed:
     - name: {{ pillar['xdg_bin_home'] }}/nnn

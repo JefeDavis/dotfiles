@@ -3,6 +3,15 @@ include:
 
 gopass: pkg.installed
 
+pass-envs:
+  file.recurse:
+    - name: {{ pillar['xdg_config_home'] }}/env/pass
+    - source: salt://passwords/env
+    - clean: true
+    - makedirs: true
+    - user: {{ grains['user'] }}
+    
+
 gopass-jsonapi:
   pkg.installed:
     - name: gopass-jsonapi

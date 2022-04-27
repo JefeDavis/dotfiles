@@ -6,6 +6,27 @@ gpg:
   #   - name: brew link gnupg@2.2
   #   - runas: {{ grains['user'] }}
 
+gpg-config:
+  file.recurse:
+    - name: {{ pillar['xdg_config_home'] }}/gpg
+    - source: salt://gpg/config
+    - makedirs: true
+    - dir_mode: 700
+    - file_mode: 600
+    - user: {{ grains['user'] }}
+  cmd.run:
+    - name: killall pinentry-mac gpg-agent
+    - onchanges:
+        - file: {{ pillar['xdg_config_home'] }}/gpg
+
+gpg-envs:
+  file.recurse:
+    - name: {{ pillar['xdg_config_home'] }}/env/gpg
+    - source: salt://gpg/env
+    - clean: true
+    - makedirs: true
+    - user: {{ grains['user'] }}
+
 pinentry-mac:
   pkg.installed:
     - name: pinentry-mac
@@ -21,23 +42,6 @@ pinentry-touchid:
     - name: jorgelbg/tap/pinentry-touchid
   cmd.run:
     - name: defaults write org.gpgtools.pinentry-touchid UseKeychain -bool NO
-
-gpg-config-dir:
-  file.directory:
-    - name: {{ pillar['xdg_config_home'] }}/gpg
-    - user: {{ grains['user'] }}
-    - dir_mode: 700
-    - file_mode: 600
-
-gpg-agent-config:
-  file.managed:
-    - name: {{ pillar['xdg_config_home'] }}/gpg/gpg-agent.conf
-    - source: salt://gpg/gpg-agent.conf
-    - user: {{ grains['user'] }}
-  cmd.run:
-    - name: killall pinentry-mac gpg-agent
-    - onchanges:
-        - file: {{ pillar['xdg_config_home'] }}/gpg/gpg-agent.conf
 
 personal-gpg-key:
   gpg.present:

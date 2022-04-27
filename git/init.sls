@@ -11,6 +11,14 @@ git-configs:
     - makedirs: true
     - user: {{ grains['user'] }}
 
+git-envs:
+  file.recurse:
+    - name: {{ pillar['xdg_config_home'] }}/env/git
+    - source: salt://git/env
+    - clean: true
+    - makedirs: true
+    - user: {{ grains['user'] }}
+
 git-scripts:
   file.recurse:
     - name: {{ pillar['xdg_bin_home'] }}
