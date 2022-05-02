@@ -24,5 +24,5 @@ base:
     - match: grain
     - skhd
     - yabai
-  #   - mac-utils
+    - mac-utils
   #   - mac-programs
