@@ -1,23 +1,28 @@
 # Mode declaration
 # 1) default: all keylib/yabaidings are available
 # 2) passthrough: all keylib/yabaidings are unavailable. (If some keylib/yabaidings conflict with some application, we can turn off skhd)
+# 3) prefix: a tmux style binding for moving windows
 :: default : yabai -m config active_window_border_color 0xffffbb7d;\
-             osascript -e "display notification \"skhd enabled!\" with title \"skhd\""
+             osascript -e "display notification \"skhd normal mode\" with title \"skhd\""
 
 :: passthrough : yabai -m config active_window_border_color 0xff8d5524;\
-                 osascript -e "display notification \"skhd disabled!\" with title \"skhd\""
+                 osascript -e "display notification \"skhd passthrough mode\" with title \"skhd\""
+
+:: prefix : yabai -m config active_window_border_color 0xff8d5524;\
+                 osascript -e "display notification \"skhd prefix mode\" with title \"skhd\""
 
 # Mode Switching
 cmd - p ; passthrough
 passthrough < cmd - p ; default
 
-# Open Terminal
-cmd - return : kitty -d ~
+# Tmux style prefix
+cmd - a ; prefix
+prefix < cmd - a ; default
 
 
 # Focus Window
 #   - k, j: focus the window above or below
-#   - h, j: focus the window left or right (support moving the focus across the display)
+#   - h, l: focus the window left or right (support moving the focus across the display)
 #   - r:    focus the recently-focused window
 #   - <, >: cycle through the windows in the stack backward or forward
 #   - /:    focus the recently-focused window in the stack
@@ -49,92 +54,97 @@ cmd + shift - m : [[ $(yabai -m query --windows --window | jq '."zoom-fullscreen
 #   - [, ]: cycle through the workspaces (support moving the focus across the display)
 #     e.g., 4 | 1 2 | 3 (three displays and currently at 2, using [ to move the focus 2 -> 1 -> 4 -> 3 -> 2, ..., ] is the same but on the opposite direction
 #   - \:    focus the recently-focused workspace
-cmd - 0x12 : ~/.local/lib/yabai/focus-space-sip.sh 1
-cmd - 0x13 : ~/.local/lib/yabai/focus-space-sip.sh 2
-cmd - 0x14 : ~/.local/lib/yabai/focus-space-sip.sh 3
-cmd - 0x15 : ~/.local/lib/yabai/focus-space-sip.sh 4
-cmd - 0x17 : ~/.local/lib/yabai/focus-space-sip.sh 5
-cmd - 0x16 : ~/.local/lib/yabai/focus-space-sip.sh 6
-cmd - 0x1A : ~/.local/lib/yabai/focus-space-sip.sh 7
-cmd - 0x1C : ~/.local/lib/yabai/focus-space-sip.sh 8
-cmd - 0x19 : ~/.local/lib/yabai/focus-space-sip.sh 9
-cmd - 0x1D : ~/.local/lib/yabai/focus-space-sip.sh 10
+####### Handled by native key bindings #######
+# cmd - 0x12 : ~/.local/lib/yabai/focus-space-sip.sh 1
+# cmd - 0x13 : ~/.local/lib/yabai/focus-space-sip.sh 2
+# cmd - 0x14 : ~/.local/lib/yabai/focus-space-sip.sh 3
+# cmd - 0x15 : ~/.local/lib/yabai/focus-space-sip.sh 4
+# cmd - 0x17 : ~/.local/lib/yabai/focus-space-sip.sh 5
+# cmd - 0x16 : ~/.local/lib/yabai/focus-space-sip.sh 6
+# cmd - 0x1A : ~/.local/lib/yabai/focus-space-sip.sh 7
+# cmd - 0x1C : ~/.local/lib/yabai/focus-space-sip.sh 8
+# cmd - 0x19 : ~/.local/lib/yabai/focus-space-sip.sh 9
+# cmd - 0x1D : ~/.local/lib/yabai/focus-space-sip.sh 10
 
-cmd - 0x21 : ~/.local/lib/yabai/focus-space-sip.sh $(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
-                                      yabai -m query --displays | jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then last else .[index($cur_space) - 1] end")
-cmd - 0x1E : ~/.local/lib/yabai/focus-space-sip.sh $(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
-                                      yabai -m query --displays | jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) + 1 == length then first else .[index($cur_space) + 1] end")
-cmd - 0x2A : yabai -m space --focus recent
-
+cmd - 0x21 : dest=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && yabai -m query --displays | \
+             jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then last else .[index($cur_space) - 1] end"); \
+             ~/.local/lib/yabai/focus-space-sip.sh ${dest}
+cmd - 0x1E : dest=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && yabai -m query --displays | \
+             jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) + 1 == length then first else .[index($cur_space) + 1] end"); \
+             ~/.local/lib/yabai/focus-space-sip.sh ${dest}
+cmd - 0x2A : recent_space=$(yabai -m query --spaces --space recent | jq '.id') && \
+             ~/.local/lib/yabai/focus-space-sip.sh ${recent_space}
 
 # Swap Window
-cmd + alt - h : yabai -m window --swap west
-cmd + alt - j : yabai -m window --swap south
-cmd + alt - k : yabai -m window --swap north
-cmd + alt - l : yabai -m window --swap east
+prefix < h : yabai -m window --swap west; skhd -k "cmd - a"
+prefix < j : yabai -m window --swap south; skhd -k "cmd - a"
+prefix < k : yabai -m window --swap north; skhd -k "cmd - a"
+prefix < l : yabai -m window --swap east; skhd -k "cmd - a"
 
 # Move Window to Workspace and follow focus
 #   - 1-0:  send the current window to the workspace #1-#10, and focus that window
 #   - [, ]: send the current window to the workspace on its left or right (support sending across the display and cycling through), and focus that window
 #     e.g., 4 | 1 2 | 3 (three display and currently at 3), [ will move the current window to workspace #2 and focus this window on workspace #2, and ] will move the current window to workspace #4 and focus this window on workspace #4
 #   - \:    send the current window to the recently-focused workspace, and focus that window
-cmd + alt - 1 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+prefix < 1 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 1 && \
                 ~/.local/lib/yabai/focus-space-sip.sh 1 && \
-                yabai -m window --focus ${cur_window}
-cmd + alt - 2 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 2 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 2 && \
                 ~/.local/lib/yabai/focus-space-sip.sh 2 && \
-                yabai -m window --focus ${cur_window}
-cmd + alt - 3 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 3 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 3 && \
                 ~/.local/lib/yabai/focus-space-sip.sh 3 && \
-                yabai -m window --focus ${cur_window}
-cmd + alt - 4 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 4 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 4 && \
                 ~/.local/lib/yabai/focus-space-sip.sh 4 && \
-                yabai -m window --focus ${cur_window}
-cmd + alt - 5 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 5 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 5 && \
                 ~/.local/lib/yabai/focus-space-sip.sh 5 && \
-                yabai -m window --focus ${cur_window}
-cmd + alt - 6 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 6 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 6 && \
                 ~/.local/lib/yabai/focus-space-sip.sh 6 && \
-                yabai -m window --focus ${cur_window}
-cmd + alt - 7 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 7 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 7 && \
                 ~/.local/lib/yabai/focus-space-sip.sh 7 && \
-                yabai -m window --focus ${cur_window}
-cmd + alt - 8 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 8 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 8 && \
                 ~/.local/lib/yabai/focus-space-sip.sh 8 && \
-                yabai -m window --focus ${cur_window}
-cmd + alt - 9 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 9 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 9 && \
                 ~/.local/lib/yabai/focus-space-sip.sh 9 && \
-                yabai -m window --focus ${cur_window}
-cmd + alt - 0 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 0 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 yabai -m window --space 10 && \
                 ~/.local/lib/yabai/focus-space-sip.sh 10 && \
-                yabai -m window --focus ${cur_window}
-cmd + alt - 0x21 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
-                   workspace_left=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
-                   yabai -m query --displays | jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then .[length - 1] else .[index($cur_space) - 1] end") && \
-                   yabai -m window --space ${workspace_left} && \
-                   ~/.local/lib/yabai/focus-space-sip.sh ${workspace_left} && \
-                   yabai -m window --focus ${cur_window}
-cmd + alt - 0x1E : cur_window=$(yabai -m query --windows --window | jq '.id') && \
-                   workspace_right=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
-                   yabai -m query --displays | jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) + 1 == length then .[0] else .[index($cur_space) + 1] end") && \
-                   yabai -m window --space ${workspace_right} && \
-                   ~/.local/lib/yabai/focus-space-sip.sh ${workspace_right} && \
-                   yabai -m window --focus ${cur_window}
-cmd + alt - 0x2A : cur_window=$(yabai -m query --windows --window | jq '.id') && \
-                   recent_space=$(yabai -m query --spaces --space recent | jq '.id') && \
-                   yabai -m window --space ${recent_space} && \
-                   ~/.local/lib/yabai/focus-space-sip.sh ${recent_space} && \
-                   yabai -m window --focus ${cur_window}
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 0x21 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                workspace_left=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
+                yabai -m query --displays | \
+                jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then .[length - 1] else .[index($cur_space) - 1] end") && \
+                yabai -m window --space ${workspace_left} && \
+                ~/.local/lib/yabai/focus-space-sip.sh ${workspace_left} && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 0x1E : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                workspace_right=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
+                yabai -m query --displays | \
+                jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) + 1 == length then .[0] else .[index($cur_space) + 1] end") && \
+                yabai -m window --space ${workspace_right} && \
+                ~/.local/lib/yabai/focus-space-sip.sh ${workspace_right} && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
+prefix < 0x2A : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                recent_space=$(yabai -m query --spaces --space recent | jq '.id') && \
+                yabai -m window --space ${recent_space} && \
+                ~/.local/lib/yabai/focus-space-sip.sh ${recent_space} && \
+                yabai -m window --focus ${cur_window}; skhd -k "cmd - a"
 
 
 # Move Window to Workspace
@@ -142,35 +152,39 @@ cmd + alt - 0x2A : cur_window=$(yabai -m query --windows --window | jq '.id') &&
 #   - [, ]: send the current window to the workspace on its left or right (support sending across the display and cycling through), and focus that window
 #     e.g., 4 | 1 2 | 3 (three display and currently at 3), [ will move the current window to workspace #2 and focus this window on workspace #2, and ] will move the current window to workspace #4 and focus this window on workspace #4
 #   - \:    send the current window to the recently-focused workspace, and focus that window
-cmd + alt + shift - 1 : yabai -m window --space 1 
-cmd + alt + shift - 2 : yabai -m window --space 2 
-cmd + alt + shift - 3 : yabai -m window --space 3 
-cmd + alt + shift - 4 : yabai -m window --space 4 
-cmd + alt + shift - 5 : yabai -m window --space 5 
-cmd + alt + shift - 6 : yabai -m window --space 6 
-cmd + alt + shift - 7 : yabai -m window --space 7 
-cmd + alt + shift - 8 : yabai -m window --space 8 
-cmd + alt + shift - 9 : yabai -m window --space 9 
-cmd + alt + shift - 0 : yabai -m window --space 0 
-cmd + alt + shift - 0x21 : workspace_left=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
-                   yabai -m query --displays | jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then .[length - 1] else .[index($cur_space) - 1] end") && \
-                   yabai -m window --space ${workspace_left} && \
-cmd + alt + shift - 0x1E : workspace_right=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
-                   yabai -m query --displays | jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) + 1 == length then .[0] else .[index($cur_space) + 1] end") && \
-                   yabai -m window --space ${workspace_right} && \
-cmd + alt + shift - 0x2A : recent_space=$(yabai -m query --spaces --space recent | jq '.id') && \
-                   yabai -m window --space ${recent_space} && \
+prefix < ctrl - 1 : yabai -m window --space 1; skhd -k "cmd - a"
+prefix < ctrl - 2 : yabai -m window --space 2; skhd -k "cmd - a"
+prefix < ctrl - 3 : yabai -m window --space 3; skhd -k "cmd - a"
+prefix < ctrl - 4 : yabai -m window --space 4; skhd -k "cmd - a"
+prefix < ctrl - 5 : yabai -m window --space 5; skhd -k "cmd - a"
+prefix < ctrl - 6 : yabai -m window --space 6; skhd -k "cmd - a"
+prefix < ctrl - 7 : yabai -m window --space 7; skhd -k "cmd - a"
+prefix < ctrl - 8 : yabai -m window --space 8; skhd -k "cmd - a"
+prefix < ctrl - 9 : yabai -m window --space 9; skhd -k "cmd - a"
+prefix < ctrl - 0 : yabai -m window --space 0; skhd -k "cmd - a"
+prefix < ctrl - 0x21 : workspace_left=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && yabai -m query --displays | \
+                       jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then .[length - 1] else .[index($cur_space) - 1] end") && \
+                       yabai -m window --space ${workspace_left}; skhd -k "cmd - a"
+prefix < ctrl - 0x1E : workspace_right=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && yabai -m query --displays | \
+                       jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) + 1 == length then .[0] else .[index($cur_space) + 1] end") && \
+                       yabai -m window --space ${workspace_right}; skhd -k "cmd - a"
+prefix < ctrl - 0x2A : recent_space=$(yabai -m query --spaces --space recent | jq '.id') && \
+                       yabai -m window --space ${recent_space}; skhd -k "cmd - a"
 
 # Resize Window
-cmd + ctrl - h : yabai -m window --resize left:-20:0 || yabai -m window --resize right:-20:0
-cmd + ctrl - j : yabai -m window --resize top:0:20 || yabai -m window --resize bottom:0:20
-cmd + ctrl - k : yabai -m window --resize top:0:-20 || yabai -m window --resize bottom:0:-20
-cmd + ctrl - l : yabai -m window --resize left:20:0 || yabai -m window --resize right:20:0
+prefix < ctrl - h : yabai -m window --resize left:-20:0 || yabai -m window --resize right:-20:0
+prefix < ctrl - j : yabai -m window --resize top:0:20 || yabai -m window --resize bottom:0:20
+prefix < ctrl - k : yabai -m window --resize top:0:-20 || yabai -m window --resize bottom:0:-20
+prefix < ctrl - l : yabai -m window --resize left:20:0 || yabai -m window --resize right:20:0
 
 # Toggle window between tiling and floating, and restore its previous position when become floating
 cmd - f : ~/.local/lib/yabai/toggle-window-floating.sh
 
-# apps
+# Apps
+
+# Open Terminal
+cmd - return : kitty -d ~
+
 cmd - w : open -na firefox
 cmd - 0x27 : ~/.local/lib/yabai/toggle-visibility.sh Slack || open -na slack
 cmd - 0x29 : ~/.local/lib/yabai/toggle-visibility.sh zoom.us || open -na zoom.us
@@ -179,9 +193,13 @@ cmd - 0x29 : ~/.local/lib/yabai/toggle-visibility.sh zoom.us || open -na zoom.us
 cmd - q : yabai -m window --close || cur_window=$(yabai -m query --windows --window | jq '.pid') && kill -9 ${cur_window}
 # restart yabai
 
-cmd + alt -r : \
+cmd + cmd - r : \
   brew services restart yabai;\
   osascript -e "display notification \"Restarting Yabai\" with title \"Yabai\""
 
 # restart skhd
 #cmd - esc : brew services restart skhd
+
+# Toggle Nightlight
+cmd - b : \
+  nightlight toggle
