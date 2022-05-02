@@ -177,6 +177,9 @@ prefix < ctrl - j : yabai -m window --resize top:0:20 || yabai -m window --resiz
 prefix < ctrl - k : yabai -m window --resize top:0:-20 || yabai -m window --resize bottom:0:-20
 prefix < ctrl - l : yabai -m window --resize left:20:0 || yabai -m window --resize right:20:0
 
+# Balance window sizes
+prefix < 0x18 : yabai -m space --balance; skhd -k "cmd - a"
+
 # Toggle window between tiling and floating, and restore its previous position when become floating
 cmd - f : ~/.local/lib/yabai/toggle-window-floating.sh
 
@@ -190,7 +193,12 @@ cmd - 0x27 : ~/.local/lib/yabai/toggle-visibility.sh Slack || open -na slack
 cmd - 0x29 : ~/.local/lib/yabai/toggle-visibility.sh zoom.us || open -na zoom.us
 
 # close window
-cmd - q : yabai -m window --close || cur_window=$(yabai -m query --windows --window | jq '.pid') && kill -9 ${cur_window}
+# cmd - q : yabai -m window --close || cur_window=$(yabai -m query --windows --window | jq '.pid') && kill -9 ${cur_window}
+cmd - q [
+  "kitty" ~ 
+  * : yabai -m window --close
+]
+
 # restart yabai
 
 cmd + cmd - r : \
