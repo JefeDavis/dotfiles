@@ -5,11 +5,6 @@ if [[ $- != *i* ]]; then
       return
   fi
 
-  # if in tmux change to TERM Variable to support nnn colors
-  if [ -n "$TMUX" ]; then
-      TERM=xterm-kitty
-  fi
-
   # The behaviour is set to cd on quit (nnn checks if NNN_TMPFILE is set)
   # If NNN_TMPFILE is set to a custom path, it must be exported for nnn to
   # see. To cd on quit only on ^G, remove the "export" and make sure not to
@@ -36,11 +31,6 @@ nnn() {
   if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
       echo "nnn is already running"
       return
-  fi
-
-  # if in tmux change to TERM Variable to support nnn colors
-  if [ -n "$TMUX" ]; then
-      TERM=xterm-kitty
   fi
 
   # The behaviour is set to cd on quit (nnn checks if NNN_TMPFILE is set)
