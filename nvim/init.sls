@@ -1,5 +1,6 @@
 include:
   - lang.lua
+  - lang.python
 
 nvim:
   pkg.installed:
@@ -25,3 +26,9 @@ nvim-config:
     - runas: {{ grains['user'] }}
     - shell: /bin/zsh
 
+pynvim:
+  cmd.run:
+  - name: pip3 install pynvim
+  - runas: {{ grains['user'] }}
+  - require:
+      - pkg: python3

@@ -187,6 +187,11 @@ packer.startup(function(use)
   use {'mkarmona/colorsbox', opt = true}
   use {'jefedavis/embark-nvim', opt = true, as = 'embark'}
     -- config = function() require('theme.embark') end }
+  -- ============================================
+
+  -- SUPPORT PLUGINS
+  -- These don't have to be loaded up front
+  use {'blindFS/vim-taskwarrior', fg = {'md', 'vimwiki'}}
 end)
 
 vim.cmd("autocmd BufWritePost plugins.lua PackerCompile")
