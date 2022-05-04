@@ -8,7 +8,7 @@ dijo:
 
 dijo-data:
   file.symlink:
-    - target: {{ grains['homedir'] }}/Documents/Delta/habits
+    - target: {{ grains['homedir'] }}/Documents/Delta/trackers/habits
     - name: {{ grains['homedir'] }}/Library/Application Support/rs.nerdypepper.dijo
     - makedirs: true
     - user: {{ grains['user'] }}
