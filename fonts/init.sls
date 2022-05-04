@@ -14,6 +14,10 @@ victor-mono:
   pkg.installed:
     - name: homebrew/cask-fonts/font-victor-mono-nerd-font
 
+jetbrains-mono:
+  pkg.installed:
+    - name: homebrew/cask-fonts/font-jetbrains-mono-nerd-font
+
 iosevka:
   pkg.installed:
     - pkgs:
