@@ -1,3 +1,7 @@
+include:
+  - yabai
+  - mac-utils
+
 skhd: 
   pkg.installed:
     - name: skhd
