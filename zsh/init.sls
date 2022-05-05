@@ -40,6 +40,11 @@ histfile:
     - name: {{ pillar['xdg_data_home'] }}/zsh
     - user: {{ grains['user'] }}
 
+zsh-plugins-dir:
+  file.directory:
+    - name: {{ zsh_dir }}/plugins
+    - user: {{ grains['user'] }}
+
 zsh-syntax-highlighting:
   git.cloned:
     - name: https://github.com/zsh-users/zsh-syntax-highlighting
@@ -63,11 +68,3 @@ zsh-fzf-tab:
     - name: https://github.com/Aloxaf/fzf-tab
     - target: {{ zsh_dir }}/plugins/fzf-tab
     - user: {{ grains['user'] }}
-
-shell-scripts:
-  file.recurse:
-    - name: {{ grains['homedir'] }}/.local/bin
-    - source: salt://zsh/scripts
-    - file_mode: keep
-    - user: {{ grains['user'] }}
-    - force: True

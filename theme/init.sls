@@ -13,3 +13,12 @@ themes:
     - clean: true
     - makedirs: true
     - user: {{ grains['user'] }}
+
+functions:
+  file.recurse:
+    - name: {{ pillar[xdg_config_home'] }}/zsh/functions
+    - source: salt://theme/functions
+    - makedirs: true
+    - file_mode: 0755
+    - user: {{ grains['user'] }}
+

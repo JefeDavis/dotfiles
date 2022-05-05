@@ -35,6 +35,13 @@ setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 
 #######################################################################
+# FUNCTIONS
+#######################################################################
+autoload -Uz $ZDOTDIR/functions/*
+
+. $HOME/.local/bin/nnn
+
+#######################################################################
 # Completion
 #######################################################################
 
@@ -139,7 +146,7 @@ source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey -v                  # vi-mode
 export KEYTIMEOUT=1         # make changing modes lickety split
 
-autoload -Uz cursor_mode; cursor_mode
+cursor_mode
 
 # edit current command line with vim (vim-mode, then v)
 autoload -Uz edit-command-line
@@ -155,16 +162,6 @@ if [ $(command -v "fzf") ]; then
   source /usr/local/opt/fzf/shell/completion.zsh
   source /usr/local/opt/fzf/shell/key-bindings.zsh
 fi
-
-autoload -Uz dotfile-call
-autoload -Uz painter
-
-#######################################################################
-# FUNCTIONS
-#######################################################################
-autoload -Uz rem
-
-. $HOME/.local/bin/nnn
 
 #######################################################################
 
