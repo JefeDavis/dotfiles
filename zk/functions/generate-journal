@@ -1,0 +1,28 @@
+#!/bin/env zsh
+
+# Generates my digital planner system for a given year
+#
+# Yearly file [year].md
+# Monthly File [year]-[month].md
+# Weekly File [year]-w[week].md
+# daily File [year]-[month]-[day].md
+#
+# Usage generate-journal 2022
+generate-journal() {
+  # First Generate year file
+  year=$1
+  zk new --no-input --group yearly -p --extra date="$year" --title "Year $year" Quests
+
+  for time in $(generate-yearly-dates $1); do
+    # generate monthly files
+    month=$(date -jf "%Y-%m-%d" $time +%m)
+    week=$(date -jf "%Y-%m-%d" $time +%U)
+    zk new --no-input --group monthly -p --extra date=$(date -jf '%Y-%m-%d' $time +"%Y-%m"),year="$year" --title="Month $month, $year" Quests
+    # create weekly files
+    zk new --no-input --group weekly -p --extra date=$(date -jf '%Y-%m-%d' $time +"%Y-W%U"),month="$month",year="$year" --title="Week $week, $year" Quests
+    # create daily files
+    yesterday=$(date -v -1d -jf "%Y-%m-%d" $time +"%Y-%m-%d")
+    tomorrow=$(date -v +1d -jf "%Y-%m-%d" $time +"%Y-%m-%d")
+    zk new --no-input --group daily -p --extra date="$time",prev="$yesterday",next="$tomorrow",year="$year",week="$week" --title "Daily Log $time" Quests
+  done
+}
