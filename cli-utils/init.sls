@@ -18,3 +18,6 @@ pastel:
 
 viu:
   pkg.installed
+
+bat:
+  pkg.installed
