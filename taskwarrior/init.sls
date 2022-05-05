@@ -49,3 +49,13 @@ task-sync-cron:
     # every 10 minutes
     - minute: "*/10"
     - user: {{ grains['user'] }}
+
+
+taskwarrior-env:
+  file.recurse:
+    - name: {{ pillar['xdg_config_home'] }}/env/taskwarrior
+    - source: salt://taskwarrior/env
+    - clean: true
+    - makedirs: true
+    - template: jinja
+    - user: {{ grains['user'] }}
