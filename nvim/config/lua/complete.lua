@@ -62,7 +62,7 @@ cmp.setup {
   },
   mapping = {
     -- confirm snippets
-    ["<C-Space"] = cmp.mapping.confirm {
+    ["<C-Space>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true
     },
