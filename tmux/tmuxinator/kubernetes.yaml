@@ -1,0 +1,10 @@
+name: <%= @settings["context"] %>
+root: ~/
+on_project_start: kubectl config use-context <%= @settings["context"] %>
+
+windows:
+  - " ": nvim 
+  - " ":
+     panes:
+       - "k9s"
+       - ""

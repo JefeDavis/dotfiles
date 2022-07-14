@@ -1,0 +1,8 @@
+
+#!/bin/sh
+
+set -eu
+
+NAME=$(kubectl config get-contexts -o=name | fzf)
+
+tmuxinator start $NAME || tmuxinator start kubernetes context=$NAME
