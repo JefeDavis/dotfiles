@@ -27,13 +27,14 @@ local assets = {
 	slim_dot = "•",
 }
 
-local clrs = require("catppuccin.core.color_palette")
+local cpapi = require("catppuccin.api.colors")
+local clrs = cpapi.get_colors()
 
 -- settings
 local sett = {
-	bkg = clrs.black2,
+	bkg = clrs.base,
 	diffs = clrs.mauve,
-	extras = clrs.gray1,
+	extras = clrs.text,
 	curr_file = clrs.maroon,
 	curr_dir = clrs.flamingo,
 }
@@ -62,7 +63,7 @@ local mode_colors = {
 }
 
  local test_colors = {
-   init = { " ", clrs.gray1 },
+   init = { " ", clrs.text },
    passing = { " ", clrs.green },
    running = { " ", clrs.yellow },
    failing = { " ", clrs.maroon }
@@ -421,7 +422,7 @@ components.active[3][2] = {
       }
     end
     return {
-      fg = clrs.gray1,
+      fg = sett.extras,
       bg = sett.bkg
     }
   end
