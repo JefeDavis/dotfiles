@@ -36,6 +36,7 @@ kitty-scripts:
     - name: {{ pillar['xdg_bin_home'] }}
     - source: salt://kitty/bin
     - makedir: true
+    - clean: false
     - file_mode: '0755'
     - user: {{ grains['user'] }}
 
