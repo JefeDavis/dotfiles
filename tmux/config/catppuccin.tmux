@@ -43,7 +43,7 @@ set -g window-status-style fg="${thm_fg}",bg="${thm_bg}",none
 
 # --------=== Statusline
 
-set -g status-left "#[bg=$thm_gray,fg=$thm_fg italics] #(tmux run-shell 'tmux display-message -p \"#S\" | tr \"[:lower:]\" \"[:upper:]\"') #[fg=$thm_gray, bg=$thm_bg]"
+set -g status-left "#[bg=$thm_gray,fg=$thm_fg italics] #S  #[fg=$thm_gray, bg=$thm_bg]"
 
 
 set -g status-right "#[fg=$thm_pink,bg=$thm_bg]#[bg=$thm_pink,fg=$thm_bg] %Y-%m-%d #[fg=$thm_pink,bg=$thm_magenta] #[fg=$thm_bg,bg=$thm_magenta]%H:%M #[fg=$thm_magenta,bg=$thm_blue]#[bg=$thm_blue,fg=$thm_bg italics] @#H "

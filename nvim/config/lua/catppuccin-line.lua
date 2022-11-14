@@ -27,8 +27,7 @@ local assets = {
 	slim_dot = "•",
 }
 
-local cpapi = require("catppuccin.api.colors")
-local clrs = cpapi.get_colors()
+local clrs = require("catppuccin.palettes").get_palette "macchiato"
 
 -- settings
 local sett = {

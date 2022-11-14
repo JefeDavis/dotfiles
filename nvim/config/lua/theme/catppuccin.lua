@@ -1,30 +1,30 @@
 local catppuccin = require("catppuccin")
-local colors = require('catppuccin.api.colors').get_colors()
+local colors = require("catppuccin.palettes").get_palette "macchiato"
 
 catppuccin.setup {
   transparent_background = true,
   styles = {
-    comments = "italic",
-    functions = "NONE",
-    keywords = "NONE",
-    strings = "NONE",
-    variables = "italic",
+    comments = {"italic"},
+    functions ={},
+    keywords = {},
+    strings ={},
+    variables = {"italic"},
   },
   integrations = {
     treesitter = true,
     native_lsp = {
       enabled = true,
       virtual_text = {
-        errors = "italic",
-        hints = "italic",
-        warnings = "italic",
-        information = "italic",
+        errors = {"italic"},
+        hints = {"italic"},
+        warnings = {"italic"},
+        information = {"italic"},
       },
       underlines = {
-        errors = "underline",
-        hints = "underline",
-        warnings = "underline",
-        information = "underline",
+        errors = {"underline"},
+        hints = {"underline"},
+        warnings = {"underline"},
+        information = {"underline"},
       },
     },
     lsp_trouble = false,
@@ -67,7 +67,7 @@ catppuccin.setup {
 catppuccin.before_loading = function()
   catppuccin.remap(
     {
-      Comment     = { fg = colors.gray2, style = "italic" },
+      Comment     = { fg = colors.gray2, style = {"italic"} },
       PMenu       = { fg = colors.gray2, bg = "NONE" },
       NormalFloat = { fg = colors.gray2, bg = colors.black2 },
       TSProperty  = { fg = colors.rosewater }

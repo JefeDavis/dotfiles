@@ -28,6 +28,7 @@ packer.startup(function(use)
       require('wiki')
     end
   }
+  use 'towolf/vim-helm'
   use 'tools-life/taskwiki'
 
   use 'saltstack/salt-vim'
@@ -120,6 +121,7 @@ packer.startup(function(use)
       }
     end
   }
+  use 'kyazdani42/nvim-web-devicons'
   use {
     -- 'glepnir/galaxyline.nvim',
     -- branch = 'main',
