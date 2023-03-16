@@ -6,9 +6,10 @@ vicmd_symbol = " "
 [kubernetes]
 format = "$symbol[$context](purple) "
 disabled = false
-symbol = " "
+symbol = "ﴱ "
 [kubernetes.context_aliases]
-".*tkg.*" = "tkg"
+".*tkg.*mgmt.*admin.*" = "tkg-mgmt"
+".*tkg.*mgmt.*" = "tkg-mgmt"
 
 [aws]
 symbol = " "
