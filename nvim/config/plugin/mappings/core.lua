@@ -1,34 +1,23 @@
--- define the leaders
-vim.g.mapleader = " "
-vim.g.maplocalleader = "-"
-vim.g.camelcasemotion_key = '<leader>'
+local map = vim.keymap.set
 
--- quickfix list
-vim.keymap.set('n', '<UP>', '<CMD>cope<CR>')
-vim.keymap.set('n', '<DOWN>', '<CMD>cclose<CR>')
-vim.keymap.set('n', '<RIGHT>', '<CMD>cnext<CR>')
-vim.keymap.set('n', '<LEFT>', '<CMD>cprev<CR>')
-
--- make jump commands center the screen on search term
-vim.keymap.set('n', 'n', 'nzz')
-vim.keymap.set('n', 'N', 'Nzz')
-vim.keymap.set('n', 'g;', 'g;zz')
-vim.keymap.set('n', 'g,', 'g,zz')
-vim.keymap.set('n', '<C-o>', '<C-o>zz')
-vim.keymap.set('n', '<C-i>', '<C-i>zz')
-vim.keymap.set('n', '*', '*zz')
-vim.keymap.set('n', '#', '#zz')
-vim.keymap.set('n', '<BS>', ':b#<CR>')
-vim.keymap.set('n', '<leader>,', '<CMD>nohlsearch<CR>')
-
--- Have esc work just like it does in vim when running terminal
-vim.keymap.set('t', '<Esc>', '<c-\\><c-n>', { silent = false })
-
--- More quickly call external programs
-vim.keymap.set('n', '<leader>>', ':!<SPACE>', { silent = false })
-
-vim.keymap.set('', '<ScrollWheelDown>', ':call comfortable_motion#flick(40)<CR>')
-vim.keymap.set('', '<ScrollWheelUp>', ':call comfortable_motion#flick(-40)<CR>')
-
-vim.keymap.set('n', '[x', '<CMD>set cursorcolumn<CR>')
-vim.keymap.set('n', ']x', '<CMD>set nocursorcolumn<CR>')
+map('v', '<leader>cc', '"+y')
+map('n', '<UP>', '<CMD>cope<CR>')
+map('n', '<DOWN>', '<CMD>cclose<CR>')
+map('n', '<RIGHT>', '<CMD>cnext<CR>')
+map('n', '<LEFT>', '<CMD>cprev<CR>')
+map('n', 'n', 'nzz')
+map('n', 'N', 'Nzz')
+map('n', 'g;', 'g;zz')
+map('n', 'g,', 'g,zz')
+map('n', '<C-o>', '<C-o>zz')
+map('n', '<C-i>', '<C-i>zz')
+map('n', '*', '*zz')
+map('n', '#', '#zz')
+map('n', '<BS>', '<CMD>b#<CR>')
+map('n', '<leader>,', '<CMD>nohlsearch<CR>')
+map('n', '<leader>>', ':!<SPACE>', { silent = false })
+map('t', '<ESC>', '<c-\\><c-n>', { silent = false })
+map('n', '[x', '<CMD>set cursorcolumn<CR>')
+map('n', ']x', '<CMD>set nocursorcolumn<CR>')
+map('', '<ScrollWheelDown>', ':call comfortable_motion#flick(40)<CR>')
+map('', '<ScrollWheelUp>', ':call comfortable_motion#flick(-40)<CR>')

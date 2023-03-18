@@ -1,9 +1,4 @@
-local has_telescope, telescope = pcall(require, 'telescope.builtin')
-local has_plenary, Job = pcall(require, 'plenary.job')
-
-if not has_telescope or not has_plenary then
-  return
-end
+local map = vim.keymap.set
 
 -- Gets the default branch for the current repository
 -- `git default-branch` is a git alias
@@ -26,33 +21,32 @@ local read_default_branch = function()
   return vim.api.nvim_command("Gread origin/" .. get_default_branch() .. ":%")
 end
 
-vim.keymap.set('n', '<leader>gg', '<CMD>G<CR>')
-vim.keymap.set('n', '<leader>go', '<CMD>Git difftool --name-only<CR>')
-vim.keymap.set('n', '<leader>gO', '<CMD>Git difftool<CR>')
-vim.keymap.set('n', '<leader>gs', telescope.git_status)
-vim.keymap.set('n', '<leader>gB', telescope.git_branches)
-vim.keymap.set('n', '<leader>gd', '<CMD>Gdiff<CR>')
-vim.keymap.set('n', '<leader>gdd', diff_against_default_branch)
-vim.keymap.set('n', '<leader>gb', '<CMD>Git blame<CR>')
-vim.keymap.set('n', '<leader>gw', '<CMD>Gwrite<CR>')
-vim.keymap.set('n', '<leader>gc', '<CMD>Git commit -s<CR>')
-vim.keymap.set('n', '<leader>gr', '<CMD>Gread<CR>')
-vim.keymap.set('n', '<leader>grd', read_default_branch)
-vim.keymap.set('n', '<leader>grb', '<CMD>Git rebase -i main --signoff -S<CR>')
-vim.keymap.set('n', '<leader>gl', '<CMD>Gclog<CR>')
-vim.keymap.set('n', '<leader>gh', '<CMD>0Gclog<CR>')
-vim.keymap.set('n', '<leader>gm', '<CMD>GitMessenger<CR>')
-vim.keymap.set('n', '<leader>gp', '<CMD>Git pull<CR>')
-vim.keymap.set('n', '<leader>gP', '<CMD>Git push<CR>')
-vim.keymap.set('n', '<leader>g!', '<CMD>Git push -f<CR>')
+map('n', '<leader>gg', '<CMD>G<CR>')
+map('n', '<leader>go', '<CMD>Git difftool --name-only<CR>')
+map('n', '<leader>gO', '<CMD>Git difftool<CR>')
+map('n', '<leader>gc', '<CMD>Git commit -s<CR>')
+map('n', '<leader>gd', '<CMD>Gdiff<CR>')
+map('n', '<leader>gdd', diff_against_default_branch)
+map('n', '<leader>gb', '<CMD>Git blame<CR>')
+map('n', '<leader>gw', '<CMD>Gwrite<CR>')
+map('n', '<leader>gr', '<CMD>Gread<CR>')
+map('n', '<leader>grd', read_default_branch)
+map('n', '<leader>gl', '<CMD>Gclog<CR>')
+map('n', '<leader>gh', '<CMD>0Gclog<CR>')
+map('n', '<leader>gm', '<CMD>GitMessenger<CR>')
+map('n', '<leader>g<down>', '<CMD>Git pull<CR>')
+map('n', '<leader>g<up>', '<CMD>Git push<CR>')
+map('n', '<leader>g!', '<CMD>Git push -f<CR>')
+map('n', '<leader>grb', '<CMD>Git rebase -i main --signoff -S<CR>')
 
-vim.keymap.set('n', '<leader>dh', '<CMD>diffget<CR>')
-vim.keymap.set('n', '<leader>dl', '<CMD>diffget<CR>')
-vim.keymap.set('n', '<leader>dj', '<CMD>diffput<CR>')
+map('n', '<leader>g<left>', '<CMD>diffget<CR>')
+map('n', '<leader>g<right>', '<CMD>diffget<CR>')
+map('n', '<leader>g<down>', '<CMD>diffput<CR>')
+map('v', '<leader>g<down>', '<CMD>diffput<CR><ESC>')
 
-vim.keymap.set('v', '<leader>gv', '<CMD>Gbrowse<CR>')
-vim.keymap.set('v', '<leader>gV', '<CMD>Gbrowse!<CR>')
-vim.keymap.set('v', '<leader>gh', '<CMD>diffget<CR>')
-vim.keymap.set('v', '<leader>gl', '<CMD>diffget<CR>')
-vim.keymap.set('v', '<leader>gj', '<CMD>diffput<CR>')
+map('v', '<leader>gv', '<CMD>GBrowse<CR>')
+map('v', '<leader>gV', '<CMD>GBrowse!<CR>')
+map('v', '<leader>gh', '<CMD>diffget<CR>')
+map('v', '<leader>gl', '<CMD>diffget<CR>')
+map('v', '<leader>gj', '<CMD>diffput<CR>')
 

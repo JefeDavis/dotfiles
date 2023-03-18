@@ -7,11 +7,16 @@ nvim:
     - name: nvim
     - options: [ "--HEAD" ]
 
-vim-packer:
-  git.cloned:
-    - name: https://github.com/wbthomason/packer.nvim
-    - target: {{ pillar['xdg_data_home'] }}/nvim/site/pack/packager/opt/packer.nvim
-    - user: {{ grains['user'] }}
+pynvim:
+  cmd.run:
+  - name: pip3 install pynvim
+  - runas: {{ grains['user'] }}
+  - require:
+      - pkg: python3
+
+vim-packer-missing:
+  file.absent:
+    - name: {{ pillar['xdg_data_home'] }}/nvim/site/pack/packager/opt/packer.nvim
 
 nvim-config:
   file.recurse:
@@ -22,13 +27,7 @@ nvim-config:
     - user: {{ grains['user'] }}
     - force: true
   cmd.run:
-    - name: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    - name: nvim --headless -c 'autocmd User LazySync quitall' -c 'Lazy sync'
     - runas: {{ grains['user'] }}
     - shell: /bin/zsh
 
-pynvim:
-  cmd.run:
-  - name: pip3 install pynvim
-  - runas: {{ grains['user'] }}
-  - require:
-      - pkg: python3

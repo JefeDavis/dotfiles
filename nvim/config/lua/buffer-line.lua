@@ -14,10 +14,8 @@ buffer.setup {
       text_align = "left",
       }
     },
-    custom_filter = function(buf_number, buf_numbers)
-      if vim.bo[buf_number].filetype ~= "nnn" then
-        return true
-      end
+    custom_filter = function(buf, buf_nums)
+      return not vim.bo[buf].filetype ~= "nnn"
     end
   },
 }
