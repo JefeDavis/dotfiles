@@ -47,7 +47,8 @@ yabai -m space 10 --label X
 # ^^ these are annoying
 yabai -m rule --add app="Safari"        space=3
 yabai -m rule --add app="Firefox"        space=3
-yabai -m rule --add app="zoom.us"       space=6
+yabai -m rule --add app="zoom.us" title="Zoom"       space=9
+yabai -m rule --add app="^zoom.us$" title="Zoom Meeting.*" space=6
 yabai -m rule --add app="Slack"         space=7
 yabai -m rule --add app="Outlook"       space=8
 
