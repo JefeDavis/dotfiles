@@ -56,3 +56,6 @@
 	sweep = !git branch --merged $([[ $1 != \"-f\" ]] \\\n&& git rev-parse main) | egrep -v \"(^\\*|^\\s*(master|main)$)\" \\\n| xargs git branch -d
   tidy = "!git fetch origin -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
 
+
+[url "git@gitlab.eng.vmware.com:"]
+  insteadOf = https://gitlab.eng.vmware.com/
