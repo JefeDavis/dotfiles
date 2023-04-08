@@ -23,7 +23,7 @@ pick-emoji() {
   case "$MENU" in
       dh) echo "💯" | pbcopy;;
       area) echo " " | pbcopy;;
-      health) echo " "🏻 | copy;;
+      health) echo " " | copy;;
       finance) echo " " | pbcopy;;
       career) echo " " | pbcopy;;
       character) echo " " | pbcopy;;
