@@ -9,7 +9,7 @@ local root_files = {
 }
 
 if vim.fn.executable(executable) then
-  vim.lsp.start {
+  vim.lsp.start({
     name = 'yamlls',
     cmd = { executable, "--stdio" },
     root_dir = vim.fs.dirname(vim.fs.find(root_files, { upward = true })[1]),
@@ -45,5 +45,5 @@ if vim.fn.executable(executable) then
         hover = true,
       }
     }
-  }
+  })
 end
