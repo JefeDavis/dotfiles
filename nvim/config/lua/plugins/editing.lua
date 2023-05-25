@@ -74,5 +74,32 @@ return {
       return vim.g.started_by_firenvim
     end,
     build = function() vim.fn['firenvim#install'](0) end
+  },
+  {
+  "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup({
+        chat = {
+          keymaps = {
+            close = { "jk", "kj", "<Esc>" },
+            yank_last = "<C-y>",
+            scroll_up = "<C-u>",
+            scroll_down = "<C-d>",
+            toggle_settings = "<C-o>",
+            new_session = "<C-n>",
+            cycle_windows = "<Tab>",
+          },
+        },
+        popup_input = {
+          submit = "<C-s>",
+        },
+      })
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
   }
 }

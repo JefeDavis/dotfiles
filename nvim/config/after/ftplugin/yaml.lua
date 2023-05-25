@@ -21,13 +21,15 @@ if vim.fn.executable(executable) then
           url = "https://www.schemastore.org/api/json/catalog.json",
         },
         schemas = {
-          kubernetes = "*.yaml",
+          kubernetes = "*.ya?l",
+          ["https://kubernetes-schemas.davishaus.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta1.json"] = "helmrelease.yaml"
+          ["https://kubernetes-schemas.davishaus.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json"] = "ks.yaml"
+          ["http://json.schemastore.org/kustomization"] = "kustomization.ym?l",
           ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
           ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
           ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = "azure-pipelines.yml",
           ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
           ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
-          ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
           ["http://json.schemastore.org/ansible-playbook"] = "*play*.{yml,yaml}",
           ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
           ["https://json.schemastore.org/dependabot-v2"] = ".github/dependabot.{yml,yaml}",
