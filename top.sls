@@ -17,6 +17,7 @@ base:
     - direnv
     - bpytop
     - mail
+    - terraform
     - kubernetes
     - neofetch
     - k9s
