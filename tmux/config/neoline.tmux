@@ -15,7 +15,7 @@ set -g status-bg "black"
 #Bars ---------------------------------
 set -g status-left "#[bg=black,fg=brightwhite italics] #(tmux run-shell 'tmux display-message -p \"#S\" | tr \"[:lower:]\" \"[:upper:]\"') #[fg=black] "
 
-set -g status-right "#[fg=#37354A]#[bg=#37354A,fg=brightwhite] %Y-%m-%d #[fg=#37354A,bg=#2D2B40] #[fg=brightwhite,bg=#2D2B40]%I:%M #[fg=#2D2B40,bg=black]#[bg=black,fg=brightwhite italics] @#H "
+set -g status-right "#[fg=#37354A]#[bg=#37354A,fg=brightwhite] %Y-%m-%d #[fg=#37354A,bg=#2D2B40] #[fg=brightwhite,bg=#2D2B40]%I:%M #[fg=#2D2B40,bg=black]#[bg=black,fg=brightwhite italics] #(who | cut -d ' ' -f1)@#H "
 
 # Windows ------------------------------
 set -g status-justify left

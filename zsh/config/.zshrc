@@ -6,7 +6,7 @@
 fpath=($ZDOTDIR/plugins $fpath)
 
 # This setting doesn't work in .zshenv for some reason. oh well
-export GPG_TTY=$TTY
+export GPG_TTY=$(tty)
 
 #######################################################################
 # Navigation
@@ -39,7 +39,7 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 #######################################################################
 autoload -Uz $ZDOTDIR/functions/*
 
-. $HOME/.local/bin/nnn
+. $(brew --prefix asdf)/libexec/asdf.sh
 
 #######################################################################
 # Completion
@@ -130,6 +130,15 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 
 
 #######################################################################
+# GCloud cli
+#######################################################################
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jeffda/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jeffda/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jeffda/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jeffda/google-cloud-sdk/completion.zsh.inc'; fi
+
+#######################################################################
 # Aliases
 #######################################################################
 source $ZDOTDIR/aliases
@@ -164,7 +173,6 @@ if [ $(command -v "fzf") ]; then
 fi
 
 #######################################################################
-
 # DIRENV
 eval "$(direnv hook zsh)"
 

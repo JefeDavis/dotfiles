@@ -1,5 +1,5 @@
 bash-profile:
-  file.managed:
+  file.remove:
     - name: {{ grains['homedir'] }}/.bash_profile
     - source: salt://env/.bash_profile
     - template: jinja
@@ -8,5 +8,5 @@ bash-profile:
 
 env-folder:
   file.directory:
-    - name: {{ pillar['xdg_config_home']/env
+    - name: {{ pillar['xdg_config_home'] }}/env
     - user: {{ grains['user'] }}

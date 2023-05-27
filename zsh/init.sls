@@ -15,12 +15,12 @@ purge-oh-my-zsh:
         - {{ pillar['xdg_config_home'] }}/.oh-my-zsh
         - {{ grains['homedir'] }}/.oh-my-zsh
 
-zsh-env:
+# Lets all zsh files be in .config/zsh
+zsh-root-env:
   file.managed:
-    - name: {{ grains['homedir'] }}/.zshenv
-    - source: salt://zsh/.zshenv
-    - user: {{ grains['user'] }}
-    - template: jinja
+    - name: /etc/zsh/zshenv
+    - source: salt://zsh/zsh_root_env
+    - makedirs: true
 
 zsh-config:
   file.recurse:
@@ -33,7 +33,6 @@ zsh-config:
         - pkgs:
             - starship
             - direnv
-
 
 histfile:
   file.directory:

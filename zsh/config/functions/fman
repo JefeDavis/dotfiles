@@ -1,0 +1,4 @@
+# manpage searching
+fman() {
+  man -k . | fzf --prompt=' ' | awk '{print $1}' | xargs -r man
+}

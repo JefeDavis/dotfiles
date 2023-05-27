@@ -13,22 +13,22 @@ export HISTSIZE=1000000000
 export HISTFILESIZE=1000000000
 export SAVEHIST=1000000000
 
-export CDPATH=.:/etc/srv/:$HOME:$HOME/Projects:$HOME/Documents
-
-export EDITOR="nvim"
-export BROWSER="firefox"
-export MANPAGER="nvim +Man!"
-export LESSHISTFILE="$XDG_DATA_HOME/lesshst"
-
 for file in $(find $HOME/.config/env -name "*.env")
 do
   source $file
 done
 
+export CDPATH=.:/etc/srv/:$HOME:$HOME/Projects:$HOME/Documents
+
+export EDITOR="nvim"
+export BROWSER="firefox"
+export MANPAGER="nvim +Man!"
+export PAGER=bat
+export LESSHISTFILE="$XDG_DATA_HOME/lesshst"
+
 export FZF_DEFAULT_OPTS='--reverse --ansi --color=bg+:#302D41,bg:#1E1E2E,spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,header:#F28FAD,info:#DDB6F2,pointer:#F8BD96 --color=marker:#F8BD96,fg+:#F2CDCD,prompt:#DDB6F2,hl+:#F28FAD'
 
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker" 
-# ZOOM - What the hell is SSB?
 export SSB_HOME="$XDG_DATA_HOME/zoom"
 
 export PATH="$HOME/.local/bin:$PATH"

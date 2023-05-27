@@ -46,7 +46,7 @@ set -g window-status-style fg="${thm_fg}",bg="${thm_bg}",none
 set -g status-left "#[bg=$thm_gray,fg=$thm_fg italics] #S  #[fg=$thm_gray, bg=$thm_bg]"
 
 
-set -g status-right "#[fg=$thm_pink,bg=$thm_bg]#[bg=$thm_pink,fg=$thm_bg] %Y-%m-%d #[fg=$thm_pink,bg=$thm_magenta] #[fg=$thm_bg,bg=$thm_magenta]%H:%M #[fg=$thm_magenta,bg=$thm_blue]#[bg=$thm_blue,fg=$thm_bg italics] @#H "
+set -g status-right "#[fg=$thm_pink,bg=$thm_bg]#[bg=$thm_pink,fg=$thm_bg] %Y-%m-%d #[fg=$thm_pink,bg=$thm_magenta] #[fg=$thm_bg,bg=$thm_magenta]%H:%M #[fg=$thm_magenta,bg=$thm_blue]#[bg=$thm_blue,fg=$thm_bg italics] #(who | cut -d ' ' -f1)@#H "
 
 set -g window-status-format "#[fg=$thm_black4]#[fg=brightwhite,bg=$thm_black4] #{?window_zoomed_flag,  ,}#W #[bg=$thm_bg,fg=$thm_black4]"
 
