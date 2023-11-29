@@ -1,0 +1,32 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+brew "git"
+brew "chezmoi"
+
+cask "bitwarden"
+
+brew "koekeishiya/formulae/yabai"
+brew "skhd"
+brew "jq"
+brew "smudge/smudge/nightlight"
+
+# cask "google-chrome"
+
+brew "kubectl"
+brew "k9s"
+EOF
+
+# disable minimize shortcut
+defaults write -g NSUserKeyEquivalents -dict-add 'Minimize' '\0'
+
+# ~/.config/yabai/yabairc
+yabai --start-service
+# ~/.config/skhd/skhdrc
+skhd --start-service
+
+{{ else if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+sudo apt install chezmoi
+{{ end -}}

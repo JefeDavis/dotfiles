@@ -1,0 +1,165 @@
+# ============================ Variables =============================
+
+declare -a gaps
+declare -a color
+
+gaps["top"]="4"
+gaps["bottom"]="24"
+gaps["left"]="4"
+gaps["right"]="4"
+gaps["inner"]="4"
+
+color["focused"]="0xff81A1C1"
+color["normal"]="0xff7A808C"
+color["preselect"]="0xff61afef"
+
+# ==================== Loading Scripting Addition ==================== 
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# ========================= Tiling Settings ========================== 
+
+yabai -m config layout                       bsp
+
+yabai -m config top_padding                 "${gaps["top"]}"
+yabai -m config bottom_padding              "${gaps["bottom"]}"
+yabai -m config left_padding                "${gaps["left"]}"
+yabai -m config right_padding               "${gaps["right"]}"
+yabai -m config window_gap                  "${gaps["inner"]}"
+
+yabai -m config mouse_follows_focus          off
+yabai -m config focus_follows_mouse          off
+
+yabai -m config window_placement             first_child
+yabai -m config window_opacity               off
+yabai -m config window_shadow                float
+
+# yabai -m config window_border                on
+# yabai -m config window_border_width          2
+# yabai -m config active_window_border_color  "${color["focused"]}"
+# yabai -m config normal_window_border_color  "${color["normal"]}"
+yabai -m config insert_feedback_color       "${color["preselect"]}"
+
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        0.9
+yabai -m config split_ratio                  0.50
+
+yabai -m config auto_balance                 off
+
+yabai -m config mouse_modifier               fn
+yabai -m config mouse_action1                move
+yabai -m config mouse_action2                resize
+yabai -m config mouse_drop_action            swap
+
+
+# ========================= Space Settings ========================== 
+function setup_space {
+  local idx="$1"
+  local name="$3"
+#  local display=$5
+  local space=
+  echo "setup space $idx : $name"
+
+  space=$(yabai -m query --spaces --space "$idx")
+  if [ -z "$space" ]; then
+    yabai -m space --create #--display "$display"
+  fi
+
+  yabai -m space "$idx" --label "$name"
+  # if $(echo $space | jq ".display != $display"); then 
+  #   yabai -m space "$idx" --display $display
+  # fi
+
+}
+
+setup_space 1 --label Terminal
+setup_space 2 --label Present
+setup_space 3 --label Search
+setup_space 4 --label Slack
+setup_space 5 --label Mail
+setup_space 6 --label Work
+
+setup_space 7 --label Meet
+setup_space 8 --label Scratch
+
+setup_space 9 --label Music
+setup_space 10 --label Vault
+
+for idx in $(yabai -m query --spaces | jq '.[].index | select(. > 10)' | sort -nr); do
+  yabai -m space --destroy "$idx"
+done
+
+# ========================= Display Settings ========================== 
+function setup_display {
+  local display=
+  OPTIND=1
+
+  while getopts ":d:" opt; do
+    case $opt in
+      d) 
+         display="$OPTARG"
+      ;;
+    esac
+  done
+
+  shift $(( OPTIND - 1 ))
+
+  for space in "$@"; do
+    echo "Moving $space to display $display"
+    yabai -m space $space --display $display
+  done
+}
+
+monitor_count=$(yabai -m query --displays | jq '. | length')
+
+case $monitor_count in
+  1)
+    setup_display -d 1 Terminal Slack Search Work Present Music Vault Scratch Mail Meet
+  ;;
+  2)
+    setup_display -d 1 Terminal Search Present Scratch Meet
+    setup_display -d 2 Slack Work Music Vault Mail
+  ;;
+  3)
+    setup_display -d 1 Terminal Slack Search Work Present Mail 
+    setup_display -d 2 Meet Scratch
+    setup_display -d 3 Music Vault
+esac
+
+
+# ============================= Rules =============================== 
+yabai -m rule --add label="Slack" app="Slack"  space=Slack
+
+yabai -m rule --add label="Chrome-Work" app="Google Chrome" title="\(Work\)$" space=Search
+yabai -m rule --add label="Chrome-Personal" app="Google Chrome" title="\(Personal\)$" space=Search
+
+yabai -m rule --add label="Ramp" app="Ramp" space=Work
+yabai -m rule --add label="Google-Drive" app="Google Drive$" space=Work
+
+yabai -m rule --add label="Bitwarden" app="^Bitwarden$" space=Vault
+
+yabai -m rule --add label="Calandar" app="Google Calendar" space=Mail
+yabai -m rule --add label="Gmail" app="Gmail" space=Mail
+
+yabai -m rule --add label="Meet" app="Google Meet" space=Meet
+yabai -m rule --add label="Gather-Desktop" app="^Gather$" title="Desktop$" space=Meet
+yabai -m rule --add label="Gather-Mini" app="^Gather$" title="Mini Mode$" manage=off
+
+yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+yabai -m rule --add label="macfeh" app="^macfeh$" manage=off
+yabai -m rule --add label="System Preferences" app="^System Preferences$" title=".*" manage=off
+yabai -m rule --add label="App Store" app="^App Store$" manage=off
+yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
+yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
+yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
+yabai -m rule --add label="Software Update" title="Software Update" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+
+# ============================= Signals =============================== 
+eabai -m signal --add event="window_created" app="Gather$" title="Desktop$" action='yabai -m window --focus $YABAI_WINDOW_ID'
+yabai -m signal --add event="display_added" action='yabai --restart-service'
+yabai -m signal --add event="display_removed" action='yabai --restart-service'
+
+echo "yabai configuration loaded.."

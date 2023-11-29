@@ -1,0 +1,166 @@
+# Mode declaration
+# 1) default: all keylib/yabai bindings are available
+# 2) passthrough: all keylib/yabai bindings are unavailable. (If some keylib/yabai bindings conflict with some application, we can turn off skhd)
+# 3) prefix: a tmux style binding for moving windows
+:: default : yabai -m config active_window_border_color 0xffffbb7d;\
+             osascript -e "display notification \"skhd normal mode\" with title \"skhd\""
+
+:: passthrough : yabai -m config active_window_border_color 0xff8d5524;\
+                 osascript -e "display notification \"skhd passthrough mode\" with title \"skhd\""
+
+:: prefix : yabai -m config active_window_border_color 0xff8d5524;\
+                 osascript -e "display notification \"skhd prefix mode\" with title \"skhd\""
+
+# Mode Switching
+alt - p ; passthrough
+passthrough < alt - p ; default
+
+# Tmux style prefix
+alt - a ; prefix
+prefix < alt - a ; default
+
+
+# Focus Window
+#   - k, j: focus the window above or below
+#   - h, l: focus the window left or right (support moving the focus across the display)
+#   - r:    focus the recently-focused window
+#   - <, >: cycle through the windows in the stack backward or forward
+#   - /:    focus the recently-focused window in the stack
+#   - m:    focus the fullscreen window in the current workspace or cycle through all the fullscreen windows
+alt - h : yabai -m window --focus west || \
+            yabai -m window --focus $(yabai -m query --windows --display west | \
+                jq 'map(select(.visible == 1)) | sort_by(.frame.x, .frame.y) | last | .id') || \
+            yabai -m display --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east || \
+            yabai -m window --focus $(yabai -m query --windows --display east | \
+                jq 'map(select(.visible == 1)) | sort_by(.frame.x, .frame.y) | first | .id') || \
+            yabai -m display --focus east
+alt - r : yabai -m window --focus recent
+alt - 0x2B : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
+alt - 0x2F : yabai -m window --focus stack.next || yabai -m window --focus stack.first
+alt - 0x2C : yabai -m window --focus stack.recent
+alt - m : yabai -m window --toggle zoom-fullscreen
+alt + shift - m : [[ $(yabai -m query --windows --window | jq '."zoom-fullscreen"') == 0 ]] && \
+          ( id=$(yabai -m query --windows --space | jq 'map(select(."zoom-fullscreen" == 1))[0] | .id') && \
+            yabai -m window --focus ${id} ) || \
+          ( yabai -m query --windows --space | \
+            jq 'map(select(."zoom-fullscreen" == 1)) | sort_by(.id) | nth(index(map(select(.focused == 1))) - 1).id' | \
+            xargs -I{} yabai -m window --focus {} )
+
+# Focus workspace
+#   - 1-0:  focus the workspace #1-#10
+#   - [, ]: cycle through the workspaces (support moving the focus across the display)
+#     e.g., 4 | 1 2 | 3 (three displays and currently at 2, using [ to move the focus 2 -> 1 -> 4 -> 3 -> 2, ..., ] is the same but on the opposite direction
+#   - \:    focus the recently-focused workspace
+alt - 0x12 : yabai -m space --focus Terminal
+alt - 0x13 : yabai -m space --focus Slack
+alt - 0x14 : yabai -m space --focus Search
+alt - 0x15 : yabai -m space --focus Work
+alt - 0x17 : yabai -m space --focus Present
+alt - 0x16 : yabai -m space --focus Music
+alt - 0x1A : yabai -m space --focus Vault
+alt - 0x1C : yabai -m space --focus Scratch
+alt - 0x19 : yabai -m space --focus Mail
+alt - 0x1D : yabai -m space --focus Meet
+
+alt - 0x21 : dest=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && yabai -m query --displays | \
+             jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then last else .[index($cur_space) - 1] end"); \
+             yabai -m space --focus ${dest}
+alt - 0x1E : dest=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && yabai -m query --displays | \
+             jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) + 1 == length then first else .[index($cur_space) + 1] end"); \
+             yabai -m space --focus ${dest}
+alt - 0x2A : recent_space=$(yabai -m query --spaces --space recent | jq '.id') && \
+             yabai -m space --focus ${recent_space}
+
+# Swap Window
+prefix < h : yabai -m window --swap west; skhd -k "alt - a"
+prefix < j : yabai -m window --swap south; skhd -k "alt - a"
+prefix < k : yabai -m window --swap north; skhd -k "alt - a"
+prefix < l : yabai -m window --swap east; skhd -k "alt - a"
+
+# Move Window to Workspace and follow focus
+#   - 1-0:  send the current window to the workspace #1-#10, and focus that window
+#   - [, ]: send the current window to the workspace on its left or right (support sending across the display and cycling through), and focus that window
+#     e.g., 4 | 1 2 | 3 (three display and currently at 3), [ will move the current window to workspace #2 and focus this window on workspace #2, and ] will move the current window to workspace #4 and focus this window on workspace #4
+#   - \:    send the current window to the recently-focused workspace, and focus that window
+prefix < 1 : yabai -m window --space Terminal --focus; skhd -k "alt - a"
+prefix < 2 : yabai -m window --space Slack --focus; skhd -k "alt - a"
+prefix < 3 : yabai -m window --space Search --focus; skhd -k "alt - a"
+prefix < 4 : yabai -m window --space Work --focus; skhd -k "alt - a"
+prefix < 5 : yabai -m window --space Present --focus; skhd -k "alt - a"
+prefix < 6 : yabai -m window --space Music --focus; skhd -k "alt - a"
+prefix < 7 : yabai -m window --space Vault --focus; skhd -k "alt - a"
+prefix < 8 : yabai -m window --space Scratch --focus; skhd -k "alt - a"
+prefix < 9 : yabai -m window --space Mail --focus; skhd -k "alt - a"
+prefix < 0 : yabai -m window --space Meet --focus; skhd -k "alt - a"
+prefix < 0x21 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                workspace_left=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
+                yabai -m query --displays | \
+                jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then .[length - 1] else .[index($cur_space) - 1] end") && \
+                yabai -m window --space ${workspace_left} --focus; skhd - "alt - a"
+prefix < 0x1E : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                workspace_right=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
+                yabai -m query --displays | \
+                jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) + 1 == length then .[0] else .[index($cur_space) + 1] end") && \
+                yabai -m window --space ${workspace_right} --focus; skhd -k "alt - a"
+prefix < 0x2A : cur_window=$(yabai -m query --windows --window | jq '.id') && \
+                recent_space=$(yabai -m query --spaces --space recent | jq '.id') && \
+                yabai -m window --space ${recent_space} --focus; skhd -k "alt - a"
+
+
+# Move Window to Workspace
+#   - 1-0:  send the current window to the workspace #1-#10, and not focus that window
+#   - [, ]: send the current window to the workspace on its left or right (support sending across the display and cycling through), and not focus that window
+#     e.g., 4 | 1 2 | 3 (three display and currently at 3), [ will move the current window to workspace #2 and focus this window on workspace #2, and ] will move the current window to workspace #4 and not focus this window on workspace #4
+#   - \:    send the current window to the recently-focused workspace, and not focus that window
+prefix < ctrl - 1 : yabai -m window --space Terminal; skhd -k "alt - a"
+prefix < ctrl - 2 : yabai -m window --space Slack; skhd -k "alt - a"
+prefix < ctrl - 3 : yabai -m window --space Search; skhd -k "alt - a"
+prefix < ctrl - 4 : yabai -m window --space Work; skhd -k "alt - a"
+prefix < ctrl - 5 : yabai -m window --space Present; skhd -k "alt - a"
+prefix < ctrl - 6 : yabai -m window --space Music; skhd -k "alt - a"
+prefix < ctrl - 7 : yabai -m window --space Vault; skhd -k "alt - a"
+prefix < ctrl - 8 : yabai -m window --space Scratch; skhd -k "alt - a"
+prefix < ctrl - 9 : yabai -m window --space Mail; skhd -k "alt - a"
+prefix < ctrl - 0 : yabai -m window --space Meet; skhd -k "alt - a"
+prefix < ctrl - 0x21 : workspace_left=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && yabai -m query --displays | \
+                       jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then .[length - 1] else .[index($cur_space) - 1] end") && \
+                       yabai -m window --space ${workspace_left}; skhd -k "alt - a"
+prefix < ctrl - 0x1E : workspace_right=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && yabai -m query --displays | \
+                       jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) + 1 == length then .[0] else .[index($cur_space) + 1] end") && \
+                       yabai -m window --space ${workspace_right}; skhd -k "alt - a"
+prefix < ctrl - 0x2A : recent_space=$(yabai -m query --spaces --space recent | jq '.id') && \
+                       yabai -m window --space ${recent_space}; skhd -k "alt - a"
+
+# Resize Window
+prefix < ctrl - h : yabai -m window --resize left:-20:0 || yabai -m window --resize right:-20:0
+prefix < ctrl - j : yabai -m window --resize top:0:20 || yabai -m window --resize bottom:0:20
+prefix < ctrl - k : yabai -m window --resize top:0:-20 || yabai -m window --resize bottom:0:-20
+prefix < ctrl - l : yabai -m window --resize left:20:0 || yabai -m window --resize right:20:0
+
+# Balance window sizes
+prefix < 0x18 : yabai -m space --balance; skhd -k "alt - a"
+
+# Toggle window between tiling and floating, and restore its previous position when become floating
+alt - f : yabai -m window --toggle float
+
+# Apps
+
+# Open Terminal
+alt - return : kitty -d ~
+
+
+# restart yabai
+
+alt + shift - r : \
+  yabai --restart-service \
+  osascript -e "display notification \"Restarting Yabai\" with title \"Yabai\""
+
+# restart skhd
+#alt - esc : brew services restart skhd
+
+# Toggle Nightlight
+alt - b : \
+  nightlight toggle
