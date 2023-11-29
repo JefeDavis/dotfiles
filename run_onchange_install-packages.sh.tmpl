@@ -2,20 +2,29 @@
 #!/bin/bash
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
+
 brew "git"
+cask "git-credential-manager"
 brew "chezmoi"
 
 cask "bitwarden"
 
-brew "koekeishiya/formulae/yabai"
+tap "koekeishiya/formulae"
+brew "yabai"
 brew "skhd"
 brew "jq"
-brew "smudge/smudge/nightlight"
+
+tap "smudge/smudge"
+brew "nightlight"
 
 # cask "google-chrome"
 
 brew "kubectl"
 brew "k9s"
+brew "dive"
+
+tap "fluxcd/tap"
+brew "fluxcd/tap/flux"
 EOF
 
 # disable minimize shortcut
