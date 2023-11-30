@@ -9,6 +9,8 @@ export HISTSIZE=1000000000
 export HISTFILESIZE=1000000000
 export SAVEHIST=1000000000
 
+export FZF_DEFAULT_OPTS='--reverse --ansi'
+
 if [ -d $HOME/.config/env ] && [ ! -z "$(ls -A $HOME/.config/env)" ]; then
   for file in $(find $HOME/.config/env -name "*.env")
   do
@@ -24,8 +26,5 @@ export MANPAGER="nvim +Man!"
 export PAGER=bat
 export LESSHISTFILE="$XDG_DATA_HOME/lesshst"
 
-export FZF_DEFAULT_OPTS='--reverse --ansi --color=bg+:#302D41,bg:#1E1E2E,spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,header:#F28FAD,info:#DDB6F2,pointer:#F8BD96 --color=marker:#F8BD96,fg+:#F2CDCD,prompt:#DDB6F2,hl+:#F28FAD'
-
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml
-export THEME="Catppuccin-Mocha"
