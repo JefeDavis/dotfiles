@@ -7,6 +7,11 @@ brew "git"
 cask "git-credential-manager"
 brew "chezmoi"
 
+cask "kitty"
+brew "zsh"
+brew "starship"
+brew "direnv"
+
 cask "bitwarden"
 
 tap "koekeishiya/formulae"
@@ -16,8 +21,6 @@ brew "jq"
 
 tap "smudge/smudge"
 brew "nightlight"
-
-cask "kitty"
 
 tap "homebrew/cask-fonts"
 cask "font-fira-code"
@@ -37,6 +40,15 @@ brew "dive"
 tap "fluxcd/tap"
 brew "fluxcd/tap/flux"
 EOF
+
+# change to homebrew zsh
+grep -qxF "$(which zsh)" /etc/shells || echo "$(which zsh)" | sudo tee -a /etc/shells
+if [ "$SHELL" != "$(which zsh)" ]; then
+  chsh -s $(which zsh)
+fi
+
+# Initialize zsh
+grep -qF "ZDOTDIR" /etc/zshenv || echo 'export "ZDOTDIR=$HOME/.config/zsh"' | sudo tee /etc/zshenv
 
 # disable minimize shortcut
 defaults write -g NSUserKeyEquivalents -dict-add 'Minimize' '\0'
