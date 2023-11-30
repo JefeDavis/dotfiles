@@ -1,1 +1,0 @@
-direnv: pkg.installed

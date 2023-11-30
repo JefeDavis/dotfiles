@@ -1,5 +1,0 @@
-#!/bin/sh
-
-set -eu pipefail
-
-git remote show origin | rg 'HEAD branch' | cut -d ' ' -f5
