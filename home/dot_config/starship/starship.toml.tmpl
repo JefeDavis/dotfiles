@@ -16,6 +16,8 @@ $git_state\
 $git_status\
 $kubernetes\
 $docker_context\
+$aws\
+$gcloud\
 $cmd_duration\
 $line_break\
 $package\
@@ -67,8 +69,6 @@ $conda\
 $meson\
 $spack\
 $memory_usage\
-$aws\
-$gcloud\
 $openstack\
 $azure\
 $env_var\
@@ -89,7 +89,7 @@ error_symbol = "[❯](bold red)"
 vimcmd_symbol = "[❮](bold green)"
 
 [aws]
-symbol = "  "
+symbol = " "
 
 [buf]
 symbol = " "
@@ -124,6 +124,10 @@ symbol = " "
 
 [fossil_branch]
 symbol = " "
+
+[gcloud]
+symbol = "  "
+format ='[$symbol$account(@$domain)(\($region\))]($style) '
 
 [git_branch]
 symbol = " "
