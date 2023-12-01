@@ -2,9 +2,6 @@
 # ░▄▀░░▀▀█░█▀█░░░█░░░█░█░█░█░█▀▀░░█░░█░█
 # ░▀▀▀░▀▀▀░▀░▀░░░▀▀▀░▀▀▀░▀░▀░▀░░░▀▀▀░▀▀▀
 
-# Make sure plugins are along the fpath
-fpath=($ZDOTDIR/plugins $fpath)
-
 #######################################################################
 # Navigation
 #######################################################################
@@ -31,10 +28,24 @@ setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 
+
+#######################################################################
+# Oh My Zsh
+#######################################################################
+source $ZSH/oh-my-zsh.sh
+
 #######################################################################
 # Aliases
 #######################################################################
 source $ZDOTDIR/aliases
+
+#######################################################################
+# FUNCTIONS
+#######################################################################
+autoload -Uz $ZDOTDIR/functions/*
+
+. $(brew --prefix asdf)/libexec/asdf.sh
+
 
 # DIRENV
 eval "$(direnv hook zsh)"

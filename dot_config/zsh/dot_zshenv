@@ -25,6 +25,10 @@ export BROWSER='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome -
 export MANPAGER="nvim +Man!"
 export PAGER=bat
 export LESSHISTFILE="$XDG_DATA_HOME/lesshst"
+export ZSH="$XDG_CONFIG_HOME/oh-my-zsh"
+export ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ohmyzsh"
+export DISABLE_AUTO_UPDATE="true"
+export ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump"
 
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml
