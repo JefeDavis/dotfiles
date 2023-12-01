@@ -51,6 +51,14 @@ source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 #######################################################################
 autoload -Uz $ZDOTDIR/functions/*
 
+#######################################################################
+# FZF
+#######################################################################
+if [ $(command -v "fzf") ]; then
+  source $(brew --prefix fzf)/shell/completion.zsh
+  source $(brew --prefix fzf)/shell/key-bindings.zsh
+fi
+
 # DIRENV
 eval "$(direnv hook zsh)"
 
