@@ -40,12 +40,16 @@ source $ZSH/oh-my-zsh.sh
 source $ZDOTDIR/aliases
 
 #######################################################################
+# ASDF
+#######################################################################
+. $(brew --prefix asdf)/libexec/asdf.sh
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+. ~/.asdf/plugins/golang/set-env.zsh
+
+#######################################################################
 # FUNCTIONS
 #######################################################################
 autoload -Uz $ZDOTDIR/functions/*
-
-. $(brew --prefix asdf)/libexec/asdf.sh
-source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 
 # DIRENV
 eval "$(direnv hook zsh)"
