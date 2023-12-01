@@ -1,47 +1,52 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
+set -eufo pipefail
+
+{{ $brews := list
+  "asdf"
+  "bat"
+  "curl"
+  "eza"
+  "fzf"
+  "git"
+  "jq"
+  "k9s"
+  "nightlight"
+  "pastel"
+  "ripgrep"
+  "skhd"
+  "starship"
+  "zsh"
+  "yabai"
+}}
+  
+{{ $casks := list
+  "bitwarden"
+  "docker"
+  "font-fira-code"
+  "font-fira-code-nerd-font"
+  "font-victor-mono-nerd-font"
+  "font-roboto-mono-nerd-font"
+  "git-credential-manager"
+  "google-chrome"
+  "google-drive"
+  "kitty"
+  "spotify"
+}}
+
 brew bundle --no-lock --file=/dev/stdin <<EOF
 
-brew "git"
-cask "git-credential-manager"
-brew "chezmoi"
-
-cask "kitty"
-brew "zsh"
-brew "starship"
-brew "direnv"
-
-cask "bitwarden"
-
 tap "koekeishiya/formulae"
-brew "yabai"
-brew "skhd"
-brew "jq"
-
 tap "smudge/smudge"
-brew "nightlight"
-
 tap "homebrew/cask-fonts"
-cask "font-fira-code"
-cask "font-fira-code-nerd-font"
-cask "font-victor-mono-nerd-font"
-cask "font-roboto-mono-nerd-font"
 
-cask "google-chrome"
-cask "google-drive"
-
-cask "docker"
-
-brew "k9s"
-
-brew "asdf"
-brew "bat"
-brew "ripgrep"
-brew "fzf"
-brew "pastel"
-brew "eza"
-
+{{ range ($brews | sortAlpha | uniq) -}}
+brew "{{ . }}"
+{{ end -}}
+{{ range ($casks | sortAlpha | uniq) -}}
+cask "{{ . }}"
+{{ end -}}
 EOF
 
 # change to homebrew zsh
