@@ -1,5 +1,5 @@
 embark() {
-  TARGET=$(ls -d ~/Projects/* ~/* ~/Documents/* $CHEZMOI_SOURCE_DIR | fzf)
+  TARGET=$(ls -d ~/Projects/* ~/* ~/Documents/* ~/.local/share/chezmoi/home | fzf)
   NAME=$(basename $TARGET)
 
   tmuxinator start $NAME || tmuxinator start default name=$NAME root=$TARGET
