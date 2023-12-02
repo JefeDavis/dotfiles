@@ -1,0 +1,6 @@
+embark() {
+  TARGET=$(ls -d ~/Projects/* ~/* ~/Documents/* $CHEZMOI_SOURCE_DIR | fzf)
+  NAME=$(basename $TARGET)
+
+  tmuxinator start $NAME || tmuxinator start default name=$NAME root=$TARGET
+}
