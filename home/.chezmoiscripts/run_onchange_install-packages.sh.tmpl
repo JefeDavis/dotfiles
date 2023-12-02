@@ -1,11 +1,12 @@
 {{- if eq .chezmoi.os "darwin" -}}
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eufo pipefail
 
 {{ $brews := list
   "asdf"
   "bat"
+  "bash"
   "curl"
   "eza"
   "fzf"
