@@ -1,0 +1,7 @@
+[".config/nnn/plugins"]
+    type = "archive"
+    url = "https://github.com/jarun/nnn/archive/master.tar.gz"
+    exact = true
+    stripComponents = 2
+    refreshPeriod = "168h"
+    include = [ "*/plugins/**" ]
