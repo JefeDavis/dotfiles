@@ -27,7 +27,7 @@
   conflictstyle = diff3
 
 [commit]
-  gpgsign = true
+#  gpgsign = true
 
 [format]
   signoff = true
