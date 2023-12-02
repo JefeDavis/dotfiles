@@ -17,6 +17,7 @@ $git_status\
 $kubernetes\
 $docker_context\
 $aws\
+$azure\
 $gcloud\
 $cmd_duration\
 $line_break\
@@ -84,18 +85,26 @@ $character"""
 
 [character]
 # Note the use of Catppuccin color 'maroon'
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
-vimcmd_symbol = "[❮](bold green)"
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold red)'
+vimcmd_symbol = '[❮](bold green)'
 
 [aws]
+format = '[$symbol($profile )(\($region\) )]($style)'
 symbol = " "
+
+[azure]
+format = '[$symbol($subscription)]($style)'
+symbol = '󰠅 '
+style = 'blue bold'
 
 [buf]
 symbol = " "
+format = '[$symbol]($style)'
 
 [c]
 symbol = " "
+format = '[$symbol]($style)'
 
 [cmd_duration]
 format = "[$duration]($style) "
@@ -103,9 +112,11 @@ style = "yellow"
 
 [conda]
 symbol = " "
+format = '[$symbol]($style)'
 
 [dart]
 symbol = " "
+format = '[$symbol]($style)'
 
 [directory]
 read_only = " 󰌾"
@@ -114,20 +125,23 @@ truncation_length = 4
 style = "bold lavender"
 
 [docker_context]
+format = '[$symbol$context]($style)'
 symbol = " "
 
 [elixir]
 symbol = " "
+format = '[$symbol]($style)'
 
 [elm]
 symbol = " "
+format = '[$symbol]($style)'
 
 [fossil_branch]
 symbol = " "
 
 [gcloud]
 symbol = "  "
-format ='[$symbol$account(@$domain)(\($region\))]($style) '
+format = '[$symbol$account(@$domain)(\($region\))]($style)'
 
 [git_branch]
 symbol = " "
@@ -151,15 +165,18 @@ style = "mantle"
 
 [golang]
 symbol = " "
+format = '[$symbol]($style)'
 
 [guix_shell]
 symbol = " "
 
 [haskell]
 symbol = " "
+format = '[$symbol]($style)'
 
 [haxe]
 symbol = " "
+format = '[$symbol]($style)'
 
 [hg_branch]
 symbol = " "
@@ -169,32 +186,39 @@ ssh_symbol = " "
 
 [java]
 symbol = " "
+format = '[$symbol]($style)'
 
 [julia]
 symbol = " "
+format = '[$symbol]($style)'
 
 [kubernetes]
-format = " [$symbol$context](blue) "
+format = '[$symbol$context](blue) '
 disabled = false
 symbol = "󱃾 "
 
 [lua]
 symbol = " "
+format = '[$symbol]($style)'
 
 [memory_usage]
 symbol = "󰍛 "
 
 [meson]
 symbol = "󰔷 "
+format = '[$symbol]($style)'
 
 [nim]
 symbol = "󰆥 "
+format = '[$symbol]($style)'
 
 [nix_shell]
 symbol = " "
+format = '[$symbol]($style)'
 
 [nodejs]
 symbol = " "
+format = '[$symbol]($style)'
 
 [os.symbols]
 Alpaquita = " "
@@ -239,26 +263,35 @@ Windows = "󰍲 "
 
 [package]
 symbol = "󰏗 "
+format = '[$symbol]($style)'
 
 [pijul_channel]
 symbol = " "
 
 [python]
 symbol = " "
-format = "$symbol[$virtualenv]($style) "
+format = '$symbol[$virtualenv]($style) '
 style = "mantle"
 
 [rlang]
 symbol = "󰟔 "
+format = '[$symbol]($style)'
 
 [ruby]
 symbol = " "
+format = '[$symbol]($style)'
 
 [rust]
 symbol = " "
+format = '[$symbol]($style)'
 
 [scala]
 symbol = " "
+format = '[$symbol]($style)'
+
+[terraform]
+symbol = "󱁢 "
+format = '[$symbol$workspace]($style)'
 
 # palette tables should be last in the config ⚓️
 [palettes."Catppuccin-Macchiato"]
