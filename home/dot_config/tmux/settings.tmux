@@ -8,7 +8,7 @@ set -g automatic-rename off
 set -g allow-passthrough on
 set -g status-interval 5
 set set-clipboard on
-set -s escape-time 1
+set -s escape-time 0
 set -g base-index 1
 set -g pane-base-index 1
 set -g renumber-windows on
