@@ -48,4 +48,10 @@ return {
       require('mappings.editing').surround()
     end
   },
+  {
+    "ggandor/leap.nvim",
+    config = function()
+      require('mappings.editing').leap()
+    end
+  }
 }

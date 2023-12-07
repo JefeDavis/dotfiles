@@ -41,7 +41,7 @@ M.commentary = function()
       mode = 'n',
       prefix ='g',
       ['c'] = { 
-        name ="+comment",
+        name ='+comment',
         '<Plug>Commentary', 'Toggle comment',
         ['c'] = { '<Plug>CommentaryLine', 'Toggle comment - line' },
         ['u'] = { '<Plug>Commentary<Plug>Commentary', 'Uncomment current and adjacent lines' },
@@ -51,6 +51,18 @@ M.commentary = function()
       ['gc'] = { '<Plug>Commentary', 'Toggle comment highlighted lines', mode='x' },
       ['gc'] = { '<Plug>Commentary', 'Comment', mode='o' },
     }
+  })
+end
+
+M.leap = function()
+  return wk.register({
+    { 
+      ['s'] = { '<Plug>(leap-forward-to)', 'Leap forward to', mode = { 'n', 'x', 'o' } },
+      ['S'] = { '<Plug>(leap-backward-to)', 'Leap backward to', mode = { 'n', 'x', 'o' } },
+      ['gs'] = { '<Plug>(leap-from-window)', 'Leap from window', mode = { 'n', 'x', 'o' } },
+      ['x'] = { '<Plug>(leap-forward-till)', 'Leap forward till', mode = { 'x', 'o' } },
+      ['X'] = { '<Plug>(leap-backward-till)', 'Leap backward till', mode = { 'x', 'o' } },
+    },
   })
 end
 
