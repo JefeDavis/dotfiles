@@ -12,6 +12,17 @@ M.nnn = function()
   })
 end
 
+M.tmux = function()
+  return wk.register({
+    ['<C-h>'] = { ':<C-U>TmuxNavigateLeft<CR>', 'move focus left', mode={ 'n', 'v', 'x' } },
+    ['<C-j>'] = { ':<C-U>TmuxNavigateDown<CR>', 'move focus down', mode={ 'n', 'v', 'x' } },
+    ['<C-k>'] = { ':<C-U>TmuxNavigateUp<CR>', 'move focuse up', mode={ 'n', 'v', 'x' } },
+    ['<C-l>'] = { ':<C-U>TmuxNavigateRight<CR>', 'move focus right', mode={ 'n', 'v', 'x' } },
+    ['<C-\\>'] = { ':<C-U>TmuxNavigateLast<CR>', 'move to focus previous', mode={ 'n', 'v', 'x' } },
+  })
+end
+
+
 M.fuzzy = function()
   local builtin = require('telescope.builtin')
 

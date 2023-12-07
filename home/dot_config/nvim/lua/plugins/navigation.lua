@@ -17,6 +17,10 @@ return {
     'christoomey/vim-tmux-navigator',
     init = function ()
       vim.g.tmux_navigator_disable_when_zoomed = true
+      vim.g.tmux_navigator_no_mappings = true
+    end,
+    config = function()
+      require('mappings.navigation').tmux()
     end
   },
   {
