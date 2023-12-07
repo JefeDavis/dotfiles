@@ -8,7 +8,8 @@ return {
     opts = {
       operators = { 
         gc = "Comments",
-        gz = 'Surrounds'
+        gz = 'Surrounds',
+        gZ = 'Surrounds - Line'
       },
       -- your configuration comes here
       -- or leave it empty to use the default settings
