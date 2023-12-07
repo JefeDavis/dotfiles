@@ -5,6 +5,7 @@
 
 [init]
   defaultBranch = main
+	templatedir = ~/.config/git/templates
 
 [pull]
   rebase = true
@@ -13,7 +14,7 @@
   prune = true
 
 [core]
-  editor = vim
+  editor = nvim
   commentChar = ";"
   excludesFile = ~/.config/git/gitignore
 
