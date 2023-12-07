@@ -12,6 +12,13 @@ M.nnn = function()
   })
 end
 
+M.motion = function()
+  return wk.register({
+    ['<ScrollWheelDown>'] = { ':call comfortable_motion#flick(40)<CR>', 'Scroll down', mode={ 'n', 'v', 'x' } },
+    ['<ScrollWheelUp'] = { ':call comfortable_motion#flick(-40)<CR>', 'Scroll up', mode={ 'n', 'v', 'x' } },
+  })
+end
+
 M.tmux = function()
   return wk.register({
     ['<C-h>'] = { ':<C-U>TmuxNavigateLeft<CR>', 'move focus left', mode={ 'n', 'v', 'x' } },

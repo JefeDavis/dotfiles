@@ -13,6 +13,12 @@ return {
       require('mappings.navigation').nnn()
     end
   },
+  { 
+    'yuttie/comfortable-motion.vim',
+    config = function()
+      require('mappings.navigation').motion()
+    end
+  },
   {
     'christoomey/vim-tmux-navigator',
     init = function ()
