@@ -18,6 +18,9 @@
   commentChar = ";"
   excludesFile = ~/.config/git/gitignore
 
+[credential]
+  helper = osxkeychain
+
 [blame]
   date = relative
 
