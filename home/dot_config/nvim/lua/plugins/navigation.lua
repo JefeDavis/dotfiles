@@ -13,6 +13,17 @@ return {
       require('mappings.navigation').nnn()
     end
   },
+  {
+    'theprimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 
+      { 'nvim-lua/plenary.nvim' },
+    },
+    config = function()
+      require('harpoon'):setup()
+      require('mappings.navigation').harpoon()
+    end
+  },
   { 
     'yuttie/comfortable-motion.vim',
     config = function()

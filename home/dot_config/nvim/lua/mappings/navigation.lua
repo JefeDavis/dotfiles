@@ -1,13 +1,39 @@
 local M = {}
-local wk = require("which-key")
+local wk = require('which-key')
+
+M.harpoon = function()
+  local h = require('harpoon')
+  return wk.register({
+    prefix = '<leader>',
+    {
+      ['m'] = {
+        name = '+harpoon',
+        ['m'] = { function() h.ui:toggle_quick_menu(h:list()) end, 'view all Marks' },
+        ['a'] = { function() h:list():append() end, 'Add file mark' },
+        ['n'] = { function() h:list():next() end, 'Next mark' },
+        ['N'] = { function() h:list():prev() end, 'prev mark' },
+        ['u'] = { function() h:list():select(1) end, '1st mark - Uno' },
+        ['d'] = { function() h:list():select(2) end, '2nd mark - Dos' },
+        ['t'] = { function() h:list():select(3) end, '3rd mark - Tres' },
+        ['q'] = { function() h:list():select(4) end, '4th mark - Quatro' },
+        ['c'] = { function() h:list():select(5) end, '5th mark - Cinco' },
+        ['s'] = { function() h:list():select(6) end, '6th mark - Seis' },
+        ['i'] = { function() h:list():select(7) end, '7th mark - sIete' },
+        ['o'] = { function() h:list():select(8) end, '8th mark - Ocho' },
+        ['v'] = { function() h:list():select(9) end, '9th mark - nueVe' },
+        ['e'] = { function() h:list():select(10) end, '10th mark - diEz' },
+      }
+    }
+  })
+end
 
 M.nnn = function()
   return wk.register({
-    prefix = "<leader>",
+    prefix = '<leader>',
     {
-      ["\\"] = { "<CMD>NnnExplorer<CR>", "Open File Explorer in side pane", mode={"n","t"} },
-      ["<BAR>"] = { "<CMD>NnnPicker %:p<CR>", "Open File Explorer in floating window" },
-      ["_"] = { ":silent grep ", "grep", silent=false },
+      ['\\'] = { '<CMD>NnnExplorer<CR>', 'Open File Explorer in side pane', mode={'n','t'} },
+      ['<BAR>'] = { '<CMD>NnnPicker %:p<CR>', 'Open File Explorer in floating window' },
+      ['_'] = { ':silent grep ', 'grep', silent=false },
     }
   })
 end
