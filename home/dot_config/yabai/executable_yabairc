@@ -146,6 +146,8 @@ yabai -m rule --add label="Meet" app="Google Meet" space=Meet
 yabai -m rule --add label="Gather-Desktop" app="^Gather$" title="Desktop$" space=Meet
 yabai -m rule --add label="Gather-Mini" app="^Gather$" title="Mini Mode$" manage=off
 
+yabai -m rule --add label="Spotify" app="^Spotify$" space=Music
+
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add label="macfeh" app="^macfeh$" manage=off

@@ -4,4 +4,6 @@ root: <%= @settings["root"] %>
 
 windows:
   - " ": nvim 
-  - " ": neofetch
+  - " ":
+    - tmux link-window -s spotify -d
+    - neofetch
