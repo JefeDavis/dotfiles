@@ -2,6 +2,7 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_BIN_HOME="$HOME/.local/bin"
 
 export ZSH_DISABLE_COMPFIX=true
 export HISTFILE="$XDG_DATA_HOME/zsh/history"
@@ -32,3 +33,5 @@ export ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump"
 
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml
+
+export PATH="$XDG_BIN_HOME:$PATH"

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -eu
+
+EMBARK=embark
+VERSION=0.0.1
+
+TARGET=$( \
+  ls -d ~/Projects/* ~/* ~/Documents/* $XDG_DATA_HOME/chezmoi/home | \
+  fzf --header-first --header="Launch Project" --prompt=" " \
+  --preview "eza --tree --icons --level 3 --git-ignore {}" \
+)
+NAME=$(basename $TARGET)
+SESSION_NAME=$(echo $NAME | tr [:lower:] [:upper:] | tr "." "-")
+
+tmuxinator start $NAME || tmuxinator start default name=$SESSION_NAME root=$TARGET
