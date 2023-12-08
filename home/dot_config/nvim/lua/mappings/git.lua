@@ -38,9 +38,9 @@ function M.gitsigns ()
 
   wk.register({
     prefix = "<leader>",
-    ['B'] = { gitsigns.toggle_current_line_blame, "toggle blame" },
     ['g'] = {
       name = "+git",
+      ['B'] = { gitsigns.toggle_current_line_blame, "toggle blame" },
       ['h'] = {
         name = '+hunk',
         ['v'] = { gitsigns.preview_hunk, "preview hunk" },
