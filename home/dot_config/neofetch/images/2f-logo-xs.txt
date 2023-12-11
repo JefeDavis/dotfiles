@@ -1,0 +1,21 @@
+${c1}                   ,
+${c1}               _,,,w?  ,,__
+${c1}          ,gDDDDDDDDDw %DDDRW,
+${c1}       ,@DDDRR^`        `^?RDDDDw
+${c1}     gDDDR^                  `RDDDW_
+${c1}   /DDDD                        ?DDDW
+${c1}  #DDR                            %DDD
+${c1} [DDR  ${c2}NNNNNNNNNNNN:${c3}""""""""""|${c1}   1DDD
+${c1}jDDR   ${c2}NNNNNNNNNNNNNN${c3}   ______|${c1}    [DDH
+${c1}RDDH   ${c2}         JNNNN${c3}   [      ${c1}     DDD
+${c1}DDD    ${c2},*NNNNNNNNNNNM${c3}   ``````|${c1}     DDD
+${c1}DDD-   ${c2}NNNN````````` ${c3}   .,,,,,|${c1}     DDD
+${c1}[DDD   ${c2}NNNNNNNNNNNNNN${c3}   ]      ${c1}    [DDD
+${c1} RDDU  ${c2}NNNNNNNNNNNNNN${c3}___]      ${c1}   ,DDD
+${c1}  RDDU                            ,DDD`
+${c1}   %DD#_                         #DDR
+${c1}    ?RDD@,                    ,@DDDC
+${c1}      '%DDD@w,            ,w@RDDR^
+${c1}         "RDDDDDw %@@@KDDDDDDR"
+${c1}             `^^RR `RRRRM^`
+${c1}                    `
