@@ -1,0 +1,16 @@
+["Library/Preferences/glow/themes/frappe.json"]
+    type = "file"
+    url = "https://github.com/catppuccin/glamour/releases/download/v1.0.0/frappe.json"
+    refreshPeriod = "168h"
+["Library/Preferences/glow/themes/latte.json"]
+    type = "file"
+    url = "https://github.com/catppuccin/glamour/releases/download/v1.0.0/latte.json"
+    refreshPeriod = "168h"
+["Library/Preferences/glow/themes/macchiato.json"]
+    type = "file"
+    url = "https://github.com/catppuccin/glamour/releases/download/v1.0.0/macchiato.json"
+    refreshPeriod = "168h"
+["Library/Preferences/glow/themes/mocha.json"]
+    type = "file"
+    url = "https://github.com/catppuccin/glamour/releases/download/v1.0.0/mocha.json"
+    refreshPeriod = "168h"
