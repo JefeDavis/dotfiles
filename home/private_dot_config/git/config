@@ -1,7 +1,6 @@
 [user]
-  name = Jeff Davis
-  email = jeff.davis@secondfront.com
-  signingkey = jeff.davis@secondfront.com
+	name = {{ .git.name }}
+	email = {{ .git.email }}
 
 [init]
   defaultBranch = main
@@ -60,3 +59,6 @@
   what = "!git config --get-regexp alias"
 	sweep = !git branch --merged $([[ $1 != \"-f\" ]] \\\n&& git rev-parse main) | egrep -v \"(^\\*|^\\s*(master|main)$)\" \\\n| xargs git branch -d
   tidy = "!git fetch origin -p && for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -D $branch; done"
+[includeIf "hasconfig:remote.*.url:https://code.il2.gamewarden.io/**"]
+  path = ~/.config/git/gitconfig-2F
+
