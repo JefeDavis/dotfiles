@@ -25,6 +25,7 @@ set -eufo pipefail
   "poppler"
   "ripgrep"
   "skhd"
+  "sketchybar"
   "spotify_player"
   "starship"
   "tmux"
@@ -46,6 +47,7 @@ set -eufo pipefail
   "google-drive"
   "kitty"
   "spotify"
+  "sf-symbols"
 }}
 
 brew bundle --no-lock --file=/dev/stdin <<EOF
@@ -53,6 +55,7 @@ brew bundle --no-lock --file=/dev/stdin <<EOF
 tap "koekeishiya/formulae"
 tap "smudge/smudge"
 tap "homebrew/cask-fonts"
+tap "FelixKratz/formulae"
 
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
@@ -73,11 +76,6 @@ grep -qF "ZDOTDIR" /etc/zshenv || echo 'export "ZDOTDIR=$HOME/.config/zsh"' | su
 
 # disable minimize shortcut
 defaults write -g NSUserKeyEquivalents -dict-add 'Minimize' '\0'
-
-# ~/.config/yabai/yabairc
-yabai --start-service
-# ~/.config/skhd/skhdrc
-skhd --start-service
 
 {{ else if eq .chezmoi.os "linux" -}}
 #!/bin/sh

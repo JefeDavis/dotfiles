@@ -41,7 +41,7 @@ alt - r : yabai -m window --focus recent
 alt - 0x2B : yabai -m window --focus stack.prev || yabai -m window --focus stack.last
 alt - 0x2F : yabai -m window --focus stack.next || yabai -m window --focus stack.first
 alt - 0x2C : yabai -m window --focus stack.recent
-alt - m : yabai -m window --toggle zoom-fullscreen
+alt - m : yabai -m window --toggle zoom-fullscreen; sketchybar --trigger window_focus
 alt + shift - m : [[ $(yabai -m query --windows --window | jq '."zoom-fullscreen"') == 0 ]] && \
           ( id=$(yabai -m query --windows --space | jq 'map(select(."zoom-fullscreen" == 1))[0] | .id') && \
             yabai -m window --focus ${id} ) || \
@@ -144,7 +144,7 @@ prefix < ctrl - l : yabai -m window --resize left:20:0 || yabai -m window --resi
 prefix < 0x18 : yabai -m space --balance; skhd -k "alt - a"
 
 # Toggle window between tiling and floating, and restore its previous position when become floating
-alt - f : yabai -m window --toggle float
+alt - f : yabai -m window --toggle float; sketchybar --trigger window_focus
 
 # Apps
 

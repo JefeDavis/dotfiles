@@ -3,7 +3,7 @@
 declare -a gaps
 declare -a color
 
-gaps["top"]="4"
+gaps["top"]="14"
 gaps["bottom"]="24"
 gaps["left"]="4"
 gaps["right"]="4"
@@ -16,11 +16,13 @@ color["preselect"]="0xff61afef"
 # ==================== Loading Scripting Addition ==================== 
 
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
 sudo yabai --load-sa
 
 # ========================= Tiling Settings ========================== 
 
 yabai -m config layout                       bsp
+yabai -m external_bar                        all:35:0
 
 yabai -m config top_padding                 "${gaps["top"]}"
 yabai -m config bottom_padding              "${gaps["bottom"]}"
