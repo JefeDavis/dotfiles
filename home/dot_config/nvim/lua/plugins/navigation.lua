@@ -8,6 +8,9 @@ return {
           { "<C-t>", nnn.builtin.open_in_tab },       -- open file(s) in tab
           { "<C-x>", nnn.builtin.open_in_split },     -- open file(s) in split
           { "<C-v>", nnn.builtin.open_in_vsplit },    -- open file(s) in vertical split
+        },
+        picker = {
+          cmd = "nnn -a"
         }
       }
       require('mappings.navigation').nnn()
