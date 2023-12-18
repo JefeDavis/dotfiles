@@ -22,7 +22,7 @@ sudo yabai --load-sa
 # ========================= Tiling Settings ========================== 
 
 yabai -m config layout                       bsp
-yabai -m external_bar                        all:35:0
+yabai -m config external_bar                        all:35:0
 
 yabai -m config top_padding                 "${gaps["top"]}"
 yabai -m config bottom_padding              "${gaps["bottom"]}"
