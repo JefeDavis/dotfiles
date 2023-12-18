@@ -57,40 +57,39 @@ yabai -m config mouse_drop_action            swap
 
 # ========================= Space Settings ========================== 
 function setup_space {
-  local idx="$1"
-  local name="$3"
-#  local display=$5
+  local name="$1"
+  local display="$2"
   local space=
-  echo "setup space $idx : $name"
 
-  space=$(yabai -m query --spaces --space "$idx")
+  echo "checking for space: $name"
+  space=$(yabai -m query --spaces --space "$name" 2>/dev/null)
+
   if [ -z "$space" ]; then
-    yabai -m space --create #--display "$display"
+    echo "space: $name not found, creating space"
+    yabai -m space --create "$display" 
+    idx=$(yabai -m query --spaces --display $display | jq 'last | .index')
+    yabai -m space $idx --label "$name"
+  else
+    if $(echo $space | jq ".display != $display"); then 
+      echo "space: $name on wrong display, moving to display: $display"
+      yabai -m space "$name" --display $display
+    fi
   fi
-
-  yabai -m space "$idx" --label "$name"
-  # if $(echo $space | jq ".display != $display"); then 
-  #   yabai -m space "$idx" --display $display
-  # fi
-
 }
 
-setup_space 1 --label Terminal
-setup_space 2 --label Present
-setup_space 3 --label Search
-setup_space 4 --label Slack
-setup_space 5 --label Mail
-setup_space 6 --label Work
+# setup_space 1 --label Terminal
+# setup_space 2 --label Present
+# setup_space 3 --label Search
+# setup_space 4 --label Slack
+# setup_space 5 --label Mail
+# setup_space 6 --label Work
 
-setup_space 7 --label Meet
-setup_space 8 --label Scratch
+# setup_space 7 --label Meet
+# setup_space 8 --label Scratch
 
-setup_space 9 --label Music
-setup_space 10 --label Vault
+# setup_space 9 --label Music
+# setup_space 10 --label Vault
 
-for idx in $(yabai -m query --spaces | jq '.[].index | select(. > 10)' | sort -nr); do
-  yabai -m space --destroy "$idx"
-done
 
 # ========================= Display Settings ========================== 
 function setup_display {
@@ -107,9 +106,9 @@ function setup_display {
 
   shift $(( OPTIND - 1 ))
 
-  for space in "$@"; do
-    echo "Moving $space to display $display"
-    yabai -m space $space --display $display
+  for name in "$@"; do
+    echo "Ensuring space $name is on display $display"
+    setup_space $name $display
   done
 }
 
@@ -130,6 +129,9 @@ case $monitor_count in
 esac
 
 
+for idx in $(yabai -m query --spaces | jq 'map(select(.label == "")) | sort_by(.index) | reverse | .[].index'); do
+  yabai -m space --destroy "$idx"
+done
 # ============================= Rules =============================== 
 yabai -m rule --add label="Slack" app="Slack"  space=Slack
 
