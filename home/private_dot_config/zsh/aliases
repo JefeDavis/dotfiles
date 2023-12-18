@@ -1,2 +1,4 @@
 alias cat='bat'
 alias ls='eza'
+alias vi='nvim'
+alias vim='nvim'
