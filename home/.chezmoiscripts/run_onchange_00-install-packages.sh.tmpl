@@ -13,6 +13,7 @@ set -eufo pipefail
   "eza"
   "fzf"
   "git"
+  "glab"
   "glow"
   "imagemagick"
   "jq"
@@ -33,7 +34,6 @@ set -eufo pipefail
   "tmuxinator"
   "trash-cli"
   "zsh"
-  "yabai"
   "nvim"
 }}
   
@@ -59,6 +59,7 @@ tap "smudge/smudge"
 tap "homebrew/cask-fonts"
 tap "FelixKratz/formulae"
 
+brew "fyabai", args: ['HEAD']
 {{ range ($brews | sortAlpha | uniq) -}}
 brew "{{ . }}"
 {{ end -}}
