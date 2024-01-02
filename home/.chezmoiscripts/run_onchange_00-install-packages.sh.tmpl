@@ -3,83 +3,19 @@
 
 set -eufo pipefail
 
-{{ $brews := list
-  "asdf"
-  "bat"
-  "bitwarden-cli"
-  "bash"
-  "curl"
-  "direnv"
-  "eza"
-  "fzf"
-  "git"
-  "glab"
-  "glow"
-  "imagemagick"
-  "jq"
-  "jp2a"
-  "k9s"
-  "mpv"
-  "neofetch"
-  "nightlight"
-  "nnn"
-  "pastel"
-  "poppler"
-  "ripgrep"
-  "skhd"
-  "sketchybar"
-  "spotify_player"
-  "starship"
-  "tmux"
-  "tmuxinator"
-  "trash-cli"
-  "zsh"
-  "nvim"
-}}
-  
-{{ $casks := list
-  "bitwarden"
-  "docker"
-  "font-fira-code"
-  "font-fira-code-nerd-font"
-  "font-victor-mono-nerd-font"
-  "font-roboto-mono-nerd-font"
-  "gather"
-  "google-chrome"
-  "google-drive"
-  "kitty"
-  "slack"
-  "spotify"
-  "sf-symbols"
-}}
-
 brew bundle --no-lock --file=/dev/stdin <<EOF
 
-tap "koekeishiya/formulae"
-tap "smudge/smudge"
-tap "homebrew/cask-fonts"
-tap "FelixKratz/formulae"
-
+{{- range (.packages.taps | sortAlpha | uniq) }}
+  tap "{{ . }}"
+{{- end }}
 brew "fyabai", args: ['HEAD']
-{{ range ($brews | sortAlpha | uniq) -}}
+{{- range ( .packages.brews | sortAlpha | uniq) }}
 brew "{{ . }}"
-{{ end -}}
-{{ range ($casks | sortAlpha | uniq) -}}
+{{- end }}
+{{- range ( .packages.casks | sortAlpha | uniq) }}
 cask "{{ . }}"
-{{ end -}}
+{{- end }}
 EOF
-
-# change to homebrew zsh
-grep -qxF "$(which zsh)" /etc/shells || echo "$(which zsh)" | sudo tee -a /etc/shells
-if [ "$SHELL" != "$(which zsh)" ]; then
-  chsh -s $(which zsh)
-fi
-
-# Initialize zsh
-grep -qF "ZDOTDIR" /etc/zshenv || echo 'export "ZDOTDIR=$HOME/.config/zsh"' | sudo tee /etc/zshenv
-
-# disable minimize shortcut
-defaults write -g NSUserKeyEquivalents -dict-add 'Minimize' '\0'
 
 {{ else if eq .chezmoi.os "linux" -}}
 #!/bin/sh
