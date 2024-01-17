@@ -1,46 +1,4 @@
-plugin:
-  select-skin:
-    shortCut: Ctrl-S
-    confirm: false
-    description: Select Skin
-    scopes:
-      - all
-    command: bash
-    background: false
-    args: ["-c", 'echo "Select default skin:" && echo "" && select f in ~/.config/k9s/skins/*.yml; do [ -n "$f" ] && cp -f "$f" ~/.config/k9s/skin.yml && break; done']
-  select-skin-for-prod:
-    shortCut: Ctrl-Y
-    confirm: false
-    description: Select Skin for Prod Contexts
-    scopes:
-      - all
-    command: bash
-    background: false
-    args:
-    args:
-      - -c
-      - |
-        echo "Select a skin YAML file for Production Contexts:"
-        select skin_file in $HOME/.config/k9s/skins/*.yml; do
-          if [ -z "$skin_file" ]; then
-            echo "Invalid selection. Please choose a skin YAML file."
-          else
-            break
-          fi
-        done
-
-        contexts=$(kubectl config get-contexts --no-headers | awk '{print $1"\n"$2"\n"$3}'|uniq | grep -v "*" |grep "prd\|prod")
-        for context in $contexts; do
-          set -x
-          # Create the folder with the context name
-          export first_half="${context%%/*}"
-          export latter_half="${context##*/}"
-          mkdir -p "$HOME/.config/k9s/${first_half}"
-
-          # Set the destination file under the created folder
-          destination_file="${first_half}/${latter_half}_skin.yml"
-          cp -f "${skin_file}" "$HOME/.config/k9s/${destination_file}"
-        done
+plugins:
   debug:
     shortCut: Shift-D
     description: Add debug container
@@ -108,7 +66,7 @@ plugin:
       - -c
       - "flux reconcile source helm --context $CONTEXT -n $NAMESPACE $NAME |& less"
   reconcile-oci-repo:
-    shortCut: Shift-Z
+    shortCut: Shift-R
     description: Flux reconcile
     scopes:
       - ocirepositories
@@ -152,7 +110,7 @@ plugin:
     - -c
     - "flux --context $CONTEXT reconcile image update -n $NAMESPACE $NAME | less"
   trace:
-    shortCut: Shift-A
+    shortCut: Shift-Z
     confirm: false
     description: Flux trace
     scopes:
