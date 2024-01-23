@@ -55,7 +55,7 @@ plugins:
     - -c
     - "flux --context $CONTEXT reconcile helmrelease -n $NAMESPACE $NAME |& less"
   reconcile-helm-repo:
-    shortCut: Shift-Z
+    shortCut: Shift-R
     description: Flux reconcile
     scopes:
       - helmrepositories
