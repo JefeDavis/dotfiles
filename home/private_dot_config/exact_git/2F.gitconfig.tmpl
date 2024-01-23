@@ -1,6 +1,7 @@
 [user]
-  email = {{ .git.workEmail }}
+  email = {{ .git.work.email }}
   name = {{ .git.name }}
-  signingkey = {{ .git.workEmail }}
+  signingkey = {{ .git.work.email }}
 [commit]
 #  gpgsign = true
+   template = ~/.config/git/message

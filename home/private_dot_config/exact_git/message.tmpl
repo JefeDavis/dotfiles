@@ -1,0 +1,38 @@
+; Title: Summary, imperative, start upper case, don't end with a period
+; No more than 50 chars. #### 50 chars is here:  #
+;
+; Remember blank line between title and body.
+;
+; Body: Explain *what* and *why* (not *how*). 
+; Wrap at 72 chars. ################################## which is here:  #
+;
+; Include task ID (Gitlab Issue).
+; Available keywords:
+; Close, Closes, Closed, Closing, close, closes, closed, closing
+; Fix, Fixes, Fixed, Fixing, fix, fixes, fixed, fixing
+; Resolve, Resolves, Resolved, Resolving, resolve, resolves, resolved, resolving
+; Implement, Implements, Implemented, Implementing, implement, implements, implemented, implementing
+;
+; Available issue reference formats:
+; A local issue (#123).
+; A cross-project issue (group/project#123).
+; The full URL of an issue (https://gitlab.example.com/group/project/issues/123).
+; An Epic (&1)
+;
+; At the end: Include Co-authored-by for all contributors.
+; Include at least one empty line before it. Format:
+{{- range .git.work.teamMembers }}
+; Co-authored-by: {{ .name }} <{{ .email }}>
+{{- end }}
+;
+; How to Write a Git Commit Message:
+; https://chris.beams.io/posts/git-commit/
+;
+; 1. Separate subject from body with a blank line
+; 2. Limit the subject line to 50 characters
+; 3. Capitalize the subject line
+; 4. Do not end the subject line with a period
+; 5. Use the imperative mood in the subject line
+; 6. Wrap the body at 72 characters
+; 7. Use the body to explain what and why vs. how
+;
