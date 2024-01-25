@@ -110,7 +110,7 @@ plugins:
     - -c
     - "flux --context $CONTEXT reconcile image update -n $NAMESPACE $NAME | less"
   trace:
-    shortCut: Shift-Z
+    shortCut: Shift-U
     confirm: false
     description: Flux trace
     scopes:
