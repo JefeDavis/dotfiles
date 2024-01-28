@@ -331,7 +331,7 @@ end
           fg = sett.hints,
           bg = sett.bkg,
         },
-        icon = " ",
+        icon = "󰠠 ",
       }
     },
 
