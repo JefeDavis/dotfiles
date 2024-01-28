@@ -12,16 +12,18 @@ return {
   },
 
   lua_ls = {
-    Lua = {
-      workspace = {
-        library = {
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.stdpath("config") .. "/lua"] = true,
+    settings = {
+      Lua = {
+        workspace = {
+          library = {
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.stdpath("config") .. "/lua"] = true,
+          },
         },
-      },
-      telemetry = { enable = false },
-      diagnostics = {
-        globals = { "vim" },
+        telemetry = { enable = false },
+        diagnostics = {
+          globals = { "vim" },
+        },
       },
     },
   },
@@ -31,7 +33,7 @@ return {
   },
 
   gopls = {
-    filetypes = { "gotmpl", "gowork" }
+    filetypes = { "go", "gomod", "gotmpl", "gowork" }
   },
 
   helm_ls = {

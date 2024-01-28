@@ -40,6 +40,17 @@ return {
 
     local mason_lspconfig = require("mason-lspconfig")
 
+    mason_lspconfig.setup_handlers({
+      function(server_name)
+        require("lspconfig")[server_name].setup({
+          capabilities = capabilities,
+          on_attach = require("mappings.lsp").on_attach,
+          settings = (require("lsp.servers")[server_name]).settings,
+          filetypes = (require("lsp.servers")[server_name] or {}).filetypes,
+        })
+      end,
+    })
+
     vim.diagnostic.config({
       title = false,
       underline = true,
