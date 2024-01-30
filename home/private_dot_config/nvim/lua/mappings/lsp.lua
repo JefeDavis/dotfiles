@@ -18,6 +18,7 @@ M.on_attach = function(_, bufnr)
         ['s'] = { vim.lsp.buf.signature_help, 'Signature Documentation' },
         ['D'] = { vim.lsp.buf.declaration, 'Goto Declaration' },
         ['v'] = { '<cmd> vsplit | lua vim.lsp.buf.definition()<cr>', 'Goto Declaration' },
+        ['m'] = { vim.diagnostic.setqflist, 'Set QuickFix List' },
       },
     },
   })
