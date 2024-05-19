@@ -65,4 +65,5 @@ eval "$(direnv hook zsh)"
 # Prompt
 eval "$(starship init zsh)"
 
-
+# History
+eval "$(atuin init zsh)"
