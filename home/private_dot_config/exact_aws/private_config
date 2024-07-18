@@ -1,0 +1,12 @@
+[default]
+region = us-east-1
+output = json
+
+[profile 2F_Gov]
+region = us-gov-east-1
+
+[profile 2F_Com]
+region = us-east-1
+
+[profile 2F_UK]
+region = eu-west-2
