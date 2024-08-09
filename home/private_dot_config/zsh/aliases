@@ -2,3 +2,5 @@ alias cat='bat'
 alias ls='eza'
 alias vi='nvim'
 alias vim='nvim'
+alias k='kubectl'
+complete -o default -F __start_kubectl k
