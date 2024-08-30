@@ -9,7 +9,7 @@ return {
 	{
 		"iamcco/markdown-preview.nvim",
 		opts = function()
-			vim.api.nvim_exec(
+			vim.api.nvim_exec2(
 				[[
         function! Open_preview_in_incognito_window(url)
           silent !clear
@@ -17,8 +17,19 @@ return {
         endfunction
         let g:mkdp_browserfunc = 'Open_preview_in_incognito_window'
       ]],
-				false
+				{
+					output = false,
+				}
 			)
 		end,
+	},
+	{
+		"folke/ts-comments.nvim",
+		event = "VeryLazy",
+		opts = {
+			lang = {
+				gitcommit = "; %s",
+			},
+		},
 	},
 }

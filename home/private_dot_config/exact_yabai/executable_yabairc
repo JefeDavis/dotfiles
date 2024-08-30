@@ -137,6 +137,7 @@ yabai -m rule --add label="Slack" app="Slack"  space=Slack
 
 yabai -m rule --add label="Chrome-Work" app="Google Chrome" title="\(Work\)$" space=Search
 yabai -m rule --add label="Chrome-Personal" app="Google Chrome" title="\(Personal\)$" space=Search
+yabai -m rule --add label="Chrome" app="Google Chrome" title space=Search
 yabai -m rule --add label="Kitty" app="Kitty" space=Terminal
 
 yabai -m rule --add label="Ramp" app="Ramp" space=Work
@@ -169,4 +170,5 @@ yabai -m signal --add event="window_created" app="Gather$" title="Desktop$" acti
 yabai -m signal --add event="display_added" action='yabai --restart-service'
 yabai -m signal --add event="display_removed" action='yabai --restart-service'
 
+yabai -m rule --apply
 echo "yabai configuration loaded.."

@@ -6,7 +6,9 @@ data:
   git:
     email: {{ $personalEmail | quote }}
     name: {{ $name | quote }}
-    workEmail: {{ $workEmail | quote }}
+    work:
+      email: {{ $workEmail | quote }}
+      teamMembers: []
   packages:
     taps:
       - koekeishiya/formulae

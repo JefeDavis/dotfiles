@@ -8,7 +8,6 @@ brew bundle --no-lock --file=/dev/stdin <<EOF
 {{- range (.packages.taps | sortAlpha | uniq) }}
   tap "{{ . }}"
 {{- end }}
-brew "fyabai", args: ['HEAD']
 {{- range ( .packages.brews | sortAlpha | uniq) }}
 brew "{{ . }}"
 {{- end }}
