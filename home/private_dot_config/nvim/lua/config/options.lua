@@ -5,8 +5,8 @@ local opt = vim.opt
 
 opt.clipboard = "" -- Sync with system clipboard
 opt.lcs = {
-  eol = "¬",
-  extends = "❯",
-  precedes = "❮",
-  tab = ">-",
+	eol = "¬",
+	extends = "❯",
+	precedes = "❮",
+	tab = ">-",
 }

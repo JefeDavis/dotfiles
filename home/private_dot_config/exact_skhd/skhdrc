@@ -55,15 +55,26 @@ alt + shift - m : [[ $(yabai -m query --windows --window | jq '."zoom-fullscreen
 #     e.g., 4 | 1 2 | 3 (three displays and currently at 2, using [ to move the focus 2 -> 1 -> 4 -> 3 -> 2, ..., ] is the same but on the opposite direction
 #   - \:    focus the recently-focused workspace
 alt - 0x12 : yabai -m space --focus Terminal
-alt - 0x13 : yabai -m space --focus Slack
-alt - 0x14 : yabai -m space --focus Search
-alt - 0x15 : yabai -m space --focus Work
+alt - 0x13 : yabai -m space --focus Gitlab
+alt - 0x14 : yabai -m space --focus Code
+alt - 0x15 : yabai -m space --focus Search
 alt - 0x17 : yabai -m space --focus Present
-alt - 0x16 : yabai -m space --focus Music
-alt - 0x1A : yabai -m space --focus Vault
+alt - 0x16 : yabai -m space --focus Personal
+alt - 0x1A : yabai -m space --focus Slack
 alt - 0x1C : yabai -m space --focus Scratch
-alt - 0x19 : yabai -m space --focus Mail
+alt - 0x19 : yabai -m space --focus Work
 alt - 0x1D : yabai -m space --focus Meet
+
+alt - t    : yabai -m space --focus Terminal
+alt - g    : yabai -m space --focus Gitlab
+alt - c    : yabai -m space --focus Code
+alt - s    : yabai -m space --focus Slack
+alt - w    : yabai -m space --focus Search
+alt - d    : yabai -m space --focus Present
+alt - v    : yabai -m space --focus Meet
+alt - e    : yabai -m space --focus Work
+alt - x    : yabai -m space --focus Personal
+alt - q    : yabai -m space --focus Scratch
 
 alt - 0x21 : dest=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && yabai -m query --displays | \
              jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then last else .[index($cur_space) - 1] end"); \
@@ -86,15 +97,35 @@ prefix < l : yabai -m window --swap east; skhd -k "alt - a"
 #     e.g., 4 | 1 2 | 3 (three display and currently at 3), [ will move the current window to workspace #2 and focus this window on workspace #2, and ] will move the current window to workspace #4 and focus this window on workspace #4
 #   - \:    send the current window to the recently-focused workspace, and focus that window
 prefix < 1 : yabai -m window --space Terminal --focus; skhd -k "alt - a"
-prefix < 2 : yabai -m window --space Slack --focus; skhd -k "alt - a"
-prefix < 3 : yabai -m window --space Search --focus; skhd -k "alt - a"
-prefix < 4 : yabai -m window --space Work --focus; skhd -k "alt - a"
+prefix < t : yabai -m window --space Terminal --focus; skhd -k "alt - a"
+
+prefix < 2 : yabai -m window --space Gitlab --focus; skhd -k "alt - a"
+prefix < g : yabai -m window --space Gitlab --focus; skhd -k "alt - a"
+
+prefix < 3 : yabai -m window --space Code --focus; skhd -k "alt - a"
+prefix < c : yabai -m window --space Code --focus; skhd -k "alt - a"
+
+prefix < 4 : yabai -m window --space Search --focus; skhd -k "alt - a"
+prefix < w : yabai -m window --space Search --focus; skhd -k "alt - a"
+
 prefix < 5 : yabai -m window --space Present --focus; skhd -k "alt - a"
-prefix < 6 : yabai -m window --space Music --focus; skhd -k "alt - a"
-prefix < 7 : yabai -m window --space Vault --focus; skhd -k "alt - a"
+prefix < d : yabai -m window --space Present --focus; skhd -k "alt - a"
+
+prefix < 6 : yabai -m window --space Personal --focus; skhd -k "alt - a"
+prefix < x : yabai -m window --space Personal --focus; skhd -k "alt - a"
+
+prefix < 7 : yabai -m window --space Slack --focus; skhd -k "alt - a"
+prefix < s : yabai -m window --space Slack --focus; skhd -k "alt - a"
+
 prefix < 8 : yabai -m window --space Scratch --focus; skhd -k "alt - a"
-prefix < 9 : yabai -m window --space Mail --focus; skhd -k "alt - a"
+prefix < q : yabai -m window --space Scratch --focus; skhd -k "alt - a"
+
+prefix < 9 : yabai -m window --space Work --focus; skhd -k "alt - a"
+prefix < e : yabai -m window --space Work --focus; skhd -k "alt - a"
+
 prefix < 0 : yabai -m window --space Meet --focus; skhd -k "alt - a"
+prefix < v : yabai -m window --space Meet --focus; skhd -k "alt - a"
+
 prefix < 0x21 : cur_window=$(yabai -m query --windows --window | jq '.id') && \
                 workspace_left=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && \
                 yabai -m query --displays | \
@@ -116,15 +147,35 @@ prefix < 0x2A : cur_window=$(yabai -m query --windows --window | jq '.id') && \
 #     e.g., 4 | 1 2 | 3 (three display and currently at 3), [ will move the current window to workspace #2 and focus this window on workspace #2, and ] will move the current window to workspace #4 and not focus this window on workspace #4
 #   - \:    send the current window to the recently-focused workspace, and not focus that window
 prefix < ctrl - 1 : yabai -m window --space Terminal; skhd -k "alt - a"
-prefix < ctrl - 2 : yabai -m window --space Slack; skhd -k "alt - a"
-prefix < ctrl - 3 : yabai -m window --space Search; skhd -k "alt - a"
-prefix < ctrl - 4 : yabai -m window --space Work; skhd -k "alt - a"
+prefix < ctrl - t : yabai -m window --space Terminal; skhd -k "alt - a"
+
+prefix < ctrl - 2 : yabai -m window --space Gitlab; skhd -k "alt - a"
+prefix < ctrl - g : yabai -m window --space Gitlab; skhd -k "alt - a"
+
+prefix < ctrl - 3 : yabai -m window --space Code; skhd -k "alt - a"
+prefix < ctrl - c : yabai -m window --space Code; skhd -k "alt - a"
+
+prefix < ctrl - 4 : yabai -m window --space Search; skhd -k "alt - a"
+prefix < ctrl - w : yabai -m window --space Search; skhd -k "alt - a"
+
 prefix < ctrl - 5 : yabai -m window --space Present; skhd -k "alt - a"
-prefix < ctrl - 6 : yabai -m window --space Music; skhd -k "alt - a"
-prefix < ctrl - 7 : yabai -m window --space Vault; skhd -k "alt - a"
+prefix < ctrl - d : yabai -m window --space Present; skhd -k "alt - a"
+
+prefix < ctrl - 6 : yabai -m window --space Personal; skhd -k "alt - a"
+prefix < ctrl - x : yabai -m window --space Personal; skhd -k "alt - a"
+
+prefix < ctrl - 7 : yabai -m window --space Slack; skhd -k "alt - a"
+prefix < ctrl - s : yabai -m window --space Slack; skhd -k "alt - a"
+
 prefix < ctrl - 8 : yabai -m window --space Scratch; skhd -k "alt - a"
-prefix < ctrl - 9 : yabai -m window --space Mail; skhd -k "alt - a"
+prefix < ctrl - q : yabai -m window --space Scratch; skhd -k "alt - a"
+
+prefix < ctrl - 9 : yabai -m window --space Work; skhd -k "alt - a"
+prefix < ctrl - e : yabai -m window --space Work; skhd -k "alt - a"
+
 prefix < ctrl - 0 : yabai -m window --space Meet; skhd -k "alt - a"
+prefix < ctrl - v : yabai -m window --space Meet; skhd -k "alt - a"
+
 prefix < ctrl - 0x21 : workspace_left=$(cur_space=$(yabai -m query --spaces --space | jq -r '.index') && yabai -m query --displays | \
                        jq -r "sort_by(.frame.x) | [.[] | .spaces] | flatten | if index($cur_space) == 0 then .[length - 1] else .[index($cur_space) - 1] end") && \
                        yabai -m window --space ${workspace_left}; skhd -k "alt - a"

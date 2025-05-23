@@ -3,4 +3,8 @@ alias ls='eza'
 alias vi='nvim'
 alias vim='nvim'
 alias k='kubectl'
+alias modcb='2fctl login sts -a mod_c0153-devb -i yk-oath -t $(modcloudtoken) && creds'
+alias modcc='2fctl login sts -a mod_c0153-devc -i yk-oath -t $(modcloudtoken) && creds'
+alias creds='source ~/.config/2fctl/credentials.sh'
+
 complete -o default -F __start_kubectl k

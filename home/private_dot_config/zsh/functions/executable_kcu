@@ -1,0 +1,13 @@
+kcu () {
+	has_aws=$(command -v aws)
+	has_jq=$(command -v jq)
+	if [ -z "$has_aws" ] || [ -z "$has_jq" ]
+	then
+		echo "Missing dependencies, install aws cli and jq"
+	else
+		for cluster in $(aws eks list-clusters | jq -r '[][]')
+		do
+			aws eks update-kubeconfig --name $cluster
+		done
+	fi
+}

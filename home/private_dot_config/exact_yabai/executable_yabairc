@@ -116,16 +116,16 @@ monitor_count=$(yabai -m query --displays | jq '. | length')
 
 case $monitor_count in
   1)
-    setup_display -d 1 Terminal Slack Search Work Present Music Vault Scratch Mail Meet
+    setup_display -d 1 Terminal Gitlab Code Search Present Personal Scratch Work Slack Meet
   ;;
   2)
-    setup_display -d 1 Terminal Search Present Scratch Meet
-    setup_display -d 2 Slack Work Music Vault Mail
+    setup_display -d 1 Terminal Gitlab Code Search Present
+    setup_display -d 2 Slack Personal Scratch Work Meet
   ;;
   3)
-    setup_display -d 1 Terminal Slack Search Work Present Mail 
-    setup_display -d 2 Meet Scratch
-    setup_display -d 3 Music Vault
+    setup_display -d 1 Terminal Gitlab Code Search Present 
+    setup_display -d 2 Meet Work Scratch
+    setup_display -d 3 Slack Personal
 esac
 
 
@@ -133,26 +133,33 @@ for idx in $(yabai -m query --spaces | jq 'map(select(.label == "")) | sort_by(.
   yabai -m space --destroy "$idx"
 done
 # ============================= Rules =============================== 
+yabai -m rule --add label="Kitty" app="Kitty" space=Terminal
+
+yabai -m rule --add label="Gitlab" app="GitLab$" space=Gitlab
+
+yabai -m rule --add label="VSCode" app="Code$" space=Code
+
 yabai -m rule --add label="Slack" app="Slack"  space=Slack
 
 yabai -m rule --add label="Chrome-Work" app="Google Chrome" title="\(Work\)$" space=Search
-yabai -m rule --add label="Chrome-Personal" app="Google Chrome" title="\(Personal\)$" space=Search
-yabai -m rule --add label="Chrome" app="Google Chrome" title space=Search
-yabai -m rule --add label="Kitty" app="Kitty" space=Terminal
+yabai -m rule --add label="Chrome" app="Google Chrome" space=Search
+
+yabai -m rule --add label="Chrome-Work" app="Google Chrome" title="\(Present\)$" space=Present
 
 yabai -m rule --add label="Ramp" app="Ramp" space=Work
 yabai -m rule --add label="Google-Drive" app="Google Drive$" space=Work
 
-yabai -m rule --add label="Bitwarden" app="^Bitwarden$" space=Vault
-
-yabai -m rule --add label="Calandar" app="Google Calendar" space=Mail
-yabai -m rule --add label="Gmail" app="Gmail" space=Mail
+yabai -m rule --add label="Calandar" app="Google Calendar" space=Work
+yabai -m rule --add label="Gmail" app="Gmail" space=Work
 
 yabai -m rule --add label="Meet" app="Google Meet" space=Meet
 yabai -m rule --add label="Gather-Desktop" app="^Gather$" title="Desktop$" space=Meet
 yabai -m rule --add label="Gather-Mini" app="^Gather$" title="Mini Mode$" manage=off
 
-yabai -m rule --add label="Spotify" app="^Spotify$" space=Music
+yabai -m rule --add label="Spotify" app="^Spotify$" space=Personal
+yabai -m rule --add label="Bitwarden" app="^Bitwarden$" space=Personal
+
+yabai -m rule --add label="Chrome-Personal" app="Google Chrome" title="\(Personal\)$" space=Scratch
 
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
