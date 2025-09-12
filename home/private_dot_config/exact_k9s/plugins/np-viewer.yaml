@@ -1,0 +1,12 @@
+plugins:
+  np-viewer:
+    shortCut: v
+    description: View NetPols
+    scopes:
+      - pods
+    command: bash
+    confirm: false
+    background: false
+    args:
+      - -c
+      - "kubectl np-viewer -p $NAME -n $NAMESPACE --context $CONTEXT | less -K"

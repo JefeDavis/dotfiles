@@ -7,6 +7,8 @@ return {
 	{ import = "lazyvim.plugins.extras.lang.terraform" },
 	{ import = "lazyvim.plugins.extras.lang.yaml" },
 	{
+		"kcl-lang/kcl.nvim",
+
 		"iamcco/markdown-preview.nvim",
 		opts = function()
 			vim.api.nvim_exec2(

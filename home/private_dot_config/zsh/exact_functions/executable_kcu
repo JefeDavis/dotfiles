@@ -5,7 +5,7 @@ kcu () {
 	then
 		echo "Missing dependencies, install aws cli and jq"
 	else
-		for cluster in $(aws eks list-clusters | jq -r '[][]')
+		for cluster in $(aws eks list-clusters | jq -r '.[][]')
 		do
 			aws eks update-kubeconfig --name $cluster
 		done

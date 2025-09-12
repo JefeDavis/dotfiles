@@ -11,6 +11,16 @@ return {
 		end,
 	},
 
+	{
+		"cwrau/yaml-schema-detect.nvim",
+		---@module "yaml-schema-detect"
+		---@type YamlSchemaDetectOptions
+		opts = {}, -- use default options
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		ft = { "yaml" },
+	},
 	-- correctly setup lspconfig
 	{
 		"neovim/nvim-lspconfig",
@@ -70,8 +80,6 @@ return {
 								["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json"] = "*api*.{yml,yaml}",
 								["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
 								["https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json"] = "*flow*.{yml,yaml}",
-								["https://kubernetes-schemas.davishaus.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json"] = "ks.yaml",
-								["https://kubernetes-schemas.davishaus.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json"] = "helmrelease.yaml",
 								["https://schemas.gamewarden.io/schemas/helm/helminator.json"] = "{base,dev,stg,prod}-values.yaml",
 								kubernetes = "*.yaml",
 							},
@@ -95,58 +103,6 @@ return {
 				end,
 			},
 		},
-	},
-	{
-		"someone-stole-my-name/yaml-companion.nvim",
-		ft = "yaml",
-		dependencies = {
-			{ "neovim/nvim-lspconfig" },
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-telescope/telescope.nvim" },
-		},
-		config = function()
-			require("telescope").load_extension("yaml_schema")
-			local cfg = require("yaml-companion").setup({
-				builtin_matchers = {
-					-- Detects Kubernetes files based on content
-					kubernetes = { enabled = true },
-					cloud_init = { enabled = true },
-				},
-				-- Add any options here, or leave empty to use the default settings
-				lspconfig = {
-					flags = {
-						debounce_text_changes = 150,
-					},
-					settings = {
-						redhat = { telemetry = { enabled = false } },
-						yaml = {
-							validate = true,
-							format = { enable = false },
-							hover = true,
-							schemaStore = {
-								enable = true,
-								url = "https://www.schemastore.org/api/json/catalog.json",
-							},
-							schemaDownload = { enable = true },
-							schemas = {},
-							trace = { server = "debug" },
-						},
-					},
-				},
-				-- Additional schemas available in Telescope picker
-				schemas = {
-					{
-						name = "Flux Kustomize",
-						uri = "https://kubernetes-schemas.davishaus.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json",
-					},
-					{
-						name = "Flux Helm Release",
-						uri = "https://kubernetes-schemas.davishaus.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json",
-					},
-				},
-			})
-			require("lspconfig")["yamlls"].setup(cfg)
-		end,
 	},
 	{
 		"nvim-telescope/telescope.nvim",

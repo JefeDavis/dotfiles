@@ -6,7 +6,7 @@ EMBARK=embark
 VERSION=0.0.1
 
 TARGET=$(
-  ls -d ~/Projects/* ~/Projects/fedramp/gamewarden/platform/frontier/citadel/ ~/* ~/Documents/* $XDG_DATA_HOME/chezmoi/home |
+  ls -d ~/Projects/* ~/Projects/frontier/* ~/* ~/Documents/* $XDG_DATA_HOME/chezmoi/home |
     fzf --header-first --header="Launch Project" --prompt=" " \
       --preview "eza --tree --icons --level 3 --git-ignore {}"
 )

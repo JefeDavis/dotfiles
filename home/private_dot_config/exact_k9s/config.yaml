@@ -7,10 +7,10 @@ k9s:
   ui:
     enableMouse: false
     headless: false
-    logoless: false
+    logoless: true
     crumbsless: false
     noIcons: true
-    skin: catppuccin-mocha
+    skin: catppuccin-mocha-transparent
   skipLatestRevCheck: false
   disablePodCounting: false
   shellPod:
