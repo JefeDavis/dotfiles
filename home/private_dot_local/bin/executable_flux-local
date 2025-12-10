@@ -6,4 +6,4 @@ git_root=$(git rev-parse --show-toplevel)
 
 relative_path=${PWD#"$git_root"/}
 
-docker run --rm -i -v "${git_root}:/runtime" -w /runtime/${relative_path} ghcr.io/allenporter/flux-local:latest "$@" --sources frontier-runtime=/runtime/platform
+docker run --rm -i -v "${git_root}:/runtime" -w /runtime/${relative_path} registry.secondfront.com/second-front/flux-local:substitute-from "$@" --sources gamewarden-runtime=/runtime/platform
